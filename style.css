@@ -1,0 +1,88 @@
+*
+{
+	font-family: "century gothic";
+}
+
+header {
+	background-color: #f33a21;
+	
+	color: #ffffff;
+}
+
+body 
+{
+	margin: 0;
+}
+
+#home, body, ::placeholder
+{
+	text-align: center;
+}
+
+#home input
+{
+	width: 25%;
+}
+
+h1
+{
+	margin: 0;
+}
+
+table
+{
+	border-collapse: collapse
+
+}
+
+@media screen and (min-width: 640px) {
+	::placeholder {
+		visibility: hidden;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.loginLabel {
+		display: none;
+	}
+	#home input {
+		width: 40%;
+	}
+}
+
+.details td, .details th
+{
+	border: none;
+
+	background-color: yellow;
+
+}
+
+.details
+{
+	display: none;
+}
+
+#stamping tbody tr:nth-child(odd)
+{
+	background-color: #E2DCDD;
+}
+
+td, th
+{
+	border: 1px solid black;
+	
+	text-align: center;
+}
+
+#situation th
+{
+	text-align: left;
+}
+
+tbody tr:hover
+{
+	background-color: #5DF3F7;
+	
+	cursor: pointer;
+}

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>airTime</title>
+</head>
+<body>
+
+<div>
+	<p>Prénom Nom</p>
+</div>
+<div>
+	<p>airTime</p>
+</div>
+<div>
+	<form action="index.html" method="post">
+		<input type="submit" value="Déconnexion">
+	</form>
+</div>
+
+<h2>Demandes</h2>
+
+<form action="type.html" method="post">
+	<div>
+	<input type="date" id="date" name"date">
+	</div>
+</form>
+
+
+<div>
+	<p>vendredi 4 décembre 20</p>
+</div>
+
+<form action="type.html" method="post">
+	<div>
+	<label for="Début">Début </label>
+	</div>
+	<div>
+	<input type="time" id="begin" name="begin" value="07:00" required autofocus>
+	</div>
+	<div>
+	<label for="fin">Fin </label>
+	</div>
+	<div>
+	<input type="time" id="end" name="end" required value="12:00">
+	</div>
+	<div>
+	<label for="motif">Motif </label>
+	</div>
+	<select id="motif" name="motif">
+          <option selected>Travail</option>
+          <option>Vacances</option>
+          <option>Récup heures</option>
+          <option>Congé sans solde</option>
+          <option>Formation</option>
+          <option>Armée/PC</option>
+          <option>Maladie</option>
+          <option>Accident</option>
+          <option>Autre absence payée</option>
+        </select>
+	<div>
+	<input type="submit" id="submit" value="Enregistrer">
+	</div>
+</form>
+
+<footer><h2>Pied de page</h2>
+<p><a href="index.html">Accueil</a></p>
+<p><a href="type.html">Saisie</a></p>
+<p><a href="report.html">Rapports</a></p>
+<p><a href="request.html">Demandes</a></p>
+</footer>
+
+</body>
+</html>
