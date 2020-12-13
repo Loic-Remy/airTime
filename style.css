@@ -3,16 +3,53 @@
 	font-family: "century gothic";
 }
 
-header {
+header 
+{
 	background-color: #f33a21;
-	
 	color: #ffffff;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+header:div
+{
+	flex: 1;
+}
+
+#airtime
+{
+	font-weight: bold;
+	font-size: large;
+}
+
+#disconnect
+{
+	color: #ffffff;
+
+	background: transparent;
+
+	border: none;
+}
+
+#disconnect:hover
+{
+	cursor: pointer;
 }
 
 body 
 {
 	margin: 0;
 }
+
+.table
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
 
 #home, body, ::placeholder
 {
@@ -31,8 +68,9 @@ h1
 
 table
 {
-	border-collapse: collapse
+	border-collapse: collapse;
 
+	width: 80%;
 }
 
 @media screen and (min-width: 640px) {
@@ -58,9 +96,18 @@ table
 
 }
 
+
 .details
 {
 	display: none;
+}
+
+tbody tr:hover td
+{
+	background-color: #5DF3F7;
+
+	
+	cursor: pointer;
 }
 
 #stamping tbody tr:nth-child(odd)
@@ -80,9 +127,3 @@ td, th
 	text-align: left;
 }
 
-tbody tr:hover
-{
-	background-color: #5DF3F7;
-	
-	cursor: pointer;
-}

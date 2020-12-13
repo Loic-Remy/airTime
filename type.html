@@ -8,27 +8,17 @@
 <head>
 	<title>airTime</title>
 </head>
-<body>
+<body onload="load_header()">
+	<header id="header">
+	</header>
 
-<div>
-	<p>Prénom Nom</p>
-</div>
-<div>
-	<p>airTime</p>
-</div>
-<div>
-	<form action="index.html" method="post">
-		<input type="submit" value="Déconnexion">
+	<h2>Saisie</h2>
+
+	<form action="type.html" method="post">
+		<div>
+		<input type="date" id="date" name="date" value="">
+		</div>
 	</form>
-</div>
-
-<h2>Saisie</h2>
-
-<form action="type.html" method="post">
-	<div>
-	<input type="date" id="date" name"date">
-	</div>
-</form>
 
 
 <div>
@@ -73,6 +63,9 @@
 <p><a href="report.html">Rapports</a></p>
 <p><a href="request.html">Demandes</a></p>
 </footer>
+
+<script type="text/javascript" src="js/script.js"></script>
+
 
 </body>
 </html>

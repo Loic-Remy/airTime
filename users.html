@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>airTime</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="load_users(); load_header()">
+    <header id="header">
+    </header>
+        
+     <h2>Utilisateurs</h2>
+
+    <table id="usersTable" >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Secteur</th>
+                <th>Actif</th>
+            </tr>
+        </thead>
+        <tbody id="users_tbody" >
+        </tbody>
+        <tfoot onload="insertRowCount()">
+            <tr>
+                <th scop="row" colspan= "3">Nombre d'utilisateurs</th>
+                <td id="totalRows" ></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    
+    
+    
+    
+    
+    
+
+
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/const.js"></script>
+
+</body>
+</html>
