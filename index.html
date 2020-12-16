@@ -2,8 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>airTime</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="mobile.css">
 </head>
 <body id="home">
 	<header>
@@ -12,33 +13,15 @@
 	<h2>connexion</h2>
 
 
-<form action="type.html" method="post">
-	<div>
+<form action="type.html" method="post" class="inputForm">
 	<label for="utilisateur" class="loginLabel">Utilisateur </label>
-	</div>
-	<div>
 	<input type="email" id="utilisateur" name="user" placeholder="utilisateur" required autofocus>
-	</div>
-	<div>
 	<label for="mot de passe" class="loginLabel">Mot de passe </label>
-	</div>
-	<div>
 	<input type="password" id="mdp" name="password" placeholder="mot de passe" required>
-	</div>
-	<div>
 	<input type="submit" id="submit" value="Valider">
-	</div>
 </form>
 
-
-<footer><h2>Pied de page</h2>
-<p><a href="index.html">Accueil</a></p>
-<p><a href="type.html">Saisie</a></p>
-<p><a href="report.html">Rapports</a></p>
-<p><a href="request.html">Demandes</a></p>
-</footer>
-
-	<script type="text/javascript" src="js/script.js"></script>
-
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/const.js"></script>
 </body>
 </html>

@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <div>
+	<div>
 		<p>Prénom Nom</p>
-	</div>
-	<div>
 		<p id="airtime">airTime</p>
-	</div>
-	<div>
 		<form action="index.html" method="post">
-		<input id="disconnect" type="submit" value="Déconnexion">
+			<input id="disconnect" class="pointer" type="submit" value="Déconnexion">
 		</form>
 	</div>
 	<div>
-		<p id="menu">Menu</p>
+		<p id="menuLabel" class="pointer" onclick="display_or_hide_menu()">Menu</p>
+	</div>
+	<div>
+		<nav>
+			<ul id="menu" class="hidden">
+				<li><a href="./type.html">Saisie</a></li>
+				<li><a href="./situation.html">Situation</a></li>
+				<li><a href="./stamping.html">Timbrages</a></li>
+				<li><a href="./request.html">Demandes</a></li>
+				<li><a href="./conditions.html">Conditions</a></li>
+			</ul>
+		</nav>
 	</div>
 </html>

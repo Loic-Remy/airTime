@@ -2,27 +2,24 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
 	<title>airTime</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="mobile.css">
 </head>
-<body onload="load_header()">
+<body onload="load_header(); setTomorrowAsValueAndMin()">
 	<header id="header">
 	</header>
 
 <h2>Demandes</h2>
 
-<form action="type.html" method="post">
+<form action="request.html" method="post">
 	<div>
-	<input type="date" id="date" name"date">
+	<input type="date" id="date" name="date">
 	</div>
 </form>
 
-
-<div>
-	<p>vendredi 4 décembre 20</p>
-</div>
-
-<form action="type.html" method="post">
+<form action="request.html" method="post">
 	<div>
 	<label for="Début">Début </label>
 	</div>
@@ -39,14 +36,10 @@
 	<label for="motif">Motif </label>
 	</div>
 	<select id="motif" name="motif">
-          <option selected>Travail</option>
-          <option>Vacances</option>
+          <option selected>Vacances</option>
           <option>Récup heures</option>
           <option>Congé sans solde</option>
-          <option>Formation</option>
           <option>Armée/PC</option>
-          <option>Maladie</option>
-          <option>Accident</option>
           <option>Autre absence payée</option>
         </select>
 	<div>
@@ -54,13 +47,7 @@
 	</div>
 </form>
 
-<footer><h2>Pied de page</h2>
-<p><a href="index.html">Accueil</a></p>
-<p><a href="type.html">Saisie</a></p>
-<p><a href="report.html">Rapports</a></p>
-<p><a href="request.html">Demandes</a></p>
-</footer>
-
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/const.js"></script>
 </body>
 </html>

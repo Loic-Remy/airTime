@@ -1,14 +1,16 @@
 
 <!DOCTYPE html>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" type="text/css" href="mobile.css">
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>airTime</title>
 </head>
-<body onload="load_header()">
+<body onload="load_header(); setTodayAsValueAndMax()"> 
 	<header id="header">
 	</header>
 
@@ -19,11 +21,6 @@
 		<input type="date" id="date" name="date" value="">
 		</div>
 	</form>
-
-
-<div>
-	<p>vendredi 4 décembre 20</p>
-</div>
 
 <form action="type.html" method="post">
 	<div>
@@ -57,15 +54,8 @@
 	</div>
 </form>
 
-<footer><h2>Pied de page</h2>
-<p><a href="index.html">Accueil</a></p>
-<p><a href="type.html">Saisie</a></p>
-<p><a href="report.html">Rapports</a></p>
-<p><a href="request.html">Demandes</a></p>
-</footer>
-
 <script type="text/javascript" src="js/script.js"></script>
-
+<script type="text/javascript" src="js/const.js"></script>
 
 </body>
 </html>
