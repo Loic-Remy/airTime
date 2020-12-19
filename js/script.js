@@ -205,56 +205,98 @@ fetch(url)
 			response.json()
 				.then(data => {
 					console.log(data);
+					situationTableConstruct(data);
 		})
 	})
 }
 
+function fillLine(data, obj, sign)
+{
+	let cells = document.getElementById(obj).children;
+
+	cells[1].innerHTML = data.summary.hours[obj] == 0 ? "" : sign;
+	cells[2].innerHTML = data.summary.hours[obj];
+	cells[3].innerHTML = data.summary.days[obj];
+}
+
+function fillLineDirect(data, obj, sign)
+{
+	let cells = document.getElementById(obj).children;
+
+	cells[1].innerHTML = data[obj] == 0 ? "" : sign;
+	cells[2].innerHTML = data[obj];
+	cells[3].innerHTML = data[obj];
+}
+
+function situationTableConstruct(data)
+{
+	fillLine(data, "globalTodo", "");
+	fillLine(data, "accident", "-");
+	fillLine(data, "health", "-");
+	fillLine(data, "learning", "-");
+	fillLine(data, "army", "-");
+	fillLine(data, "holiday", "-");
+	fillLine(data, "unpaid", "-");
+	fillLine(data, "paidunemployed", "-");
+	fillLineDirect(data, "done", "-");
+
+	fillLine(data, "report", "-");
+	fillLine(data, "paid", "-");
+	fillLine(data, "manual", "-");
+
+
+
+}
+
 function convertDateToUnix(date)
 {
-	return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	let m = date.getMonth() + 1;
+
+	let year = date.getFullYear().toString();
+	
+	let month = m < 10 ? "0" + m : m;
+
+	let day = date.getDate() < 10 ? "0" + date.getDate().toString() : date.getDate().toString();
+	
+	return year + '-' + month + '-' + day;
 }
 
-function set_first_day()
+function firstDayMonth()
 {
-	let element = document.getElementById("firstDay");
-
-	let today = new Date();
-	let formatedDate= today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + '01';
-
-	element.setAttribute("value", formatedDate);
-}
-
-function set_last_day()
-{
-	let element = document.getElementById("lastDay");
-
-	let today = new Date();
-	formatedDate = convertDateToUnix(today);
-
-	element.setAttribute("value", formatedDate);
-}
-
-function setTodayAsValueAndMax()
-{
-	let element = document.getElementById("date");
-
-	let today = convertDateToUnix(new Date());
-
-	element.setAttribute("value", today);
-	element.setAttribute("max", today);
-}
-
-function setTomorrowAsValueAndMin()
-{
-	let element = document.getElementById("date");
-
 	let today = new Date();
 
-	let tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); 
+	return new Date(today.getFullYear(), today.getMonth(), 1);
+}
 
-	tomorrow = convertDateToUnix(tomorrow);
 
-	element.setAttribute("value", tomorrow);
-	element.setAttribute("min", tomorrow);
+function today()
+{
+	return new Date();
+}
 
+function tomorrow()
+{
+	let today = new Date();
+	return  new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); 
+}
+
+function yesterday()
+{
+	let today = new Date();
+
+	return new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1); 
+}
+
+function setDateAsAttributes(element, dateFunction, attributes)
+{
+	let elmt = document.getElementById(element);
+
+	console.log(elmt);
+
+	let date = convertDateToUnix(dateFunction);
+
+	for(let i = 0; i < attributes.length; i++)
+	{
+		elmt.setAttribute(attributes[i], date);
+	}
 }

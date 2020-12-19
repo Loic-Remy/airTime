@@ -122,9 +122,10 @@ h1
 
 table
 {
+	font-size: 14px;
 	border-collapse: collapse;
 
-	width: 80%;
+	width: 90%;
 }
 
 .loginLabel 
@@ -171,8 +172,33 @@ td, th
 	text-align: left;
 }
 
+#todo, #globalTodo, #annualDiff, #balance
+{
+	background-color: #a3a2a2;
+}
+
+.long
+{
+	display: none;
+
+}
+
+
 @media screen and (min-width: 640px) {
-	::placeholder {
+	::placeholder 
+	{
 		visibility: hidden;
+	}
+
+	.long
+	{
+		display: contents;
+	}
+
+	table
+	{
+		font-size: 16px;
+
+		width: 50%;
 	}
 }

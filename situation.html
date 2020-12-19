@@ -7,14 +7,14 @@
 	<link rel="stylesheet" type="text/css" href="mobile.css">
 </head>
 
-<body onload="load_header(); fetchSituation()">
+<body onload="load_header(); setDateAsAttributes('date', yesterday(), ['value']); fetchSituation()">
 	<header id="header">
 	</header>
 
 <h2>Situation</h2>
 
 <form action="report.html" method="post">
-	<input type="date">
+	<input id="date" type="date">
 </form>
 
 <div class="table">
@@ -27,94 +27,97 @@
 			<th>Jours</th>
 		</tr>
 		</thead>
-
-		<tfoot>
-		<tr>
-			<th>Solde</th>
-			<td> </td>
-			<td>60:00</td>
-			<td>10</td>
-		</tr>
-		</tfoot>
-
 		<tbody>
 		<tr id="globalTodo">
 			<th>Travail planifié</th>
-			<td>-</td>
-			<td>960:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="accident">
 			<th>Accident</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="health">
 			<th>Maladie</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="learning">
 			<th>Formation</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="army">
 			<th>Armée/PC</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="holiday">
 			<th>Vacances</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>	
 		<tr id="unpaid">
 			<th>Congés non-payés</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="paidunemployed">
 			<th>Autres absences payées</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
-		<tr id="work">
-			<th>Travail effectif</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+		<tr id="todo">
+			<th>Total <span class="long">des heures </span>à effectuer</th>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr id="done">
+			<th>Travail effectué</th>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>	
+		<tr id="paid">
+			<th>Heures supp payées</th>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr id="annualDiff">
+			<th>Différence annuelle</th>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="report">
 			<th>Report période préc</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
-		<tr>
-			<th id="paid">Heures supp payées</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
-		</tr>
+
 		<tr id="manual">
 			<th>Correction manuelle</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="balance">
-			<th>Solde des heures</th>
-			<td>-</td>
-			<td>60:00</td>
-			<td>10</td>
+			<th>Solde cumulé<span class="long"> des heures et vacances</span></th>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		</tbody>
 	</table>
