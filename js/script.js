@@ -54,6 +54,8 @@ function display_or_hide_menu()
 }
 
 
+
+
 function load_users ()
 {
 	fetch(url_users).then(response => {
@@ -163,7 +165,7 @@ function stampingTableConstruct(list)
 
 		/*col "Motif" */	
 		cell = line.insertCell(1);
-		cell.innerHTML = entry.reason;
+		cell.innerHTML = reasonDesc[entry.reason];
 
 		/*col "Début" */
 		cell = line.insertCell(2);
@@ -225,25 +227,50 @@ function fillLineDirect(data, obj, sign)
 
 	cells[1].innerHTML = data[obj] == 0 ? "" : sign;
 	cells[2].innerHTML = data[obj];
-	cells[3].innerHTML = data[obj];
+	cells[3].innerHTML = "--";
+}
+
+function fillLineEasy(value, obj, sign)
+{
+	let cells = document.getElementById(obj).children;
+
+	cells[1].innerHTML = (value == 0) ? "" : sign;
+	cells[2].innerHTML = value;
+	cells[3].innerHTML = "--";
 }
 
 function situationTableConstruct(data)
 {
-	fillLine(data, "globalTodo", "");
-	fillLine(data, "accident", "-");
-	fillLine(data, "health", "-");
-	fillLine(data, "learning", "-");
-	fillLine(data, "army", "-");
-	fillLine(data, "holiday", "-");
-	fillLine(data, "unpaid", "-");
-	fillLine(data, "paidunemployed", "-");
-	fillLineDirect(data, "done", "-");
+	var workToDo = {
+		days: 0,
+		hours : 0	
+	}
+	
+	let days = data.summary.days;
+	let hours = data.summary.hours;
+
+	workToDo.days = days.globalTodo - (days.accident+ days.army + days.health + days.holiday + days.learning + days.unpaid + days.paidunemployed);
+	workToDo.hours = hours.globalTodo - (hours.accident + hours.army + hours.health + hours.holiday + hours.learning + hours.unpaid + hours.paidunemployed);
+
+	fillLine(data, "globalTodo", "-");
+	fillLine(data, "accident", "+");
+	fillLine(data, "health", "+");
+	fillLine(data, "learning", "+");
+	fillLine(data, "army", "+");
+	fillLine(data, "holiday", "+");
+	fillLine(data, "unpaid", "+");
+	fillLine(data, "paidunemployed", "+");
+
+	fillLineDirect(data, "todo", "-");
+	fillLineDirect(data, "done", "+");
+
+	fillLineEasy(data.todo - data.done, "annualDiff", "-");
 
 	fillLine(data, "report", "-");
 	fillLine(data, "paid", "-");
 	fillLine(data, "manual", "-");
 
+	fillLineEasy(Math.abs(data.diff), "diff", "-");
 
 
 }
@@ -261,11 +288,26 @@ function convertDateToUnix(date)
 	return year + '-' + month + '-' + day;
 }
 
-function firstDayMonth()
+function firstDayMonth(dateFunction)
 {
-	let today = new Date();
+	let currentDate = (typeof dateFunction === 'undefined') ? new Date() : dateFunction;
 
-	return new Date(today.getFullYear(), today.getMonth(), 1);
+	return new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+}
+
+function lastFriday()
+{
+	let targetDate = new Date();
+	let today = new Date();
+	let diff = 0;
+
+	while(targetDate.getDay() != 5 || diff < 3)
+	{
+		targetDate.setDate(targetDate.getDate() - 1);
+		diff = (today - targetDate) / miliSecondsPerDay;
+	}
+
+	return targetDate;
 }
 
 
@@ -290,9 +332,6 @@ function yesterday()
 function setDateAsAttributes(element, dateFunction, attributes)
 {
 	let elmt = document.getElementById(element);
-
-	console.log(elmt);
-
 	let date = convertDateToUnix(dateFunction);
 
 	for(let i = 0; i < attributes.length; i++)
@@ -300,3 +339,16 @@ function setDateAsAttributes(element, dateFunction, attributes)
 		elmt.setAttribute(attributes[i], date);
 	}
 }
+
+function display_stamping(e)
+{
+	this.preventDefault();
+
+	get_stamping();
+}
+
+document.getElementById("display").addEventListener("click", function (e) {
+	e.preventDefault();
+	get_stamping();
+})
+

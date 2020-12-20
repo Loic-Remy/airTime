@@ -170,11 +170,17 @@ td, th
 #situation th
 {
 	text-align: left;
+	font-weight: normal;
 }
 
-#todo, #globalTodo, #annualDiff, #balance
+.hilight
 {
-	background-color: #a3a2a2;
+	background-color: #c2c2c2;
+}
+
+#diff, #diff > th
+{
+	font-weight: bold;
 }
 
 .long
