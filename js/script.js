@@ -1,3 +1,48 @@
+class Header
+{
+	constructor(url)
+	{
+		this.url = url;
+	}
+	
+	async getHeader()
+	{
+		let response = await fetch(this.url);
+		return await response.text();
+	}
+
+	display()
+	{
+		this.getHeader()
+			.then(response => {
+				document.getElementById("header").innerHTML = response;
+				})
+			.then(function () {
+				document.querySelector('#identity').innerHTML = sessionStorage.getItem('userName');
+			});
+	}
+}
+
+var header = new Header(url_header);
+
+if (document.querySelector('h2').innerHTML != 'connexion')
+{
+	document.body.addEventListener('load', header.display());
+	console.log(sessionStorage.getItem('userName'));
+}
+
+var loginPage = document.querySelector('h2').innerHTML === 'connexion';
+
+if (loginPage)
+{
+	document.querySelector('#submit').addEventListener('click', function (event) {
+		sessionStorage.setItem('userId', '4OsUdM6QkP311');
+		sessionStorage.setItem('userName', 'Etienne Jordan');
+	})
+
+}
+
+
 function displayDetails()
 {
 	let elem = document.getElementsByClassName("details");
@@ -53,148 +98,218 @@ function display_or_hide_menu()
 	}
 }
 
-
-
-
-function load_users ()
+class Users
 {
-	fetch(url_users).then(response => {
-	response.json().then(result => {
-		result.forEach(element => console.log(element));
-		usersTableConstruct(result);
-	})
-})
-}
-
-function usersTableConstruct(list)
-{
-	let table = document.getElementById("users_tbody");
-
-	let cell;
-	let line;  
-
-	let entry;
-
-	for (let i = 0; i < list.length; i++)
+	constructor(url)
 	{
-		entry = list[i];
-
-		line = table.insertRow(-1);
-		
-		cell = line.insertCell(0);
-		cell.innerHTML = `${entry.id}`;
-
-		cell = line.insertCell(1);
-		cell.innerHTML = `${entry.commonName}`;
-
-		cell = line.insertCell(2);
-		cell.innerHTML = "";
-		
-		cell = line.insertCell(3);
-		let active = entry.disabled === null ? "OUI" : "NON"; 
-		cell.innerHTML = `${active}`;
+		this.url = url;
 	}
 
-	document.getElementById("totalRows").innerHTML = list.length;
-
-}
-
-function load_header()
-{
-	fetch(url_header)
-		.then(response => {
-			return response.text()
-		})
-		.then(data => {
-			document.getElementById("header").innerHTML = data;
-		});
-
-}
-
-function get_stamping()
-{
-	let first_day = document.getElementById("firstDay").value + "T00:00:00.000Z";
-	let last_day = document.getElementById("lastDay").value + "T00:00:00.000Z"; 
-	let worker_id = '4OsUdM6QkP311';
-	 
-
-	let url = new URL(url_stamping);
-	url.searchParams.append('from', first_day);
-	url.searchParams.append('until', last_day);
-	url.searchParams.append('target', worker_id);
-
-	console.log(url);
-
-	fetch (url)
-		.then(response => {
-			response.json()
-				.then(data => {
-					console.log(data);
-					stampingTableConstruct(data);
-		})
-	})
-}
-
-function stampingTableConstruct(list)
-{
-	let table = document.getElementById("stamping_tbody");
-	
-	let cell;
-	let line;  
-
-	let entry;
-
-	for (let i = 0; i < list.length; i++)
+	async getUsers() 
 	{
-		entry = list[i];
+		let data = await fetch(this.url);
 
-		line = table.insertRow(-1);
+		return await data.json();
+	}
 
-		if ( (i + 1) % 2) {
-			line.classList.add("odd");
-		} else {
-			line.classList.add("pair");
-		} 
+	usersTableConstruct(list)
+	{
+		let table = document.getElementById("users_tbody");
 
-		let begin = new Date(entry.begin);
-		let end = new Date(entry.end);
-		
-		/*col "Jour" */
-		cell = line.insertCell(0);
-		cell.innerHTML = begin.getDate() + '.' + (begin.getMonth() + 1);
+		let cell;
+		let line;  
 
-		/*col "Motif" */	
-		cell = line.insertCell(1);
-		cell.innerHTML = reasonDesc[entry.reason];
+		let entry;
 
-		/*col "Début" */
-		cell = line.insertCell(2);
-		cell.innerHTML = begin.getHours() + ':' + begin.getMinutes();
+		for (let i = 0; i < list.length; i++)
+		{
+			entry = list[i];
 
-		/*col "Fin" */
-		cell = line.insertCell(3);
-		cell.innerHTML = end.getHours() + ':' + end.getMinutes();
-	
-		/*col "Remarque" */
-		cell = line.insertCell(4);
-		cell.innerHTML = entry.remark;
-		
-		/*col "Durée" */
+			line = table.insertRow(-1);
+			
+			cell = line.insertCell(0);
+			cell.innerHTML = `${entry.id}`;
 
-		/*col "Majoré" */
+			cell = line.insertCell(1);
+			cell.innerHTML = `${entry.commonName}`;
 
-		/*col "Total" */
+			cell = line.insertCell(2);
+			cell.innerHTML = "";
+			
+			cell = line.insertCell(3);
+			let active = entry.disabled === null ? "OUI" : "NON"; 
+			cell.innerHTML = `${active}`;
+		}
+
+		document.getElementById("totalRows").innerHTML = list.length;
+	}
+
+	log()
+	{
+		this.getUsers().then(response => console.log(response));
+	}
+
+	constructTable()
+	{
+		this.getUsers().then(response => this.usersTableConstruct(response));
 	}
 }
 
-function fetchSituation()
+var usersPage = document.querySelector('h2').innerHTML === 'Utilisateurs';
+
+if (usersPage)
+{
+	let users = new Users(url_users);
+
+	let body = document.querySelector('body');
+	body.addEventListener('load', users.constructTable());
+}
+
+class Situation
+{
+	constructor(url)
+	{
+		this.url = url;
+	}
+
+	async getSituation(userId, year, firstDay, lastDay)
+	{
+		let url = new URL(this.url);
+
+		url.searchParams.append('year', year);
+		url.searchParams.append('id', userId);
+		url.searchParams.append('from', firstDay);
+		url.searchParams.append('to', lastDay);
+
+		console.log(url);
+
+		let response = await fetch(url);
+
+		return await response.json();
+	}
+	
+	fillLine(data, obj, sign)
+	{
+		let cells = document.getElementById(obj).children;
+
+		cells[1].innerHTML = data.summary.hours[obj] == 0 ? "" : sign;
+		cells[2].innerHTML = data.summary.hours[obj];
+		cells[3].innerHTML = data.summary.days[obj];
+	}
+
+	fillLineDirect(data, obj, sign)
+	{
+		let cells = document.getElementById(obj).children;
+
+		cells[1].innerHTML = data[obj] == 0 ? "" : sign;
+		cells[2].innerHTML = data[obj];
+		cells[3].innerHTML = "--";
+	}
+
+	fillLineEasy(value, obj, sign)
+	{
+		let cells = document.getElementById(obj).children;
+
+		cells[1].innerHTML = (value == 0) ? "" : sign;
+		cells[2].innerHTML = value;
+		cells[3].innerHTML = "--";
+	}
+
+	situationTableConstruct(data)
+	{
+		var workToDo = {
+			days: 0,
+			hours : 0	
+		}
+		
+		let days = data.summary.days;
+		let hours = data.summary.hours;
+
+		let diff = data.diff;
+		diff = Math.round(data.diff * 100) / 100;
+
+		workToDo.days = days.globalTodo - (days.accident+ days.army + days.health + days.holiday + days.learning + days.unpaid + days.paidunemployed);
+		workToDo.hours = hours.globalTodo - (hours.accident + hours.army + hours.health + hours.holiday + hours.learning + hours.unpaid + hours.paidunemployed);
+
+		this.fillLine(data, "globalTodo", "+");
+		this.fillLine(data, "accident", "-");
+		this.fillLine(data, "health", "-");
+		this.fillLine(data, "learning", "-");
+		this.fillLine(data, "army", "-");
+		this.fillLine(data, "holiday", "-");
+		this.fillLine(data, "unpaid", "-");
+		this.fillLine(data, "paidunemployed", "-");
+
+		this.fillLineDirect(data, "todo", "+");
+		this.fillLineDirect(data, "done", "-");
+
+		this.fillLineEasy(data.todo - data.done, "annualDiff", "+");
+
+		this.fillLine(data, "report", "+");
+		this.fillLine(data, "paid", "+");
+		this.fillLine(data, "manual", "+");
+
+		let cells = document.getElementById("diff").children;
+		cells[1].innerHTML = (diff < 0) ? "-" : "+";
+		cells[2].innerHTML = Math.abs(diff);
+		cells[3].innerHTML = "--";
+
+	}
+
+	constructTable(userId, year, firstDay, lastDay)
+	{
+		this.getSituation(userId, year, firstDay, lastDay).then(response => this.situationTableConstruct(response));
+	}
+
+	updateTable(userId, year, firstDay, lastDay)
+	{
+		this.constructTable(userId, year, firstDay, lastDay);
+	}
+}
+
+var situationPage = document.querySelector('h2').innerHTML === 'Situation';
+
+if (situationPage)
+{
+	document.body.addEventListener('load', setDateAsAttributes('date', lastFriday(), ['value', 'max']));
+
+	let lastDay = function () {
+		return document.querySelector('#date').value;
+	}
+
+	let year = function () {
+		let year = lastDay();
+		return year.slice(0,4);
+	}
+
+	var situation = new Situation(url_situation);
+
+	situation.constructTable(sessionStorage.getItem('userId'), year(), '1.1', convertUnixDateToSimple(lastDay()));
+
+	document.querySelector('#displaySituation').addEventListener('click', function (event) {
+		event.preventDefault();	
+		situation.updateTable('4OsUdM6QkP311', year(), '1.1', convertUnixDateToSimple(lastDay()));
+	})
+}
+
+
+
+
+function fetchStamping()
 {
 	let url = new URL(url_situation);
+	let today = new Date();
 
-	let year = '2020';
+	let year = toString(today.getFullYear());
 	let worker_id = '4OsUdM6QkP311';
-	let first_day = '1.1';
-	let last_day = '31.12';
+	let first_day = new Date(year, 1, 1);
+	let last_day = new Date(year, 12, 31);
+
+	first_day = convertDateToUnix(first_day);
+	first_day = convertUnixDateToSimple(first_day);
+
+	last_day = convertDateToUnix(last_day);
+	last_day = convertUnixDateToSimple(last_day);
 
 	url.searchParams.append('year', year);
 	url.searchParams.append('id', worker_id);
@@ -212,69 +327,86 @@ fetch(url)
 	})
 }
 
-function fillLine(data, obj, sign)
+function fetchConditions()
 {
-	let cells = document.getElementById(obj).children;
+	let url = new URL(url_situation);
 
-	cells[1].innerHTML = data.summary.hours[obj] == 0 ? "" : sign;
-	cells[2].innerHTML = data.summary.hours[obj];
-	cells[3].innerHTML = data.summary.days[obj];
+	let year = '2020';
+	let worker_id = '4OsUdM6QkP311';
+	let first_day = '1.1';
+	let last_day = '31.12';
+
+
+	url.searchParams.append('year', year);
+	url.searchParams.append('id', worker_id);
+	url.searchParams.append('from', first_day);
+	url.searchParams.append('to', last_day);
+
+	console.log(url);
+
+fetch(url)
+		.then(response => {
+			response.json()
+				.then(data => {
+					console.log(data);
+					conditionsViewConstruct(data);
+		})
+	})
 }
 
-function fillLineDirect(data, obj, sign)
+function conditionsViewConstruct(data)
 {
-	let cells = document.getElementById(obj).children;
+	let posForInsertion = document.querySelector('div#condList');
+	let newCond = document.createElement('div');
+	newCond.classList.add("conditionsSet");
 
-	cells[1].innerHTML = data[obj] == 0 ? "" : sign;
-	cells[2].innerHTML = data[obj];
-	cells[3].innerHTML = "--";
+	let cond = data.conditions['2020_cond1'];
+
+	newCond.append(condElement('begin', 'Début', cond.begin.date.slice(0,10)));
+	newCond.append(condElement('end', 'Fin', cond.end.date.slice(0,10)));
+	newCond.append(condElement('reportHour', 'Solde année précédente (vac/heures)', cond.report));
+	newCond.append(condElement('workweek', 'Heures par semaine', cond.workweek));
+	newCond.append(condElement('workratio', 'Taux d\'activité', cond.workratio));
+	newCond.append(condElement('dayhours', 'Heures par jour', cond.dayhours));
+	newCond.append(condElement('holiday', 'Vacances', cond.holiday));
+	newCond.append(condElement('sundayratio', 'Majoration dimanche', cond.sundayratio));
+	newCond.append(condElement('overtime', 'Majoration de nuit', cond.overtime));
+
+	posForInsertion.append(newCond);
 }
 
-function fillLineEasy(value, obj, sign)
+function condElement(id, title, value)
 {
-	let cells = document.getElementById(obj).children;
+	let div = document.createElement('div');
+	div.setAttribute('id', id);
+	div.classList.add('condElem');
 
-	cells[1].innerHTML = (value == 0) ? "" : sign;
-	cells[2].innerHTML = value;
-	cells[3].innerHTML = "--";
+	let titleP = document.createElement('p');
+	let valueP = document.createElement('p');
+
+	titleP.setAttribute('class', 'condTitle');
+	valueP.setAttribute('class', 'condValue');
+
+	titleP.textContent = title;
+	valueP.textContent = value;
+
+	div.append(titleP, valueP);
+
+	return div;
 }
 
-function situationTableConstruct(data)
+function convertUnixDateToSimple(date)
 {
-	var workToDo = {
-		days: 0,
-		hours : 0	
-	}
-	
-	let days = data.summary.days;
-	let hours = data.summary.hours;
+	let day = date[8] + date[9];
+	let month = date[5] + date[6];
 
-	workToDo.days = days.globalTodo - (days.accident+ days.army + days.health + days.holiday + days.learning + days.unpaid + days.paidunemployed);
-	workToDo.hours = hours.globalTodo - (hours.accident + hours.army + hours.health + hours.holiday + hours.learning + hours.unpaid + hours.paidunemployed);
+	day = parseInt(day, 10);
+	month = parseInt(month, 10);
 
-	fillLine(data, "globalTodo", "-");
-	fillLine(data, "accident", "+");
-	fillLine(data, "health", "+");
-	fillLine(data, "learning", "+");
-	fillLine(data, "army", "+");
-	fillLine(data, "holiday", "+");
-	fillLine(data, "unpaid", "+");
-	fillLine(data, "paidunemployed", "+");
+	console.log(day + "." + month);
 
-	fillLineDirect(data, "todo", "-");
-	fillLineDirect(data, "done", "+");
-
-	fillLineEasy(data.todo - data.done, "annualDiff", "-");
-
-	fillLine(data, "report", "-");
-	fillLine(data, "paid", "-");
-	fillLine(data, "manual", "-");
-
-	fillLineEasy(Math.abs(data.diff), "diff", "-");
-
-
+	return day + "." + month;
 }
-
 function convertDateToUnix(date)
 {
 	let m = date.getMonth() + 1;
@@ -310,7 +442,6 @@ function lastFriday()
 	return targetDate;
 }
 
-
 function today()
 {
 	return new Date();
@@ -340,15 +471,97 @@ function setDateAsAttributes(element, dateFunction, attributes)
 	}
 }
 
-function display_stamping(e)
+function stampingTableConstruct(list)
+{
+	let table = document.getElementById("stamping_tbody");
+	
+	let month = 1;
+	let cell;
+	let line;
+	
+	var entry;
+
+	for (let i = 0; i < list.entries[month].length; i++)
+	{
+		line = table.insertRow(-1);
+
+		if ( (i + 1) % 2) {
+			line.classList.add("odd");
+		} else {
+			line.classList.add("pair");
+		} 
+
+		let entry = list.entries[month][i];
+		
+		/*col "Jour" */
+		cell = line.insertCell(0);
+		cell.innerHTML = entry.date;
+
+		/*col "Motif" */	
+		cell = line.insertCell(1);
+		cell.innerHTML = reasonDesc[entry.reason];
+
+		/*col "Début" */
+		cell = line.insertCell(2);
+		cell.innerHTML = begin.getHours() + ':' + begin.getMinutes();
+
+		/*col "Fin" */
+		cell = line.insertCell(3);
+		cell.innerHTML = end.getHours() + ':' + end.getMinutes();
+	
+		/*col "Remarque" */
+		cell = line.insertCell(4);
+		cell.innerHTML = entry.remark;
+		
+		/*col "Durée" */
+
+		/*col "Majoré" */
+
+		/*col "Total" */
+	}
+}
+
+
+
+function get_stamping(func)
+{
+	let first_day = document.getElementById("firstDay").value + "T00:00:00.000Z";
+	let last_day = document.getElementById("lastDay").value + "T00:00:00.000Z"; 
+	let worker_id = '4OsUdM6QkP311';
+	 
+
+	let url = new URL(url_stamping);
+	url.searchParams.append('from', first_day);
+	url.searchParams.append('until', last_day);
+	url.searchParams.append('target', worker_id);
+
+	console.log(url);
+
+	fetch (url)
+		.then(response => {
+				response.json()
+		.then(data => {
+			console.log(data);
+			func(data);
+		})
+		.catch(error => console.log(error));
+		})
+}
+function display_stamping()
 {
 	this.preventDefault();
 
 	get_stamping();
 }
 
-document.getElementById("display").addEventListener("click", function (e) {
+var triggerTarget;
+
+if (triggerTarget = document.getElementById("display"))
+{
+	triggerTarget.addEventListener("click", function (e) {
 	e.preventDefault();
 	get_stamping();
-})
+	})
+}
+
 

@@ -7,14 +7,15 @@
 	<link rel="stylesheet" type="text/css" href="mobile.css">
 </head>
 
-<body onload="load_header(); setDateAsAttributes('date', yesterday(), ['value']); fetchSituation()">
+<body>
 	<header id="header">
 	</header>
 
 <h2>Situation</h2>
 
-<form action="report.html" method="post">
-	<input id="date" type="date">
+<form id="form">
+	<input type="date" id="date" name="date">
+	<input type="submit" value="afficher" id="displaySituation" name="display">
 </form>
 
 <div class="table">
@@ -126,8 +127,8 @@
 </div>
 
 
-<script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/const.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>

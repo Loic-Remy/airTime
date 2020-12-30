@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="mobile.css">
 </head>
 
-<body onload="load_header();  setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']);  setDateAsAttributes('lastDay', lastFriday(), ['value']);  get_stamping();">
+<body onload="setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']);  setDateAsAttributes('lastDay', lastFriday(), ['value']);  get_stamping(stampingTableConstruct());">
 	<header id="header">
 	</header>
 
@@ -42,6 +42,6 @@
 
 </body>
 
-<script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/const.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </html>
