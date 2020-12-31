@@ -327,73 +327,100 @@ fetch(url)
 	})
 }
 
-function fetchConditions()
+class Conditions
 {
-	let url = new URL(url_situation);
+	constructor(url)
+	{
+		this.url = url;
+	}
 
-	let year = '2020';
-	let worker_id = '4OsUdM6QkP311';
-	let first_day = '1.1';
-	let last_day = '31.12';
+	async getConditions() 
+	{	
+		let url = new URL(this.url);
+
+		let year = '2020';
+		let worker_id = sessionStorage.getItem('userId');
+		let first_day = '1.1';
+		let last_day = '31.12';
 
 
-	url.searchParams.append('year', year);
-	url.searchParams.append('id', worker_id);
-	url.searchParams.append('from', first_day);
-	url.searchParams.append('to', last_day);
+		url.searchParams.append('year', year);
+		url.searchParams.append('id', worker_id);
+		url.searchParams.append('from', first_day);
+		url.searchParams.append('to', last_day);
 
-	console.log(url);
+		let response = await fetch(url);
+		return await response.json();
+	}
+	
+	condElement(id, title, value)
+	{
+		let div = document.createElement('div');
+		div.setAttribute('id', id);
+		div.classList.add('condElem');
 
-fetch(url)
-		.then(response => {
-			response.json()
-				.then(data => {
-					console.log(data);
-					conditionsViewConstruct(data);
-		})
-	})
+		let titleP = document.createElement('p');
+		let valueP = document.createElement('p');
+
+		titleP.setAttribute('class', 'condTitle');
+		valueP.setAttribute('class', 'condValue');
+
+		titleP.textContent = title;
+		valueP.textContent = value;
+
+		div.append(titleP, valueP);
+
+		return div;
+	}
+
+	conditionsConstructView(data)
+	{
+		let posForInsertion = document.querySelector('div#condList');
+
+		let keys = Object.keys(data.conditions);
+
+		keys.reverse();
+		
+		for (let i = 0; i < keys.length; i++)
+		{
+			if (keys[i].slice(0, 4) < firstYear)
+			{
+				continue;
+			}
+
+			let cond = data.conditions[keys[i]];
+		
+			let newCond = document.createElement('div');
+			newCond.classList.add("conditionsSet");
+			
+			newCond.append(this.condElement('begin', 'Début', cond.begin.date.slice(0,10)));
+			newCond.append(this.condElement('end', 'Fin', cond.end.date.slice(0,10)));
+			newCond.append(this.condElement('reportHour', 'Solde année précédente (vac/heures)', cond.report));
+			newCond.append(this.condElement('workweek', 'Heures par semaine', cond.workweek));
+			newCond.append(this.condElement('workratio', 'Taux d\'activité', cond.workratio));
+			newCond.append(this.condElement('dayhours', 'Heures par jour', cond.dayhours));
+			newCond.append(this.condElement('holiday', 'Vacances', cond.holiday));
+			newCond.append(this.condElement('sundayratio', 'Majoration dimanche', cond.sundayratio));
+
+			posForInsertion.append(newCond);
+		}
+	}
+
+	constructView()
+	{
+		this.getConditions().then(response => this.conditionsConstructView(response));
+	}
 }
 
-function conditionsViewConstruct(data)
+var conditionsPage = document.querySelector('h2').innerHTML === 'Conditions';
+
+if (conditionsPage)
 {
-	let posForInsertion = document.querySelector('div#condList');
-	let newCond = document.createElement('div');
-	newCond.classList.add("conditionsSet");
-
-	let cond = data.conditions['2020_cond1'];
-
-	newCond.append(condElement('begin', 'Début', cond.begin.date.slice(0,10)));
-	newCond.append(condElement('end', 'Fin', cond.end.date.slice(0,10)));
-	newCond.append(condElement('reportHour', 'Solde année précédente (vac/heures)', cond.report));
-	newCond.append(condElement('workweek', 'Heures par semaine', cond.workweek));
-	newCond.append(condElement('workratio', 'Taux d\'activité', cond.workratio));
-	newCond.append(condElement('dayhours', 'Heures par jour', cond.dayhours));
-	newCond.append(condElement('holiday', 'Vacances', cond.holiday));
-	newCond.append(condElement('sundayratio', 'Majoration dimanche', cond.sundayratio));
-	newCond.append(condElement('overtime', 'Majoration de nuit', cond.overtime));
-
-	posForInsertion.append(newCond);
+	let conditions = new Conditions(url_situation);
+	
+	document.body.addEventListener('load', conditions.constructView());
 }
-
-function condElement(id, title, value)
-{
-	let div = document.createElement('div');
-	div.setAttribute('id', id);
-	div.classList.add('condElem');
-
-	let titleP = document.createElement('p');
-	let valueP = document.createElement('p');
-
-	titleP.setAttribute('class', 'condTitle');
-	valueP.setAttribute('class', 'condValue');
-
-	titleP.textContent = title;
-	valueP.textContent = value;
-
-	div.append(titleP, valueP);
-
-	return div;
-}
+	
 
 function convertUnixDateToSimple(date)
 {
