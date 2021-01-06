@@ -21,6 +21,13 @@ class Header
 				document.querySelector('#identity').innerHTML = sessionStorage.getItem('userName');
 			});
 	}
+
+	save()
+	{
+		this.getHeader().then(response => {
+			sessionStorage.setItem('header', response);
+		})
+	}
 }
 
 var header = new Header(url_header);
@@ -272,6 +279,7 @@ var situationPage = document.querySelector('h2').innerHTML === 'Situation';
 if (situationPage)
 {
 	document.body.addEventListener('load', setDateAsAttributes('date', lastFriday(), ['value', 'max']));
+	document.body.addEventListener('load', setDateAsAttributes('date', firstDayYear(), ['min']));
 
 	let lastDay = function () {
 		return document.querySelector('#date').value;
@@ -294,44 +302,12 @@ if (situationPage)
 
 
 
-
-function fetchStamping()
-{
-	let url = new URL(url_situation);
-	let today = new Date();
-
-	let year = toString(today.getFullYear());
-	let worker_id = '4OsUdM6QkP311';
-	let first_day = new Date(year, 1, 1);
-	let last_day = new Date(year, 12, 31);
-
-	first_day = convertDateToUnix(first_day);
-	first_day = convertUnixDateToSimple(first_day);
-
-	last_day = convertDateToUnix(last_day);
-	last_day = convertUnixDateToSimple(last_day);
-
-	url.searchParams.append('year', year);
-	url.searchParams.append('id', worker_id);
-	url.searchParams.append('from', first_day);
-	url.searchParams.append('to', last_day);
-
-
-fetch(url)
-		.then(response => {
-			response.json()
-				.then(data => {
-					console.log(data);
-					situationTableConstruct(data);
-		})
-	})
-}
-
 class Conditions
 {
 	constructor(url)
 	{
 		this.url = url;
+		this.conditions = null;
 	}
 
 	async getConditions() 
@@ -420,7 +396,278 @@ if (conditionsPage)
 	
 	document.body.addEventListener('load', conditions.constructView());
 }
+
+class Stamping 
+{
+	constructor(url)
+	{
+		this.url = url;
+		this.response = null;
+	}
+
+	async getStamping()
+	{		
+		let url = new URL(this.url);
+		console.log(url);
+
+		let year = document.querySelector('#firstDay').value;
+		year = year[0] + year[1] + year[2] + year[3];
+		let worker_id = sessionStorage.getItem('userId');
+		let first_day = '1.1';
+		let last_day = convertUnixDateToSimple(document.querySelector('#lastDay').value);
+		
+		url.searchParams.append('year', year);
+		url.searchParams.append('id', worker_id);
+		url.searchParams.append('from', first_day);
+		url.searchParams.append('to', last_day);
+
+		let response = await fetch(url);
+		return await response.json();
+	}
+
+	_showOrHideDetails(event)
+	{
+		let currentEl = event.target.parentElement.nextElementSibling;
+						
+		while (currentEl.classList.contains('detailLine'))
+		{
+			if (currentEl.classList.contains('hidden'))
+			{
+				currentEl.classList.replace('hidden', 'shown');
+			}
+			else
+			{
+				currentEl.classList.replace('shown', 'hidden');
+			}
+			currentEl = currentEl.nextElementSibling;
+		}
+	}
+
+	_buildDayLine(line, entry)
+	{
+		let position;
+		let value;
+		let util;
+		let classAttribute = null;
+
+		for (let i = 0; i < 9; i++)
+		{
+			line.insertCell(-1);
+		}
+
+		for (const key in entry)
+		{
+			value = entry[key];
+			util = true;
+
+			switch (key)
+			{
+				case 'date':
+					position = 0;
+					value = unixDateToReadable(value, true);
+					break;
+				case 'reason':
+					position = 1;
+					break;
+				case 'ratio':
+					position = 2;
+					value = value + ' %';
+					classAttribute = 'long';
+					break;
+				case 'todo':
+					position = 3;
+					value = decimalToHours(value);
+					break;
+				case 'done':
+					position = 4;
+					value = decimalToHours(value);
+					break;
+				case 'overtime':
+					position = 5;		
+					value = decimalToHours(value);
+					break;
+				case 'total':
+					position = 6;
+					value = decimalToHours(value);
+					break;
+				case 'diff':
+					position = 7;
+					value = decimalToHours(value);
+					break;
+				case 'yearDiff':
+					position = 8;
+					value = decimalToHours(value);
+					break;
+				default:
+					util = false;
+					break;
+			}
 	
+			if (util)
+			{
+				line.children[position].innerHTML = value;
+			}
+			if (classAttribute)
+			{
+				line.children[position].classList.add(classAttribute);
+				classAttribute = null;
+			}
+		}
+
+	}
+
+	_buildDetailLine(line, entry)
+	{
+		for (let i = 0; i < 3; i++)
+		{
+			line.insertCell(-1);
+		}
+		
+		line.children[1].innerHTML = 'Période'
+		
+		line.children[2].setAttribute("colspan", "8");
+		line.children[2].innerHTML = entry;
+	}
+
+	_constructTable(data)
+	{
+		console.log(data);
+		let lastMonth		= 1;
+		let lastDay			= 31; 
+		let currMonth		= 1;
+		let currDay			= 1;
+
+		let entry;
+		let dayColoration;
+		let newLine;
+		let table			= document.querySelector('#stamping_tbody');	
+
+		let color = false;
+		
+		for (; currMonth <= lastMonth; currMonth++)
+		{
+			for (; currDay <= lastDay; currDay++)
+			{
+				entry = data.entries[currMonth][currDay - 1];
+				newLine = document.createElement('tr');
+				newLine.classList.add('stampingLine');
+
+				dayColoration = new Date(2020, currMonth - 1, currDay);
+				dayColoration = dayColoration.getDay();
+				
+				if (dayColoration === 6 || dayColoration === 0)
+					newLine.classList.add('hilight');
+
+				this._buildDayLine(newLine, entry);
+				newLine.addEventListener('click', this._showOrHideDetails);
+
+				table.appendChild(newLine);
+				
+				for (let i = 0; i < entry.entries.length; i++)
+				{
+					newLine = document.createElement('tr');
+					
+					newLine.classList.add('hidden');
+					newLine.classList.add('detailLine');
+					
+					this._buildDetailLine(newLine, entry.entries[i]);
+					table.appendChild(newLine);
+				}
+				
+			}
+
+			currDay = 0;
+		}
+	}
+
+	constructTable()
+	{
+		this.getStamping().then(response => this._constructTable(response));
+	}
+
+	udpateTable()
+	{
+		/* TODO */
+	}
+
+	log()
+	{
+		this.getStamping().then(response => console.log(response));
+	}
+
+}
+
+var stampingPage = document.querySelector('h2').innerHTML === 'Timbrages';
+
+if (stampingPage)
+{
+	let stamping = new Stamping(url_situation);
+	
+	document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']));
+	document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayYear(lastFriday()), ['min']));
+	document.body.addEventListener('load', setDateAsAttributes('lastDay', lastFriday(), ['value', 'max']));
+	document.body.addEventListener('load', stamping.constructTable());
+
+	document.getElementById("display").addEventListener('click', function (e) {
+		e.preventDefault();
+		stamping.constructTable();
+	});
+
+	document.querySelectorAll(".stampingLine").forEach(element => {
+		element.addEventListener('click', function (event) {
+			let currentEl = event.target.nextElementSibling;
+			console.log(currentEl);	
+			while (currentEl.classList.contains('detailLine'))
+			{
+				currentEl.classList.replace('hidden', 'shown');
+				currentEl = currentEl.nextElementSibling;
+			}
+		})
+	})
+}
+
+/*
+var triggerTarget;
+
+if (triggerTarget = document.getElementById("display"))
+{
+	triggerTarget.addEventListener("click", function (e) {
+	e.preventDefault();
+	get_stamping();
+	})
+}
+*/
+function unixDateToReadable(date, short = true)
+{
+	let year = date[0] + date[1] + date[2] + date[3];
+	let month = date[5] + date[6];
+	let day = date[8] + date[9];
+
+	if (short)
+	{
+		return day + '.' + month;
+	}
+
+	return day + '.' + month + '.' + year;
+}
+
+function decimalToHours(time)
+{
+	let sign = time < 0 ? '-&nbsp;' : '&nbsp;&nbsp;';
+	
+	if (time === 0)
+		return sign + "&nbsp;0:00"
+
+	let hours = Math.abs(time);	
+	hours = parseInt(hours, 10);
+	hours = hours < 10 ? '&nbsp' + hours : hours;
+
+	let minutes = (time % 1) * 60;
+	minutes = Math.abs(minutes);
+	minutes = minutes < 10 ? '0' + minutes : minutes;
+
+	return sign + hours + ':' + minutes;
+}
 
 function convertUnixDateToSimple(date)
 {
@@ -452,6 +699,23 @@ function firstDayMonth(dateFunction)
 	let currentDate = (typeof dateFunction === 'undefined') ? new Date() : dateFunction;
 
 	return new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+}
+
+function firstDayYear(dateFunction)
+{
+	let today;
+
+	if (typeof dateFunction === 'undefined')
+	{
+		today = new Date();
+	}
+	else
+	{
+		today = dateFunction;
+	}
+
+
+	return new Date(today.getFullYear(), 0, 1);
 }
 
 function lastFriday()
@@ -491,104 +755,13 @@ function setDateAsAttributes(element, dateFunction, attributes)
 {
 	let elmt = document.getElementById(element);
 	let date = convertDateToUnix(dateFunction);
-
 	for(let i = 0; i < attributes.length; i++)
 	{
 		elmt.setAttribute(attributes[i], date);
 	}
 }
 
-function stampingTableConstruct(list)
-{
-	let table = document.getElementById("stamping_tbody");
-	
-	let month = 1;
-	let cell;
-	let line;
-	
-	var entry;
-
-	for (let i = 0; i < list.entries[month].length; i++)
-	{
-		line = table.insertRow(-1);
-
-		if ( (i + 1) % 2) {
-			line.classList.add("odd");
-		} else {
-			line.classList.add("pair");
-		} 
-
-		let entry = list.entries[month][i];
-		
-		/*col "Jour" */
-		cell = line.insertCell(0);
-		cell.innerHTML = entry.date;
-
-		/*col "Motif" */	
-		cell = line.insertCell(1);
-		cell.innerHTML = reasonDesc[entry.reason];
-
-		/*col "Début" */
-		cell = line.insertCell(2);
-		cell.innerHTML = begin.getHours() + ':' + begin.getMinutes();
-
-		/*col "Fin" */
-		cell = line.insertCell(3);
-		cell.innerHTML = end.getHours() + ':' + end.getMinutes();
-	
-		/*col "Remarque" */
-		cell = line.insertCell(4);
-		cell.innerHTML = entry.remark;
-		
-		/*col "Durée" */
-
-		/*col "Majoré" */
-
-		/*col "Total" */
-	}
-}
 
 
-
-function get_stamping(func)
-{
-	let first_day = document.getElementById("firstDay").value + "T00:00:00.000Z";
-	let last_day = document.getElementById("lastDay").value + "T00:00:00.000Z"; 
-	let worker_id = '4OsUdM6QkP311';
-	 
-
-	let url = new URL(url_stamping);
-	url.searchParams.append('from', first_day);
-	url.searchParams.append('until', last_day);
-	url.searchParams.append('target', worker_id);
-
-	console.log(url);
-
-	fetch (url)
-		.then(response => {
-				response.json()
-		.then(data => {
-			console.log(data);
-			func(data);
-		})
-		.catch(error => console.log(error));
-		})
-}
-function display_stamping()
-{
-	this.preventDefault();
-
-	get_stamping();
-}
-
-var triggerTarget;
-
-if (triggerTarget = document.getElementById("display"))
-{
-	triggerTarget.addEventListener("click", function (e) {
-	e.preventDefault();
-	get_stamping();
-	})
-}
 
 

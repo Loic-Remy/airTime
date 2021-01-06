@@ -15,7 +15,6 @@ header
 
 	display: flex;
 	flex-direction: column;
-
 }
 
 header > div
@@ -24,6 +23,7 @@ header > div
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-around;
+
 }
 
 #menuBox
@@ -97,6 +97,8 @@ a:visited
 body 
 {
 	margin: 0;
+	height: 100%;
+
 }
 
 #condList
@@ -175,6 +177,7 @@ body, ::placeholder
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+
 }
 
 h1
@@ -184,29 +187,24 @@ h1
 
 table
 {
-	font-size: 14px;
+	font-size: 12px;
 	border-collapse: collapse;
 
 	width: 90%;
 }
+
+
 
 .loginLabel 
 {
 	display: none;
 }
 	
-.details td, .details th
+.detailLine > td
 {
-	border: none;
-
 	background-color: yellow;
 
-}
-
-
-.details
-{
-	display: none;
+	text-align: center;
 }
 
 tbody tr:hover td
@@ -215,11 +213,6 @@ tbody tr:hover td
 
 	
 	cursor: pointer;
-}
-
-#stamping tbody tr:nth-child(odd)
-{
-	background-color: #E2DCDD;
 }
 
 td, th
@@ -256,12 +249,6 @@ td, th
 	display: none;
 }
 
-.shown
-{
-	display: contents;
-}
-
-
 @media screen and (min-width: 640px) {
 	::placeholder 
 	{
@@ -277,7 +264,7 @@ td, th
 	{
 		font-size: 16px;
 
-		width: 50%;
+		width: 80%;
 	}
 
 	.conditionsSet

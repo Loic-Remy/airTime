@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="mobile.css">
 </head>
 
-<body onload="setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']);  setDateAsAttributes('lastDay', lastFriday(), ['value']);  get_stamping(stampingTableConstruct());">
+<body>
 	<header id="header">
 	</header>
 
@@ -28,10 +28,14 @@
 		<thead>
 			<tr>
 				<th>Jour</th>
-				<th>Motif</th>
-				<th>Début</th>
-				<th>Fin</th>
-				<th>Remarque</th>
+				<th>Type</th>
+				<th class="long">Taux <br>%</th>
+				<th>A faire</th>
+				<th>Fait</th>
+				<th>Majoré</th>
+				<th>Total jour<span class="long">nalier</span></th>
+				<th>Diff jour<span class="long">nalière</span></th>
+				<th>Diff an<span class="long">nuelle</span></th>
 			</tr>
 		</thead>
 		<tbody id="stamping_tbody">
@@ -39,9 +43,8 @@
 	</table>
 </div>
 
-
-</body>
-
 <script type="text/javascript" src="js/const.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+</body>
+
 </html>
