@@ -1,3 +1,4 @@
+
 class Header
 {
 	constructor(url)
@@ -8,6 +9,7 @@ class Header
 	async getHeader()
 	{
 		let response = await fetch(this.url);
+		console.log(response);
 		return await response.text();
 	}
 
@@ -16,17 +18,8 @@ class Header
 		this.getHeader()
 			.then(response => {
 				document.getElementById("header").innerHTML = response;
-				})
-			.then(function () {
-				document.querySelector('#identity').innerHTML = sessionStorage.getItem('userName');
-			});
-	}
-
-	save()
-	{
-		this.getHeader().then(response => {
-			sessionStorage.setItem('header', response);
-		})
+				document.getElementById("identity").innerHTML = sessionStorage.getItem('userName');
+				});
 	}
 }
 
@@ -34,8 +27,7 @@ var header = new Header(url_header);
 
 if (document.querySelector('h2').innerHTML != 'connexion')
 {
-	document.body.addEventListener('load', header.display());
-	console.log(sessionStorage.getItem('userName'));
+	header.display();
 }
 
 var loginPage = document.querySelector('h2').innerHTML === 'connexion';
@@ -45,8 +37,7 @@ if (loginPage)
 	document.querySelector('#submit').addEventListener('click', function (event) {
 		sessionStorage.setItem('userId', '4OsUdM6QkP311');
 		sessionStorage.setItem('userName', 'Etienne Jordan');
-	})
-
+	});
 }
 
 
@@ -422,6 +413,7 @@ class Stamping
 		url.searchParams.append('to', last_day);
 
 		let response = await fetch(url);
+		console.log(response);
 		return await response.json();
 	}
 
@@ -441,6 +433,13 @@ class Stamping
 			}
 			currentEl = currentEl.nextElementSibling;
 		}
+	}
+
+	_buildNoDataLine(line)
+	{
+		let newCell = line.insertCell(-1);
+		newCell.setAttribute('colspan', '9');
+		newCell.innerHTML = 'Aucun timbrage pour la période sélectionnée';
 	}
 
 	_buildDayLine(line, entry)
@@ -529,13 +528,23 @@ class Stamping
 		line.children[2].innerHTML = entry;
 	}
 
-	_constructTable(data)
+	_constructTable(data, firstDay, lastDay)
 	{
 		console.log(data);
-		let lastMonth		= 1;
-		let lastDay			= 31; 
-		let currMonth		= 1;
-		let currDay			= 1;
+		console.log(firstDay);
+		console.log(lastDay);
+		let currDay			= 	parseInt(firstDay[8] + firstDay[9], 10);
+		lastDay				=	parseInt(lastDay[8] + lastDay[9], 10);
+//		let currMonth		=	parseInt(firstDay[5] + firstDay[6], 10) - 1;
+		let currMonth		=	parseInt(firstDay[5], 10) + parseInt(firstDay[6], 10) - 1;
+//		let lastMonth		=	parseInt(lastDay[5] + lastDay[6], 10) - 1;
+		let lastMonth		=	parseInt(lastDay[5], 10) + parseInt(lastDay[6], 10) - 1;
+
+		console.log(currDay);
+		console.log(lastDay);
+		console.log(currMonth);
+		console.log(lastDay[5] + lastDay[6]);
+		console.log(lastMonth);
 
 		let entry;
 		let dayColoration;
@@ -580,9 +589,9 @@ class Stamping
 		}
 	}
 
-	constructTable()
+	constructTable(firstDay, lastDay)
 	{
-		this.getStamping().then(response => this._constructTable(response));
+		this.getStamping().then(response => this._constructTable(response, firstDay, lastDay));
 	}
 
 	udpateTable()
@@ -602,15 +611,20 @@ var stampingPage = document.querySelector('h2').innerHTML === 'Timbrages';
 if (stampingPage)
 {
 	let stamping = new Stamping(url_situation);
-	
+	let form;
+
 	document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']));
 	document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayYear(lastFriday()), ['min']));
 	document.body.addEventListener('load', setDateAsAttributes('lastDay', lastFriday(), ['value', 'max']));
-	document.body.addEventListener('load', stamping.constructTable());
+	document.body.addEventListener('load', function (e) {
+		form = new FormData(document.querySelector('#form_date'));	
+		stamping.constructTable(form.get('firstDay'), form.get('lastDay'))
+	});
 
 	document.getElementById("display").addEventListener('click', function (e) {
 		e.preventDefault();
-		stamping.constructTable();
+		form = new FormData(document.querySelector('#form_date'));	
+		stamping.constructTable(form.get('firstDay'), form.get('lastDay'))
 	});
 
 	document.querySelectorAll(".stampingLine").forEach(element => {
@@ -626,17 +640,6 @@ if (stampingPage)
 	})
 }
 
-/*
-var triggerTarget;
-
-if (triggerTarget = document.getElementById("display"))
-{
-	triggerTarget.addEventListener("click", function (e) {
-	e.preventDefault();
-	get_stamping();
-	})
-}
-*/
 function unixDateToReadable(date, short = true)
 {
 	let year = date[0] + date[1] + date[2] + date[3];
