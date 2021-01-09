@@ -9,7 +9,6 @@ class Header
 	async getHeader()
 	{
 		let response = await fetch(this.url);
-		console.log(response);
 		return await response.text();
 	}
 
@@ -179,8 +178,6 @@ class Situation
 		url.searchParams.append('from', firstDay);
 		url.searchParams.append('to', lastDay);
 
-		console.log(url);
-
 		let response = await fetch(url);
 
 		return await response.json();
@@ -229,23 +226,23 @@ class Situation
 		workToDo.days = days.globalTodo - (days.accident+ days.army + days.health + days.holiday + days.learning + days.unpaid + days.paidunemployed);
 		workToDo.hours = hours.globalTodo - (hours.accident + hours.army + hours.health + hours.holiday + hours.learning + hours.unpaid + hours.paidunemployed);
 
-		this.fillLine(data, "globalTodo", "+");
-		this.fillLine(data, "accident", "-");
-		this.fillLine(data, "health", "-");
-		this.fillLine(data, "learning", "-");
-		this.fillLine(data, "army", "-");
-		this.fillLine(data, "holiday", "-");
-		this.fillLine(data, "unpaid", "-");
-		this.fillLine(data, "paidunemployed", "-");
+		this.fillLine(data, "globalTodo", "-");
+		this.fillLine(data, "accident", "+");
+		this.fillLine(data, "health", "+");
+		this.fillLine(data, "learning", "+");
+		this.fillLine(data, "army", "+");
+		this.fillLine(data, "holiday", "+");
+		this.fillLine(data, "unpaid", "+");
+		this.fillLine(data, "paidunemployed", "+");
 
-		this.fillLineDirect(data, "todo", "+");
-		this.fillLineDirect(data, "done", "-");
+		this.fillLineDirect(data, "todo", "-");
+		this.fillLineDirect(data, "done", "+");
 
-		this.fillLineEasy(data.todo - data.done, "annualDiff", "+");
+		this.fillLineEasy(data.todo - data.done, "annualDiff", "-");
 
 		this.fillLine(data, "report", "+");
-		this.fillLine(data, "paid", "+");
-		this.fillLine(data, "manual", "+");
+		this.fillLine(data, "paid", "-");
+		this.fillLine(data, "manual", "-");
 
 		let cells = document.getElementById("diff").children;
 		cells[1].innerHTML = (diff < 0) ? "-" : "+";
@@ -528,40 +525,38 @@ class Stamping
 		line.children[2].innerHTML = entry;
 	}
 
-	_constructTable(data, firstDay, lastDay)
+	_constructTable(data, formFirstDay, formLastDay)
 	{
-		console.log(data);
-		console.log(firstDay);
-		console.log(lastDay);
-		let currDay			= 	parseInt(firstDay[8] + firstDay[9], 10);
-		lastDay				=	parseInt(lastDay[8] + lastDay[9], 10);
-//		let currMonth		=	parseInt(firstDay[5] + firstDay[6], 10) - 1;
-		let currMonth		=	parseInt(firstDay[5], 10) + parseInt(firstDay[6], 10) - 1;
-//		let lastMonth		=	parseInt(lastDay[5] + lastDay[6], 10) - 1;
-		let lastMonth		=	parseInt(lastDay[5], 10) + parseInt(lastDay[6], 10) - 1;
+		let currDay			= 	parseInt(formFirstDay[8] + formFirstDay[9], 10);
+		let lastDay			=	parseInt(formLastDay[8] + formLastDay[9], 10);
+		let currMonth		=	parseInt(formFirstDay[5] + formFirstDay[6], 10);
+		let lastMonth		=	parseInt(formLastDay[5] + formLastDay[6], 10);
+		let year			= 	parseInt(formLastDay[0] + formLastDay[1] + formLastDay[2] + formLastDay[3])
+		let lastDayThisMonth;
 
-		console.log(currDay);
-		console.log(lastDay);
-		console.log(currMonth);
-		console.log(lastDay[5] + lastDay[6]);
-		console.log(lastMonth);
 
-		let entry;
+		var entry;
 		let dayColoration;
 		let newLine;
 		let table			= document.querySelector('#stamping_tbody');	
-
-		let color = false;
 		
+		console.log(data);
+		console.log('Debut: m=' + currMonth + ' / j=' + currDay);
+		console.log('Fin: m=' + lastMonth + ' / j= ' + lastDay);
+	
 		for (; currMonth <= lastMonth; currMonth++)
 		{
-			for (; currDay <= lastDay; currDay++)
+			lastDayThisMonth = currMonth === lastMonth ? lastDay : data.entries[currMonth].length;
+			console.log(lastDayThisMonth);
+			
+			for (; currDay <= lastDayThisMonth; currDay++)
 			{
 				entry = data.entries[currMonth][currDay - 1];
+
 				newLine = document.createElement('tr');
 				newLine.classList.add('stampingLine');
 
-				dayColoration = new Date(2020, currMonth - 1, currDay);
+				dayColoration = new Date(year, currMonth - 1, currDay);
 				dayColoration = dayColoration.getDay();
 				
 				if (dayColoration === 6 || dayColoration === 0)
@@ -585,8 +580,21 @@ class Stamping
 				
 			}
 
-			currDay = 0;
+			currDay = 1;
 		}
+	}
+
+	_deleteTable()
+	{
+		let tbody = document.querySelector('#stamping_tbody');	
+
+		let size = tbody.children.length;
+		let deleted;
+
+		for (let i = size - 1; i >= 0; i--)
+		{
+			deleted = tbody.removeChild(tbody.children[i]);
+		}	
 	}
 
 	constructTable(firstDay, lastDay)
@@ -594,9 +602,10 @@ class Stamping
 		this.getStamping().then(response => this._constructTable(response, firstDay, lastDay));
 	}
 
-	udpateTable()
+	updateTable(firstDay, lastDay)
 	{
-		/* TODO */
+		this._deleteTable();
+		this.constructTable(firstDay, lastDay);
 	}
 
 	log()
@@ -616,28 +625,15 @@ if (stampingPage)
 	document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']));
 	document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayYear(lastFriday()), ['min']));
 	document.body.addEventListener('load', setDateAsAttributes('lastDay', lastFriday(), ['value', 'max']));
-	document.body.addEventListener('load', function (e) {
-		form = new FormData(document.querySelector('#form_date'));	
-		stamping.constructTable(form.get('firstDay'), form.get('lastDay'))
-	});
+		
+	form = new FormData(document.querySelector('#form_date'));	
+	stamping.constructTable(form.get('firstDay'), form.get('lastDay'));
 
 	document.getElementById("display").addEventListener('click', function (e) {
 		e.preventDefault();
 		form = new FormData(document.querySelector('#form_date'));	
-		stamping.constructTable(form.get('firstDay'), form.get('lastDay'))
+		stamping.updateTable(form.get('firstDay'), form.get('lastDay'))
 	});
-
-	document.querySelectorAll(".stampingLine").forEach(element => {
-		element.addEventListener('click', function (event) {
-			let currentEl = event.target.nextElementSibling;
-			console.log(currentEl);	
-			while (currentEl.classList.contains('detailLine'))
-			{
-				currentEl.classList.replace('hidden', 'shown');
-				currentEl = currentEl.nextElementSibling;
-			}
-		})
-	})
 }
 
 function unixDateToReadable(date, short = true)
@@ -679,8 +675,6 @@ function convertUnixDateToSimple(date)
 
 	day = parseInt(day, 10);
 	month = parseInt(month, 10);
-
-	console.log(day + "." + month);
 
 	return day + "." + month;
 }
