@@ -18,26 +18,86 @@ class Header
 			.then(response => {
 				document.getElementById("header").innerHTML = response;
 				document.getElementById("identity").innerHTML = sessionStorage.getItem('userName');
+				document.querySelector('#disconnect').addEventListener('click', function() {
+					sessionStorage.clear();
+					});
 				});
 	}
 }
 
 var header = new Header(url_header);
 
-if (document.querySelector('h2').innerHTML != 'connexion')
+
+	if (document.querySelector('h2').innerHTML != 'connexion')
 {
 	header.display();
 }
 
+class Login
+{
+	constructor(url)
+	{
+		this.url = url;
+	}
+
+	async getUser(userName)
+	{
+		var entry;
+		var name = userName || this.typedUser;
+
+		return await fetch(this.url)
+							.then(response => {
+								return response.json()
+							})
+							.then(response => {
+								var user = {};
+								for (let i = 0; i < response.length; i++)
+								{
+									entry = response[i];
+									
+									if (entry.commonName === name)
+									{
+										user.userName = entry.commonName;
+										user.id = entry.id;
+										user.pos = i;
+									}
+								}
+								return user;
+							});
+	}
+
+	log(userName)
+	{
+		this.getUser(userName).then(response => console.log(response));
+	}
+	
+	async saveUser(response)
+	{
+		sessionStorage.setItem('userId', await response.id);
+		sessionStorage.setItem('userName', await response.userName);
+		sessionStorage.setItem('pos', await response.pos);
+	}
+
+
+}
+
+var login = new Login(url_users);
 var loginPage = document.querySelector('h2').innerHTML === 'connexion';
 
 if (loginPage)
 {
-	document.querySelector('#submit').addEventListener('click', function (event) {
-		sessionStorage.setItem('userId', '4OsUdM6QkP311');
-		sessionStorage.setItem('userName', 'Etienne Jordan');
+	document.forms.login.addEventListener('submit', function (e) {
+		e.preventDefault();	
+		login.typedUser = document.forms.login.user.value;
+		login.typedPassword = document.forms.login.password.value;
+
+		login.getUser()
+			.then(response => login.saveUser(response))
+			.then( () => document.forms.login.submit() )
+			.catch(error => console.log(error));
 	});
 }
+
 
 
 function displayDetails()
