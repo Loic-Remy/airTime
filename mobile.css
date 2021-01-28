@@ -170,14 +170,29 @@ body, ::placeholder
 	text-align: center;
 }
 
-.inputForm
+.loginForm
 {
-	width: 80%;
+	width: 50%;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	
+	margin: 0 auto;
+}
 
+.multiForm
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.multiForm > input, .multiForm > select
+{
+	width: 25%;
+	margin: 0 auto;
+	text-align: center;
 }
 
 h1

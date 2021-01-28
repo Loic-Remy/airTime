@@ -10,52 +10,16 @@
 <head>
 	<title>airTime</title>
 </head>
-<body onload="setDateAsAttributes('date', today(), ['value', 'max'])"> 
-	<header id="header">
-	</header>
+<body> 
+	<main></main>
 
 	<h2>Saisie</h2>
 
-	<form action="type.html" method="post">
-		<div>
-		<input type="date" id="date" name="date" value="">
-		</div>
-	</form>
-
-<form action="type.html" method="post">
-	<div>
-	<label for="Début">Début </label>
-	</div>
-	<div>
-	<input type="time" id="begin" name="begin" value="07:00" required autofocus>
-	</div>
-	<div>
-	<label for="fin">Fin </label>
-	</div>
-	<div>
-	<input type="time" id="end" name="end" required value="12:00">
-	</div>
-	<div>
-	<label for="motif">Motif </label>
-	</div>
-	<select id="motif" name="motif">
-          <option selected>Travail</option>
-          <option>Vacances</option>
-          <option>Récup heures</option>
-          <option>Congé sans solde</option>
-          <option>Formation</option>
-          <option>Armée/PC</option>
-          <option>Maladie</option>
-          <option>Accident</option>
-          <option>Autre absence payée</option>
-        </select>
-	<div>
-	<input type="submit" id="submit" value="Enregistrer">
-	</div>
-</form>
-
-<script type="text/javascript" src="js/const.js" defer></script>
-<script type="text/javascript" src="js/script.js" defer></script>
+<script type="text/javascript" src="js/const.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/interval.js"></script>
+<script type="text/javascript" src="js/viewType.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 
 </body>
 </html>

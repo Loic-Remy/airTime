@@ -24,15 +24,15 @@ class Header
 				});
 	}
 }
-
+/*
 var header = new Header(url_header);
 
 
-	if (document.querySelector('h2').innerHTML != 'connexion')
+	if (document.querySelector('h2').innerHTML != 'connexion');
 {
 	header.display();
 }
-
+*/
 class Login
 {
 	constructor(url)
@@ -60,41 +60,55 @@ class Login
 										user.userName = entry.commonName;
 										user.id = entry.id;
 										user.pos = i;
+
+										return user;
 									}
 								}
-								return user;
+								throw new Error("L'utilisateur n'existe pas");
 							});
 	}
+
+	manageError(error)
+	{
+		console.log(error);
+	}
+
 
 	log(userName)
 	{
 		this.getUser(userName).then(response => console.log(response));
 	}
 	
-	async saveUser(response)
+	saveUser(response)
 	{
-		sessionStorage.setItem('userId', await response.id);
-		sessionStorage.setItem('userName', await response.userName);
-		sessionStorage.setItem('pos', await response.pos);
+		sessionStorage.setItem('userId', response.id);
+		sessionStorage.setItem('userName', response.userName);
+		sessionStorage.setItem('pos', response.pos);
 	}
 
 
 }
 
-var login = new Login(url_users);
 var loginPage = document.querySelector('h2').innerHTML === 'connexion';
 
 if (loginPage)
 {
-	document.forms.login.addEventListener('submit', function (e) {
-		e.preventDefault();	
+	document.forms.login.addEventListener('submit', function (event) {
+		event.preventDefault();	
+
+		let userField = document.forms.login.user.value;
+	});
+
+	document.forms.login.addEventListener('submit', function (event) {
+
+		let login = new Login(url_users);
 		login.typedUser = document.forms.login.user.value;
 		login.typedPassword = document.forms.login.password.value;
 
 		login.getUser()
 			.then(response => login.saveUser(response))
-			.then( () => document.forms.login.submit() )
-			.catch(error => console.log(error));
+			.then( () => document.forms.login.submit())
+			.catch(error => login.manageError(error));
 	});
 }
 
@@ -344,7 +358,7 @@ if (situationPage)
 
 	document.querySelector('#displaySituation').addEventListener('click', function (event) {
 		event.preventDefault();	
-		situation.updateTable('4OsUdM6QkP311', year(), '1.1', convertUnixDateToSimple(lastDay()));
+		situation.updateTable(sessionStorage.getItem('userId'), year(), '1.1', convertUnixDateToSimple(lastDay()));
 	})
 }
 
@@ -362,7 +376,7 @@ class Conditions
 	{	
 		let url = new URL(this.url);
 
-		let year = '2020';
+		let year = '2021';
 		let worker_id = sessionStorage.getItem('userId');
 		let first_day = '1.1';
 		let last_day = '31.12';
@@ -696,6 +710,24 @@ if (stampingPage)
 	});
 }
 
+
+
+var typePage = document.querySelector('h2').innerHTML === 'Saisie';
+
+if (typePage)
+{
+	var interval = new Interval(sessionStorage.getItem('userId'));
+	var intervalManager = new IntervalManager(url_type);
+
+	var view = new TypeView(document.querySelector('main'), "Saisie");
+	view.buildPage(view.header, view.h2, view.form, view.table);
+
+	interval.fill(document.forms.typeForm);
+	
+	intervalManager.getIntervals(interval)
+		.then(response => view.buildTable(response));
+}
+
 function unixDateToReadable(date, short = true)
 {
 	let year = date[0] + date[1] + date[2] + date[3];
@@ -817,8 +849,4 @@ function setDateAsAttributes(element, dateFunction, attributes)
 		elmt.setAttribute(attributes[i], date);
 	}
 }
-
-
-
-
 
