@@ -1,0 +1,59 @@
+"use strict";
+
+class LoginManager
+{
+    typedUser;
+
+	constructor(url)
+	{
+		this.url = url;
+	}
+
+	async getUser(userName)
+	{
+		var entry;
+		var name = userName || this.typedUser;
+
+		return await fetch(this.url)
+							.then(response => {
+								return response.json()
+							})
+							.then(response => {
+								var user = {};
+								for (let i = 0; i < response.length; i++)
+								{
+									entry = response[i];
+									
+									if (entry.commonName === name)
+									{
+										user.userName = entry.commonName;
+										user.id = entry.id;
+										user.pos = i;
+
+										return user;
+									}
+								}
+								throw new Error("L'utilisateur n'existe pas");
+							});
+	}
+
+	manageError(error)
+	{
+		console.log(error);
+	}
+
+
+	log(userName)
+	{
+		this.getUser(userName).then(response => console.log(response));
+	}
+	
+	saveUser(response)
+	{
+		sessionStorage.setItem('userId', response.id);
+		sessionStorage.setItem('userName', response.userName);
+		sessionStorage.setItem('pos', response.pos);
+	}
+
+
+}

@@ -1,8 +1,16 @@
+"use strict";
+
 class Interval
 {
     constructor(target, begin, end, type, reason, remark)
     {
-        this.target = target;
+        this._hydrate(target, begin, end, type, reason, remark);
+
+    }
+
+    _hydrate(target, begin, end, type, reason, remark)
+    {
+       this.target = target;
         this.begin = begin;
         this.end = end;
         this.type = type;
@@ -15,18 +23,22 @@ class Interval
 		let formDate = form.date.value;
 		let formBegin = form.begin.value;
 		let formEnd = form.end.value;
-	
-		this.begin = formDate + 'T' + formBegin + ':00Z';
-		this.end = formDate + 'T' + formEnd + ':00Z';
-		this.type = 'time';
-        this.reason = document.forms.typeForm.reason.value.translate();
-		this.remark = document.forms.typeForm.remark.value;
         
+        this._hydrate(
+            sessionStorage.getItem('userId'),
+            formDate + 'T' + formBegin + ':00Z',
+            formDate + 'T' + formEnd + ':00Z',
+            'time',
+            document.forms.typeForm.reason.value.translate(),
+            document.forms.typeForm.remark.value);
+
         this.from = formDate + 'T00:00:00Z';
         this.until = formDate + 'T23:59:59Z';
 
         console.log(this);
     }
+
+
 
 }
 
@@ -68,4 +80,5 @@ class IntervalManager
         
         return await fetch(url, init);
     }
+
 }
