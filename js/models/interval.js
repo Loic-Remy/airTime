@@ -68,6 +68,7 @@ class IntervalManager
     async sendInterval(interval)
     {
         let url = new URL(this.url);
+        let result;
 
 		url.searchParams.append('begin', interval.begin);
 		url.searchParams.append('end', interval.end);
@@ -77,8 +78,10 @@ class IntervalManager
         url.searchParams.append('remark', interval.remark);
        
         let init =  {method: 'POST'};
-        
-        return await fetch(url, init);
+        console.log(url);
+        result = await fetch(url, init).then(response => response.json());
+        console.log(result);
+        return await result;
     }
 
 }

@@ -106,7 +106,7 @@ class ControllerType extends Controller
         this.view.buildPage();
 
         var interval = new Interval();
-        function filter(data)
+        function filterCurrentDay(data)
         {
             return data.filter((element => {
                 let date = document.forms.typeForm.date.value;
@@ -119,17 +119,19 @@ class ControllerType extends Controller
         interval.fill(document.forms.typeForm);
         
         this.manager.getIntervals(interval)
-            .then(response => filter(response))
+            .then(response => filterCurrentDay(response))
             .then(response => this.view.updateTable(response));
             
         document.forms.typeForm.addEventListener('submit', (event) => {
             event.preventDefault();
             
             interval.fill(document.forms.typeForm);
-            this.manager.sendInterval(interval);
-
-            this.manager.getIntervals(interval)
-                .then(response => filter(response))
+            this.manager.sendInterval(interval)
+                .then((response) => {
+                    if (response)
+                        return this.manager.getIntervals(interval)
+                })
+                .then(response => filterCurrentDay(response))
                 .then(response => this.view.updateTable(response)); 
  
             document.forms.typeForm.begin.focus();
@@ -141,7 +143,7 @@ class ControllerType extends Controller
             interval.fill(document.forms.typeForm);
             
             this.manager.getIntervals(interval)
-                .then(response => filter(response))
+                .then(response => filterCurrentDay(response))
                 .then(response => this.view.updateTable(response));
         });
         return Promise.resolve('ok');
