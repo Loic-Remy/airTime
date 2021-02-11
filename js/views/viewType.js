@@ -10,7 +10,7 @@ class ViewType extends View
             `<div>
                 <label for='date'>Date</label>
                 <label for='reason'>Motif</label>
-                <label for='duration' id='labelDuration' class='hidden'>Durée</label>
+                <label for='type' id='labelType' class='hidden'>Durée</label>
                 <label for='begin' id='labelBegin'>Début</label>
                 <label for='end' id='labelEnd'>Fin</label>
                 <label for='remark'>Remarque</label>
@@ -20,18 +20,19 @@ class ViewType extends View
                 <select name='reason'>
                     <option value='work' selected>Travail</option>
                     <option value='holiday'>Vacances</option>
-                    <option value='holiday'>Armée/PC/Service civil</option>
-                    <option>Maladie</option>
-                    <option>Accident</option>
-                    <option>Cours</option>
-                    <option>Compensation heures</option>
-                    <option>Vacances non-payées</option>
-                    <option>Chômage technique</option>
+                    <option value='army'>Armée/PC/Service civil</option>
+                    <option value='health'>Maladie</option>
+                    <option value='accident'>Accident</option>
+                    <option value='learning'>Cours</option>
+                    <option value='overtime'>Compensation heures</option>
+                    <option value='unpaid'>Vacances non-payées</option>
+                    <option value='paidunemployed'>Chômage technique</option>
                 </select>
-                <select name='duration' class='hidden'>
-                    <option selected>Jour entier</option>
-                    <option>Matin</option>
-                    <option>Après-midi</option>
+                <select name='type' class='hidden'>
+                    <option value='time' selected>Timbrage</option>
+                    <option value='wholeday'>Jour entier</option>
+                    <option value='morning'>Matin</option>
+                    <option value='afternoon'>Après-midi</option>
                 </select>
                 <input name='begin' type='time' value='07:00' required autofocus>
                 <input name='end' type='time' value='12:00' required>

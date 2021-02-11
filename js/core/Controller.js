@@ -133,7 +133,9 @@ class ControllerType extends Controller
                 })
                 .then(response => filterCurrentDay(response))
                 .then(response => this.view.updateTable(response)); 
- 
+
+
+            document.forms.typeForm.remark.value = "";
             document.forms.typeForm.begin.focus();
 
         });
@@ -149,9 +151,15 @@ class ControllerType extends Controller
 
         document.forms.typeForm.reason.addEventListener('change', (event) => {
             if (event.target.value === 'work')
-            {
-                document.forms.typeForm.duration.classList.add('hidden');
-                document.querySelector('#labelDuration').classList.add('hidden');
+            {   
+                document.forms.typeForm.type.options[0].setAttribute('selected', 'true');
+                document.forms.typeForm.type.options[0].classList.remove('hidden');
+                document.forms.typeForm.type.options[1].removeAttribute('selected');
+
+
+
+                document.forms.typeForm.type.classList.add('hidden');
+                document.querySelector('#labelType').classList.add('hidden');
                 document.forms.typeForm.begin.classList.remove('hidden');
                 document.querySelector('#labelBegin').classList.remove('hidden');
                 document.forms.typeForm.end.classList.remove('hidden');
@@ -159,10 +167,16 @@ class ControllerType extends Controller
             }
             else 
             {
-                document.forms.typeForm.duration.classList.remove('hidden');
-                document.querySelector('#labelDuration').classList.remove('hidden');
+                document.forms.typeForm.type.options[0].removeAttribute('selected');
+                document.forms.typeForm.type.options[0].classList.add('hidden');
+                document.forms.typeForm.type.options[1].setAttribute('selected', 'true');
+
+                document.forms.typeForm.type.classList.remove('hidden');
+                document.querySelector('#labelType').classList.remove('hidden');
+
                 document.forms.typeForm.begin.classList.add('hidden');
                 document.querySelector('#labelBegin').classList.add('hidden');
+
                 document.forms.typeForm.end.classList.add('hidden');
                 document.querySelector('#labelEnd').classList.add('hidden');
             }

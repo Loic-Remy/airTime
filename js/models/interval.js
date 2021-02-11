@@ -23,14 +23,37 @@ class Interval
 		let formDate = form.date.value;
 		let formBegin = form.begin.value;
 		let formEnd = form.end.value;
+        let formType = form.type.value;
+
+        if (formType === 'morning')
+        {
+            formType = 'halfday';
+            formBegin = '06:00';
+            formEnd = '06:00';
+        }
+        else if (formType === 'afternoon')
+        {
+            formType = 'halfday';
+            formBegin = '12:01';
+            formEnd = '12:01';
+        }
+        else if (formType === 'wholeday')
+        {
+            formBegin = '06:00';
+            formEnd = '06:00';
+        }
+        else
+        {
+            formType = 'time';
+        }
         
         this._hydrate(
             sessionStorage.getItem('userId'),
             formDate + 'T' + formBegin + ':00Z',
             formDate + 'T' + formEnd + ':00Z',
-            'time',
-            document.forms.typeForm.reason.value.translate(),
-            document.forms.typeForm.remark.value);
+            formType,
+            form.reason.value,
+            form.remark.value);
 
         this.from = formDate + 'T00:00:00Z';
         this.until = formDate + 'T23:59:59Z';
