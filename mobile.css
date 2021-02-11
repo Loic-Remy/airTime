@@ -22,13 +22,21 @@ header > div
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-around; 
 
+}
+
+header > div > p, header > div > form
+{
+	flex: 1;
 }
 
 #menuBox
 {
 	top: 20px;
+	height: 20px;
+
+	border-top:#ffffff solid 1px;
 }
 
 #menu
@@ -170,6 +178,53 @@ body, ::placeholder
 	text-align: center;
 }
 
+form
+{
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+}
+form > div
+{
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+form > div:nth-child(1)
+{
+	flex: 1;
+}
+
+form > div:nth-child(2)
+{
+	flex: 4;
+}
+
+label, input, select
+{
+	margin-bottom: 10px;
+	height: 19.2px;
+	font-size: 16;
+}
+
+label
+{
+	padding-bottom: 2px;
+}
+
+input, select
+{
+	border-top: none;
+	border-left: none;
+}
+
+.loginLabel 
+{
+	display: none;
+}
+
 .loginForm
 {
 	width: 50%;
@@ -184,13 +239,14 @@ body, ::placeholder
 .multiForm
 {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 }
 
 .multiForm > input, .multiForm > select
 {
-	width: 25%;
+	border-top: none;
+	border-right: none;
+	width: 80%;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -206,14 +262,15 @@ table
 	border-collapse: collapse;
 
 	width: 90%;
+	margin: 0 auto;
+	margin-top: 20px;
 }
 
-
-
-.loginLabel 
+thead
 {
-	display: none;
+	font-weight: bold;
 }
+
 	
 .detailLine > td
 {
@@ -288,5 +345,12 @@ td, th
 	.conditionsSet
 	{
 		width: 980px;
+	}
+	
+	.multiForm > input, .multiForm > select
+	{
+		width: 60%;
+		margin: 0 auto;
+		text-align: center;
 	}
 }

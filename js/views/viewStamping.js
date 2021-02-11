@@ -7,10 +7,15 @@ class ViewStamping extends View
         super(title);
 
         this.formHTML = 
-            `<label for='cal'>Période </label>
-            <input type='date' name='firstDay' id='firstDay' autofocus>
-            <input type='date' name='lastDay' id='lastDay'>
-            <input type='submit' name='afficher' value='afficher' id='display'>`;
+            `<div>
+				<label for='firstDay'>Du</label>
+				<label for='lastDay'>Au</label>
+			</div>
+			<div>
+				<input type='date' name='firstDay' id='firstDay' autofocus>
+				<input type='date' name='lastDay' id='lastDay'>
+				<input type='submit' name='afficher' value='afficher' id='display'>
+			</div>`;
 
         this.tableHTML = 
             `<thead>

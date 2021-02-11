@@ -146,7 +146,27 @@ class ControllerType extends Controller
                 .then(response => filterCurrentDay(response))
                 .then(response => this.view.updateTable(response));
         });
-        return Promise.resolve('ok');
+
+        document.forms.typeForm.reason.addEventListener('change', (event) => {
+            if (event.target.value === 'work')
+            {
+                document.forms.typeForm.duration.classList.add('hidden');
+                document.querySelector('#labelDuration').classList.add('hidden');
+                document.forms.typeForm.begin.classList.remove('hidden');
+                document.querySelector('#labelBegin').classList.remove('hidden');
+                document.forms.typeForm.end.classList.remove('hidden');
+                document.querySelector('#labelEnd').classList.remove('hidden');
+            }
+            else 
+            {
+                document.forms.typeForm.duration.classList.remove('hidden');
+                document.querySelector('#labelDuration').classList.remove('hidden');
+                document.forms.typeForm.begin.classList.add('hidden');
+                document.querySelector('#labelBegin').classList.add('hidden');
+                document.forms.typeForm.end.classList.add('hidden');
+                document.querySelector('#labelEnd').classList.add('hidden');
+            }
+        });
     }
 }
 

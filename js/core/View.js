@@ -20,7 +20,7 @@ class View
             </form>
         </div>
         <div id='menuBox'>
-            <p id='menuLabel' class='pointer' onclick='display_or_hide_menu()'>Menu</p>
+            <p id='menuLabel' class='pointer' onclick='display_or_hide_menu()'>menu</p>
         </div>
         <div>
             <nav>

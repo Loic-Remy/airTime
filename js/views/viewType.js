@@ -7,20 +7,37 @@ class ViewType extends View
         super(title);
 
         this.formHTML = 
-            `<label for='date'>Date</label>
-            <input name='date' type='date'>
-            <label for='begin'>Début</label>
-            <input name='begin' type='time' value='07:00' required autofocus>
-            <label for='end'>Fin</label>
-            <input name='end' type='time' value='12:00' required>
-            <label for='reason'>Motif</label>
-            <select name='reason'>
-                <option selected>Travail</option>
-                <option>Urgence</option>
-            </select>
-            <label for='remark'>Remarque</label>
-            <input name='remark' type='text'>
-            <input name='btnSubmit' type='submit' value='Enregistrer'>`;
+            `<div>
+                <label for='date'>Date</label>
+                <label for='reason'>Motif</label>
+                <label for='duration' id='labelDuration' class='hidden'>Durée</label>
+                <label for='begin' id='labelBegin'>Début</label>
+                <label for='end' id='labelEnd'>Fin</label>
+                <label for='remark'>Remarque</label>
+            </div>
+            <div>
+                <input name='date' type='date'>
+                <select name='reason'>
+                    <option value='work' selected>Travail</option>
+                    <option value='holiday'>Vacances</option>
+                    <option value='holiday'>Armée/PC/Service civil</option>
+                    <option>Maladie</option>
+                    <option>Accident</option>
+                    <option>Cours</option>
+                    <option>Compensation heures</option>
+                    <option>Vacances non-payées</option>
+                    <option>Chômage technique</option>
+                </select>
+                <select name='duration' class='hidden'>
+                    <option selected>Jour entier</option>
+                    <option>Matin</option>
+                    <option>Après-midi</option>
+                </select>
+                <input name='begin' type='time' value='07:00' required autofocus>
+                <input name='end' type='time' value='12:00' required>
+                <input name='remark' type='text'>
+                <input name='btnSubmit' type='submit' value='Enregistrer'>
+            </div>`;
 
         this.tableHTML = 
             `<thead>
