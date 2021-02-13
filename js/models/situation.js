@@ -16,9 +16,11 @@ class SituationManager
 		url.searchParams.append('from', firstDay);
 		url.searchParams.append('to', lastDay);
 
-		let response = await fetch(url);
+		let response = await fetch(url).then(response => response.json());
 
-		return await response.json();
+		console.log(await response);
+
+		return await response;
 	}
 }
 	

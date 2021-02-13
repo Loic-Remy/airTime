@@ -34,7 +34,7 @@ class ViewType extends View
                     <option value='morning'>Matin</option>
                     <option value='afternoon'>Après-midi</option>
                 </select>
-                <input name='begin' type='time' value='07:00' required autofocus>
+                <input name='begin' type='time' value='07:00' required>
                 <input name='end' type='time' value='12:00' required>
                 <input name='remark' type='text'>
                 <input name='btnSubmit' type='submit' value='Enregistrer'>
@@ -43,11 +43,9 @@ class ViewType extends View
         this.tableHTML = 
             `<thead>
                 <tr>
-                    <td>Début</td>
-                    <td>Fin</td>
-                    <td>Motif</td>
-                    <td>Type</td>
-                    <td>Remarque</td>
+                    <td>timbrage</td>
+                    <td>motif</td>
+                    <td>remarque</td>
                 </tr>
             </thead>
             <tboy>
@@ -58,11 +56,10 @@ class ViewType extends View
     {
         this.form.name = 'typeForm';
         this.form.classList.add('multiForm');
+        document.forms.typeForm.begin.autofocus = true;
 
         document.forms.typeForm.date.value = new Date().toUnixFormat();
     }
-
-    _formEvents() {}
 
     _tableModifier()
     {
@@ -73,15 +70,22 @@ class ViewType extends View
     {
         if(entry === undefined)
         {
-            rowElem.innerHTML = `<td colspan='5'>Aucun timbrage pour cette journée</td>`;
+            rowElem.innerHTML = `<td colspan='4'>Aucun timbrage pour cette journée</td>`;
+            return;
         }
-        else 
+
+        if (entry.type === 'time')
         {
             rowElem.innerHTML = 
-                `<td>${entry.begin.substring(11, 16)}</td>
-                <td>${entry.end.substring(11, 16)}</td>
+                `<td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
-                <td>${entry.type.translate()}</td>
+                <td>${entry.remark}</td>`;
+        }
+        else
+        {
+           rowElem.innerHTML = 
+                `<td>${entry.type.translate()}</td>
+                <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>`;
         }
     }

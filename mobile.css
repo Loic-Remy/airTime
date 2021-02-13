@@ -204,18 +204,22 @@ form > div:nth-child(2)
 
 label, input, select
 {
+	width: 100%;
 	margin-bottom: 10px;
 	height: 19.2px;
 	font-size: 16;
+	padding: 0;
 }
 
 label
 {
-	padding-bottom: 2px;
+	padding-bottom: 1px;
+	padding-right: 2px;
 }
 
 input, select
 {
+	border: solid 1px #000000;
 	border-top: none;
 	border-left: none;
 }
@@ -259,19 +263,44 @@ h1
 table
 {
 	font-size: 12px;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border: none;
+
 
 	width: 90%;
 	margin: 0 auto;
-	margin-top: 20px;
+	margin-top: 0px 20px;
+
+	border-spacing: 0px 10px;
+
 }
 
 thead
 {
-	font-weight: bold;
+	background-color: #e7e7e7;
 }
 
-	
+td
+{
+	border: solid 1px #000000;
+	border-right: none; 
+	border-left: none;
+	border-top: none;
+
+	padding-left: 4px;
+	padding-right: 4px;
+
+	text-align: left;
+}
+
+thead td:last-child, tbody td:last-child
+{
+	border-right: solid black 1px; 
+}
+
+thead td:first-child, tbody td:first-child
+{
+}
 .detailLine > td
 {
 	background-color: yellow;
@@ -287,22 +316,37 @@ tbody tr:hover td
 	cursor: pointer;
 }
 
-td, th
+#tableStamping
 {
-	border: 1px solid black;
-	
-	text-align: center;
+	border-spacing: 0px 5px;
 }
 
-#situation th
+#tableSituation
+{
+	border-spacing: 0px 2px;
+}
+
+#tableSituation tbody th
 {
 	text-align: left;
 	font-weight: normal;
+
+	border-bottom: solid #000000 1px;
+}
+
+#tableSituation td, #tableSituation thead th
+{
+	text-align: right;
+}
+
+#tableSituation thead th
+{
+	background-color: #ffffff;
 }
 
 .hilight
 {
-	background-color: #c2c2c2;
+	background-color: #e7e7e7;
 }
 
 #diff, #diff > th

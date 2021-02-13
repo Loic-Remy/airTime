@@ -32,6 +32,19 @@ String.prototype.translate = function()
         }
 };
 
+String.prototype.unixToReadable= function(short = true)
+{
+	let year = this[0] + this[1] + this[2] + this[3];
+	let month = this[5] + this[6];
+	let day = this[8] + this[9];
+
+	if (short)
+	{
+		return day + '.' + month;
+	}
+
+	return day + '.' + month + '.' + year;
+};
 
 String.prototype.unixToSimple = function ()
 {
@@ -47,20 +60,25 @@ String.prototype.unixToSimple = function ()
 Number.prototype.toHoursFormat = function ()
 {
     let sign = this < 0 ? '-&nbsp;' : '&nbsp;&nbsp;';
+	let blank = "";
 	
 	if (this === 0)
-		return sign + "&nbsp;0:00"
+		return sign + "&nbsp&nbsp;0:00"
 
 	let hours = Math.abs(this);	
 	hours = parseInt(hours, 10);
-	hours = hours < 10 ? '&nbsp' + hours : hours;
+	if (hours < 100)
+		blank = '&nbsp;';
+	if (hours < 10)
+		blank = '&nbsp;&nbsp;'
 
 	let minutes = (this % 1) * 60;
 	minutes = Math.abs(minutes);
+	minutes = Math.round(minutes);
 	minutes = minutes < 10 ? '0' + minutes : minutes;
 
-	return sign + hours + ':' + minutes;
-}
+	return sign + blank + hours + ':' + minutes;
+};
 
 Date.prototype.toUnixFormat = function () 
 {

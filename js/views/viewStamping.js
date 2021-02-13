@@ -20,15 +20,15 @@ class ViewStamping extends View
         this.tableHTML = 
             `<thead>
                 <tr>
-                    <th>Jour</th>
-                    <th>Type</th>
-                    <th class='long'>Taux</th>
-                    <th>A faire</th>
-                    <th>Fait</th>
-                    <th>Majoré</th>
-                    <th>Total jour<span class='long'>nalier</span></th>
-                    <th>Diff jour<span class='long'>nalière</span></th>
-                    <th>Diff an<span class='long'>nuelle</span></th>
+                    <th>date</th>
+                    <th class='long'>type</th>
+                    <th class='long'>taux</th>
+                    <th>à faire</th>
+                    <th class='long'>fait</th>
+                    <th class='long'>majoré</th>
+                    <th>total jour<span class='long'>nalier</span></th>
+                    <th>+/- jour<span class='long'>nalière</span></th>
+                    <th>+/- an<span class='long'>nuelle</span></th>
 			    </tr>
 		    </thead>
 		    <tbody>
@@ -37,7 +37,7 @@ class ViewStamping extends View
 
     _formModifier()
     {
-		this.form.setAttribute('id', 'form_date');
+		this.form.setAttribute('id', 'stamping');
 		this.form.setAttribute('name', 'formDate');
 
 	}
@@ -78,11 +78,11 @@ class ViewStamping extends View
 	{
 		line.innerHTML = 
 			`<td>${unixDateToReadable(entry.date, true)}</td>
-  		    <td>${entry.reason}</td>
+  		    <td class='long'>${entry.reason}</td>
         	<td class='long'>${entry.ratio}%</td>
         	<td>${entry.todo.toHoursFormat()}</td>
-        	<td>${entry.done.toHoursFormat()}</td>
-        	<td>${entry.overtime.toHoursFormat()}</td>
+        	<td class='long'>${entry.done.toHoursFormat()}</td>
+        	<td class='long'>${entry.overtime.toHoursFormat()}</td>
         	<td>${entry.total.toHoursFormat()}</td>
         	<td>${entry.diff.toHoursFormat()}</td>
 			<td>${entry.yearDiff.toHoursFormat()}</td>`;
