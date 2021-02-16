@@ -5,11 +5,13 @@ String.prototype.translate = function()
         let word = this.toLowerCase();
         let reason = dictionary;
         let english= 0;
-        let french =1;
+        let french = 1;
         let translation = null;
-       
+		console.log(word);
+		console.log(reason.length);
         for (let i = 0; i < reason.length; i++)
         {
+			console.log(reason[i]);
             if(reason[i][english] === word)
             {
                 translation = reason[i][french];

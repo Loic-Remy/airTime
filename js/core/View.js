@@ -16,7 +16,7 @@ class View
             <p id='identity'></p>
             <p id='airtime'>airTime</p>
             <form action='index.html' method='post'>
-                <input id='disconnect' class='pointer' type='submit' value='Déconnexion'>
+                <button id='disconnect' type='button' class='pointer'>Déconnexion</button>
             </form>
         </div>
         <div id='menuBox'>
@@ -44,6 +44,7 @@ class View
     {
         document.querySelector('#disconnect').addEventListener('click', function() {
             sessionStorage.clear();
+            location.hash = 'login';
         });
     
         document.querySelectorAll('li').forEach(li => li.addEventListener('click', (event) => {

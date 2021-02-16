@@ -81,6 +81,13 @@ class ViewType extends View
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>`;
         }
+        else if (entry.reason === 'driving')
+        {
+             rowElem.innerHTML = 
+                `<td>${entry.end.substring(11, 16)}</td>
+                <td>${entry.reason.translate()}</td>
+                <td>${entry.remark ? entry.remark : ""}</td>`;
+        }
         else
         {
            rowElem.innerHTML = 
