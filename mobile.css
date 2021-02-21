@@ -15,6 +15,7 @@ header
 
 	display: flex;
 	flex-direction: column;
+	font-size: 16px;
 }
 
 header > div
@@ -33,8 +34,8 @@ header > div > p, header > div > form
 
 #menuBox
 {
-	top: 20px;
-	height: 20px;
+	top: 44px;
+	height: 44px;
 
 	border-top:#ffffff solid 1px;
 }
@@ -42,6 +43,7 @@ header > div > p, header > div > form
 #menu
 {
 	display: none;
+	z-index: 1;
 }
 
 nav
@@ -62,8 +64,7 @@ ul
 
 li 
 {
-	height: 50px;
-
+	height: 44px;
 	border-top: solid #ffffff 1px;
 
 	display: flex;	
@@ -99,6 +100,7 @@ a:visited
 
 	background: transparent;
 
+	padding: 0px;
 	border: none;
 }
 
@@ -205,16 +207,18 @@ form > div:nth-child(2)
 label, input, select
 {
 	width: 100%;
+	height: 36px;
 	margin-bottom: 10px;
-	height: 19.2px;
-	font-size: 16;
+	font-size: 16px;
 	padding: 0;
+
 }
 
 label
 {
 	padding-bottom: 1px;
 	padding-right: 2px;
+	align-items: center;
 }
 
 input, select
@@ -298,9 +302,6 @@ thead td:last-child, tbody td:last-child
 	border-right: solid black 1px; 
 }
 
-thead td:first-child, tbody td:first-child
-{
-}
 .detailLine > td
 {
 	background-color: yellow;
@@ -311,7 +312,6 @@ thead td:first-child, tbody td:first-child
 tbody tr:hover td
 {
 	background-color: #5DF3F7;
-
 	
 	cursor: pointer;
 }
@@ -319,6 +319,20 @@ tbody tr:hover td
 #tableStamping
 {
 	border-spacing: 0px 5px;
+}
+
+#tableStamping th, #tableSamping td
+{
+	position: sticky;
+	top: 0px;
+	background-color: #e7e7e7;
+	border-bottom: solid 1px #000000;
+}
+
+#tableStamping th , #tableStamping .stampingLine > td 
+{
+	text-align: center;
+	height: 44px;
 }
 
 #tableSituation
@@ -366,6 +380,7 @@ tbody tr:hover td
 }
 
 @media screen and (min-width: 640px) {
+
 	::placeholder 
 	{
 		visibility: hidden;
@@ -373,17 +388,14 @@ tbody tr:hover td
 
 	.long
 	{
-		display: contents;
-
-		border-top: 1px solid #000000;
-		border-bottom: 1px solid #000000; 
+		display: table-cell;
 	}
 
-	table
-	{
-		font-size: 16px;
 
-		width: 80%;
+	table, form
+	{
+
+		width: 600px;
 	}
 
 	.conditionsSet

@@ -30,6 +30,7 @@ class View
                     <li id='stamping' class='pointer'>Timbrages</li>
                     <li id='request' class='pointer'>Demandes</li>
                     <li id='conditions' class='pointer'>Conditions</li>
+                    <li id='mask'></li>
                 </ul>
             </nav>
         </div>`;

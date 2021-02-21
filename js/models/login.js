@@ -13,7 +13,10 @@ class LoginManager
 	{
 		var entry;
 		var name = userName || this.typedUser;
-
+	/*	
+		let encoded = utf8_to_b64(name + ':' + this.typedPassword);
+		sessionStorage.setItem('autorization', encoded);
+	*/	
 		return await fetch(this.url)
 							.then(response => {
 								return response.json()

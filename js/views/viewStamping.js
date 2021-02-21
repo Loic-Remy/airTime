@@ -26,9 +26,9 @@ class ViewStamping extends View
                     <th>à faire</th>
                     <th class='long'>fait</th>
                     <th class='long'>majoré</th>
-                    <th>total jour<span class='long'>nalier</span></th>
-                    <th>+/- jour<span class='long'>nalière</span></th>
-                    <th>+/- an<span class='long'>nuelle</span></th>
+                    <th>total jour</span></th>
+                    <th>+/- jour</span></th>
+                    <th>+/- an</span></th>
 			    </tr>
 		    </thead>
 		    <tbody>

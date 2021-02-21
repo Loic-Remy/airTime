@@ -101,7 +101,6 @@ class ControllerType extends Controller
 
     displayView()
     {
-//        window.history.pushState({}, "", '#type');
         
         this.view.buildPage();
 

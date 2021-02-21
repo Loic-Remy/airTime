@@ -1,4 +1,24 @@
 "use strict";
+/*
+function utf8_to_b64(str)
+{
+	return window.btoa(unescape(encodeURIComponent(str)));
+}
+
+
+const _fetch = fetch;
+
+fetch = (url) => {
+	let init = {
+		headers: {
+			'Authorization': `Basic ${sessionStorage.getItem('autorization')}`
+		}
+	};
+	console.log(init);
+	
+	return _fetch(url, init)
+}
+*/
 
 String.prototype.translate = function()
 {
@@ -7,11 +27,9 @@ String.prototype.translate = function()
         let english= 0;
         let french = 1;
         let translation = null;
-		console.log(word);
-		console.log(reason.length);
-        for (let i = 0; i < reason.length; i++)
+
+		for (let i = 0; i < reason.length; i++)
         {
-			console.log(reason[i]);
             if(reason[i][english] === word)
             {
                 translation = reason[i][french];
@@ -26,7 +44,7 @@ String.prototype.translate = function()
 
         if (translation === null)
         {
-            throw new Error("valeur inconnue");
+            throw new Error(`valeur inconnue: ${word}`);
         }
         else
         {
@@ -34,7 +52,7 @@ String.prototype.translate = function()
         }
 };
 
-String.prototype.unixToReadable= function(short = true)
+String.prototype.unixToReadable = function(short = true)
 {
 	let year = this[0] + this[1] + this[2] + this[3];
 	let month = this[5] + this[6];
@@ -77,7 +95,16 @@ Number.prototype.toHoursFormat = function ()
 	let minutes = (this % 1) * 60;
 	minutes = Math.abs(minutes);
 	minutes = Math.round(minutes);
-	minutes = minutes < 10 ? '0' + minutes : minutes;
+
+	if (minutes > 59)
+	{
+		minutes = '00';
+		hours += 1;
+	}
+	else if (minutes < 10)
+	{
+		minutes = '0' + minutes;
+	}
 
 	return sign + blank + hours + ':' + minutes;
 };
