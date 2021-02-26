@@ -7,11 +7,13 @@ class viewLogin extends View
         super(title);
 
         this.formHTML = 
-                `<label for='utilisateur' class='loginLabel'>Utilisateur </label>
-                <input type='text' id='utilisateur' name='user' placeholder='utilisateur' required autofocus autocomplete>
-                <label for='mot de passe' class='loginLabel'>Mot de passe </label>
-                <input type='password' id='mdp' name='password' placeholder='mot de passe' required autocomplete>
-                <input type='submit' id='btnSubmit' name='btnSubmit' value='Valider'>`;
+            `
+            <label for='utilisateur' class='loginLabel'>Utilisateur </label>
+            <input type='text' id='utilisateur' name='user' placeholder='utilisateur' required autofocus autocomplete>
+            <label for='mot de passe' class='loginLabel'>Mot de passe </label>
+            <input type='password' id='mdp' name='password' placeholder='mot de passe' required autocomplete>
+            <input type='submit' id='btnSubmit' name='btnSubmit' value='Valider' class='pointer'>
+            `;
     }
 
     _headerModifier()

@@ -7,16 +7,26 @@ class ViewStamping extends View
         super(title);
 
         this.formHTML = 
-            `<div>
+				`
 				<label for='firstDay'>Du</label>
+				<input type='date' name='firstDay' id='firstDay' autofocus>
 				<label for='lastDay'>Au</label>
+				<input type='date' name='lastDay' id='lastDay'>
+				<input type='submit' name='afficher' value='afficher' id='display' class='pointer'>
+				`;
+
+/*            `<div>
+				<label for='firstDay'>Du</label>
+				<input type='date' name='firstDay' id='firstDay' autofocus>
 			</div>
 			<div>
-				<input type='date' name='firstDay' id='firstDay' autofocus>
+				<label for='lastDay'>Au</label>
 				<input type='date' name='lastDay' id='lastDay'>
+			</div>
+			<div>
 				<input type='submit' name='afficher' value='afficher' id='display'>
 			</div>`;
-
+*/
         this.tableHTML = 
             `<thead>
                 <tr>
@@ -77,7 +87,7 @@ class ViewStamping extends View
 	_buildDayLine(line, entry)
 	{
 		line.innerHTML = 
-			`<td>${unixDateToReadable(entry.date, true)}</td>
+			`<td>${entry.date.unixToReadable()}</td>
   		    <td class='long'>${entry.reason}</td>
         	<td class='long'>${entry.ratio}%</td>
         	<td>${entry.todo.toHoursFormat()}</td>

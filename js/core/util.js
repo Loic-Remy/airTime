@@ -52,34 +52,64 @@ String.prototype.translate = function()
         }
 };
 
+String.prototype.isUnixDate = function()
+{
+	const unixDatePatern = /^[0-9]{4}[^0-9a-zA-Z][0-1][0-9][^0-9a-zA-Z][0-3][0-9]$/;
+
+	if (unixDatePatern.test(this))
+	{
+		return true;
+	}
+	else 
+	{
+		throw new Error(`"${this}" is not formated as UNIX date`);
+	}
+};
+
+String.prototype.parseUnixDateString = function()
+{
+	if (this.isUnixDate())
+	{
+		let year = this[0] + this[1] + this[2] + this[3];
+		let month = this[5] + this[6];
+		let day = this[8] + this[9];
+
+		return {
+			'year': year,
+			'month': month,
+			'day' : day
+		};
+	}
+};
+
 String.prototype.unixToReadable = function(short = true)
 {
-	let year = this[0] + this[1] + this[2] + this[3];
-	let month = this[5] + this[6];
-	let day = this[8] + this[9];
+	const date = this.parseUnixDateString();
 
 	if (short)
 	{
-		return day + '.' + month;
+		return date.day + '.' + date.month;
 	}
 
-	return day + '.' + month + '.' + year;
+	return date.day + '.' + date.month + '.' + date.year;
 };
 
 String.prototype.unixToSimple = function ()
 {
-	let day = this[8] + this[9];
-	let month = this[5] + this[6];
+	const date = this.parseUnixDateString();
 
-	day = parseInt(day, 10);
-	month = parseInt(month, 10);
+	const day = parseInt(date.day, 10);
+	const month = parseInt(date.month, 10);
 
-	return day + "." + month;
-}
+		return day + "." + month;
+};
 
 Number.prototype.toHoursFormat = function ()
 {
-    let sign = this < 0 ? '-&nbsp;' : '&nbsp;&nbsp;';
+	const HTMLspace = '&nbsp;';
+	const minus = '-';
+	
+    let sign = this < 0 ? `${minus}${HTMLspace}` : `${HTMLspace}${HTMLspace}`;
 	let blank = "";
 	
 	if (this === 0)
@@ -176,20 +206,6 @@ function display_or_hide_menu()
 		menu.style.display = "none";
 		menu.classList.replace("shown", "hidden");
 	}
-}
-
-function unixDateToReadable(date, short = true)
-{
-	let year = date[0] + date[1] + date[2] + date[3];
-	let month = date[5] + date[6];
-	let day = date[8] + date[9];
-
-	if (short)
-	{
-		return day + '.' + month;
-	}
-
-	return day + '.' + month + '.' + year;
 }
 
 function decimalToHours(time)

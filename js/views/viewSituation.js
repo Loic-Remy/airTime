@@ -7,13 +7,11 @@ class ViewSituation extends View
 		super(title);
 
 		this.formHTML = 
-			`<div>
+			`
 				<label for='date'>Au</label>
-			</div>
-			<div>
 				<input type="date" id="date" name="date" autofocus>
-				<input type="submit" value="afficher" id="displaySituation" name="display">
-			</div>`;
+				<input type="submit" value="afficher" id="displaySituation" name="display" class='pointer'>
+			`;
 
 		this.tableHTML =
 			`<thead>

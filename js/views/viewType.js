@@ -7,16 +7,10 @@ class ViewType extends View
         super(title);
 
         this.formHTML = 
-            `<div>
+            `
                 <label for='date'>Date</label>
-                <label for='reason'>Motif</label>
-                <label for='type' id='labelType' class='hidden'>Durée</label>
-                <label for='begin' id='labelBegin'>Début</label>
-                <label for='end' id='labelEnd'>Fin</label>
-                <label for='remark'>Remarque</label>
-            </div>
-            <div>
                 <input name='date' type='date'>
+                <label for='reason'>Motif</label>
                 <select name='reason'>
                     <option value='work' selected>Travail</option>
                     <option value='holiday'>Vacances</option>
@@ -28,17 +22,21 @@ class ViewType extends View
                     <option value='unpaid'>Vacances non-payées</option>
                     <option value='paidunemployed'>Chômage technique</option>
                 </select>
+                <label for='type' id='labelType' class='hidden'>Durée</label>
                 <select name='type' class='hidden'>
                     <option value='time' selected>Timbrage</option>
                     <option value='wholeday'>Jour entier</option>
                     <option value='morning'>Matin</option>
                     <option value='afternoon'>Après-midi</option>
                 </select>
+                <label for='begin' id='labelBegin'>Début</label>
                 <input name='begin' type='time' value='07:00' required>
+                <label for='end' id='labelEnd'>Fin</label>
                 <input name='end' type='time' value='12:00' required>
+                <label for='remark'>Remarque</label>
                 <input name='remark' type='text'>
-                <input name='btnSubmit' type='submit' value='Enregistrer'>
-            </div>`;
+                <input name='btnSubmit' type='submit' value='Enregistrer' class='pointer'>
+            `;
 
         this.tableHTML = 
             `<thead>
