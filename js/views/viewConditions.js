@@ -19,6 +19,11 @@ class viewConditions extends View
             `;
     }
 
+    _tableModifier()
+    {
+        this.table.id = 'conditionsTable';
+    }
+
     _buildTableBody(data)
     {
         let tableBody = document.createElement('tbody');
@@ -41,16 +46,16 @@ class viewConditions extends View
                 <td>${cond.report}</td>
             </tr>
             <tr>
-                <td>Durée du travail hebdomadaire</td>
-                <td>${cond.workweek} heures</td>
+                <td>Durée de la semaine de travail</td>
+                <td>${parseFloat(cond.workweek).toHoursFormat()} heures</td>
             </tr>
             <tr>
                 <td>Taux d'activité</td>
                 <td>${cond.workratio} %</td>
             </tr>
             <tr>
-                <td>Dureé du travail journalier</td>
-                <td>${cond.dayhours} heures</td>
+                <td>Dureé de la journée de travail</td>
+                <td>${parseFloat(cond.dayhours).toHoursFormat()} heures</td>
             </tr>
             <tr>
                 <td>Vacances</td>

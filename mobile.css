@@ -110,60 +110,9 @@ body
 
 }
 
-#condList
+#conditionsTable td:nth-child(2)
 {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-
-.conditionsSet
-{
-	width: 340px;
-	margin-bottom: 14px;
-	font-size: 14px;
-	
-	box-shadow: 10px 10px 13px -4px #707070;
-	
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: start;
-}
-
-
-
-.conditionsSet > div
-{
-	width: 90px;
-	height: 90px;
-	border-top: 1px solid #000000; 
-	border-left: 1px solid #000000; 
-	border-collapse: collapse;
-
-	padding : 4px 4px 4px 4px;
-	margin-right: 8px;
-	margin-bottom: 8px;
-
-
-	text-align: left;
-/*	display: flex;
-	flex-direction: column;
-	align-items: stretch; 
-*/
-	position: relative;
-
-}
-
-.condElem > p
-{
-	margin: 0px 0px 0px 0px;
-}
-
-.condTitle
-{
-	font-weight: bold;
+	text-align: right;
 }
 
 .table
