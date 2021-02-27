@@ -34,7 +34,17 @@ class ControllerConditions extends Controller
         this.view = new viewConditions('Conditions');
     }
 
+    displayView()
+    {
+        this.view.buildPage();
+        
+        let year = function () {
+    		return new Date.year();
+	    }
 
+        this.manager.getConditions(sessionStorage.getItem('userId'), year())
+            .then(response => this.view.updateTable(response));
+    }
 }
 
 class ControllerSituation extends Controller
