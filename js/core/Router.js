@@ -24,6 +24,10 @@ class Router
         {
             path: '#situation',
             controller: new ControllerSituation('situation')
+        },
+        {
+            path: '#conditions',
+            controller: new ControllerConditions('conditions')
         }
     ];
 
