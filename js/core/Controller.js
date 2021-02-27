@@ -25,6 +25,18 @@ class ControllerDefault extends Controller
     }
 }
 
+class ControllerConditions extends Controller
+{
+    constructor(hash)
+    {
+        super(hash);
+        this.manager = new ConditionsManager(url_conditions);
+        this.view = new viewConditions('Conditions');
+    }
+
+
+}
+
 class ControllerSituation extends Controller
 {
     constructor(hash)
