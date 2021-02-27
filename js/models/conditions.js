@@ -19,8 +19,9 @@ class ConditionsManager
 		url.searchParams.append('from', firstDay);
 		url.searchParams.append('to', lastDay);
 
-		let response = await fetch(url);
-		return await response.json();
+		let response = await fetch(url).then(response => response.json());
+		console.log(await response);
+		return await response;
 	}
 
 	

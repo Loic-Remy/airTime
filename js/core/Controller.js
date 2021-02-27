@@ -30,7 +30,7 @@ class ControllerConditions extends Controller
     constructor(hash)
     {
         super(hash);
-        this.manager = new ConditionsManager(url_conditions);
+        this.manager = new ConditionsManager(url_situation);
         this.view = new viewConditions('Conditions');
     }
 
@@ -39,7 +39,7 @@ class ControllerConditions extends Controller
         this.view.buildPage();
         
         let year = function () {
-    		return new Date.year();
+    		return new Date().getFullYear();
 	    }
 
         this.manager.getConditions(sessionStorage.getItem('userId'), year())

@@ -28,8 +28,8 @@ class View
                     <li id='type' class='pointer'>Saisie</li>
                     <li id='situation' class='pointer'>Situation</li>
                     <li id='stamping' class='pointer'>Timbrages</li>
-                    <li id='request' class='pointer'>Demandes</li>
                     <li id='conditions' class='pointer'>Conditions</li>
+                    <li id='request' class='pointer'>Demandes</li>
                     <li id='mask' class='hidden'></li>
                 </ul>
             </nav>

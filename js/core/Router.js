@@ -36,7 +36,6 @@ class Router
         let result;
 
         result = this.routes.find((route) => route.path === path);
-        console.log(result);
         this.currentRoute = result || this.routes[0];
     }
 
