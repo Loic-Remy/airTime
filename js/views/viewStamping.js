@@ -87,15 +87,15 @@ class ViewStamping extends View
 	_buildDayLine(line, entry)
 	{
 		line.innerHTML = 
-			`<td>${entry.date.unixToReadable()}</td>
+			`<td>${entry.date.unixDateToDDMM()}</td>
   		    <td class='long'>${entry.reason}</td>
         	<td class='long'>${entry.ratio}%</td>
         	<td>${entry.todo.toHoursFormat()}</td>
         	<td class='long'>${entry.done.toHoursFormat()}</td>
         	<td class='long'>${entry.overtime.toHoursFormat()}</td>
-        	<td>${entry.total.toHoursFormat()}</td>
-        	<td>${entry.diff.toHoursFormat()}</td>
-			<td>${entry.yearDiff.toHoursFormat()}</td>`;
+        	<td>${entry.total.getSign()}${entry.total.toHoursFormat()}</td>
+        	<td>${entry.diff.getSign()}${entry.diff.toHoursFormat()}</td>
+			<td>${entry.diff.getSign()}${entry.yearDiff.toHoursFormat()}</td>`;
 	}
 
 	_buildDetailLine(line, entry)

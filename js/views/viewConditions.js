@@ -35,11 +35,11 @@ class viewConditions extends View
             `
             <tr>
                 <td>Début</td>
-                <td>${cond.begin.date.substring(0, 10).unixToReadable(false)}</td>
+                <td>${cond.begin.date.substring(0, 10).unixDateToDDMMYYYY()}</td>
             </tr>
             <tr>
                 <td>Fin</td>
-                <td>${cond.end.date.substring(0, 10).unixToReadable(false)}</td>
+                <td>${cond.end.date.substring(0, 10).unixDateToDDMMYYYY()}</td>
             </tr>
             <tr>
                 <td>Solde période préc [heures / vac]</td>

@@ -144,8 +144,11 @@ class ControllerType extends Controller
             .then(response => this.view.updateTable(response));
             
         document.forms.typeForm.addEventListener('submit', (event) => {
+            console.log(`Submit form count ${++counter}`);
             event.preventDefault();
-            
+
+            let interval = new Interval();
+
             interval.fill(document.forms.typeForm);
             this.manager.sendInterval(interval)
                 .then((response) => {

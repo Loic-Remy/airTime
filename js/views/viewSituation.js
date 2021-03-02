@@ -42,7 +42,7 @@ class ViewSituation extends View
 	_buildTableBody(data)
 	{
 		let tbody = document.createElement('tbody');
-		let situationDate = document.forms.formSituation.date.value.unixToReadable(false);
+		let situationDate = document.forms.formSituation.date.value.unixDateToDDMMYYYY();
 	
 		let diff = data.diff;
 		diff = Math.round(data.diff * 100) / 100;

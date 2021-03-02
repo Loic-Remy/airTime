@@ -23,4 +23,11 @@ class SituationManager
 		return await response;
 	}
 }
+
+class Situation
+{
+	constructor({})
+	{
+	}
+}
 	

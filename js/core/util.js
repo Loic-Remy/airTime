@@ -82,14 +82,14 @@ String.prototype.parseUnixDateString = function()
 	}
 };
 
-String.prototype.unixToReadable = function(short = true)
-{
-	const date = this.parseUnixDateString();
+String.prototype.unixDateToDDMM = function() {
+	const fullDateStr = this.unixDateToDDMMYYYY();	
 
-	if (short)
-	{
-		return date.day + '.' + date.month;
-	}
+	return fullDateStr.substring(0, 5);
+}
+
+String.prototype.unixDateToDDMMYYYY = function() {
+	const date = this.parseUnixDateString();
 
 	return date.day + '.' + date.month + '.' + date.year;
 };
@@ -104,6 +104,41 @@ String.prototype.unixToSimple = function ()
 		return day + "." + month;
 };
 
+Number.prototype.toHoursFormat = function ()
+{
+	const HTMLspace = '&nbsp;';
+	const duration = Math.abs(this);
+	
+	let hours = Math.trunc(duration);
+	let blankSpace = "";
+
+	if (duration < 100)
+		blankSpace = HTMLspace;
+	if (duration < 10)
+		blankSpace = HTMLspace + HTMLspace;
+
+	let minutes = (duration % 1) * 60;
+	minutes = Math.round(minutes);
+
+	if (minutes > 59) {
+		minutes = '00';
+		hours += 1;
+	}
+	else if (minutes < 10) {
+		minutes = '0' + minutes;
+	}
+
+	return blankSpace + hours + ':' + minutes;
+};
+
+Number.prototype.getSign = function()
+{
+	const HTMLspace = '&nbsp;'
+	const minus = '-';
+
+	return this < 0 ? minus + HTMLspace : HTMLspace + HTMLspace;
+};
+/*
 Number.prototype.toHoursFormat = function ()
 {
 	const HTMLspace = '&nbsp;';
@@ -138,23 +173,19 @@ Number.prototype.toHoursFormat = function ()
 
 	return sign + blank + hours + ':' + minutes;
 };
-
+*/
 Date.prototype.toUnixFormat = function () 
 {
-    let m = this.getMonth() + 1;
+	const year = this.getFullYear().toString();
+	const day = this.getDate() < 10 ? "0" + this.getDate().toString() : this.getDate().toString();
+	const month = this.getMonth() + 1 < 10 ? "0" + this.getMonth() : this.getMonth();
 
-	let year = this.getFullYear().toString();
-	
-	let month = m < 10 ? "0" + m : m;
-
-	let day = this.getDate() < 10 ? "0" + this.getDate().toString() : this.getDate().toString();
-	
 	return year + '-' + month + '-' + day;
 }
 
 function displayDetails()
 {
-	let elem = document.getElementsByClassName("details");
+	const elem = document.getElementsByClassName("details");
 	let size = elem.length
 	for (let i = 0; i < size; i++){
 		elem[i].style.display = "contents";
@@ -208,48 +239,6 @@ function display_or_hide_menu()
 	}
 }
 
-function decimalToHours(time)
-{
-	let sign = time < 0 ? '-&nbsp;' : '&nbsp;&nbsp;';
-	
-	if (time === 0)
-		return sign + "&nbsp;0:00"
-
-	let hours = Math.abs(time);	
-	hours = parseInt(hours, 10);
-	hours = hours < 10 ? '&nbsp' + hours : hours;
-
-	let minutes = (time % 1) * 60;
-	minutes = Math.abs(minutes);
-	minutes = minutes < 10 ? '0' + minutes : minutes;
-
-	return sign + hours + ':' + minutes;
-}
-/*
-function convertUnixDateToSimple(date)
-{
-	let day = date[8] + date[9];
-	let month = date[5] + date[6];
-
-	day = parseInt(day, 10);
-	month = parseInt(month, 10);
-
-	return day + "." + month;
-}
-
-function convertDateToUnix(date)
-{
-	let m = date.getMonth() + 1;
-
-	let year = date.getFullYear().toString();
-	
-	let month = m < 10 ? "0" + m : m;
-
-	let day = date.getDate() < 10 ? "0" + date.getDate().toString() : date.getDate().toString();
-	
-	return year + '-' + month + '-' + day;
-}
-*/
 function firstDayMonth(dateFunction)
 {
 	let currentDate = (typeof dateFunction === 'undefined') ? new Date() : dateFunction;

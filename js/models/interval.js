@@ -61,6 +61,11 @@ class Interval
         console.log(this);
     }
 
+    clear()
+    {
+        
+    }
+
 
 
 }
