@@ -58,16 +58,15 @@ class Interval
         this.from = formDate + 'T00:00:00Z';
         this.until = formDate + 'T23:59:59Z';
 
-        console.log(this);
+        this._endIsBiggerThanBegin();
     }
 
-    clear()
+    _endIsBiggerThanBegin()
     {
-        
+        if(this.end < this.begin){
+            throw new Error("Begin is bigger than end hour of interval");
+        }
     }
-
-
-
 }
 
 class IntervalManager
@@ -86,10 +85,11 @@ class IntervalManager
 		url.searchParams.append('until', interval.until);
         url.searchParams.append('target', interval.target);
         
-        console.log(url);
-        
         result = await fetch(url).then(response => response.json());
+
+        console.log(url);
         console.log(result);
+
         return await result;
     }
 
@@ -106,8 +106,8 @@ class IntervalManager
         url.searchParams.append('remark', interval.remark);
        
         let init =  {method: 'POST'};
-        console.log(url);
         result = await fetch(url, init).then(response => response.json());
+        console.log(url);
         console.log(result);
         return await result;
     }

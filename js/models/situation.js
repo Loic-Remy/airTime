@@ -18,6 +18,7 @@ class SituationManager
 
 		let response = await fetch(url).then(response => response.json());
 
+		console.log(url);
 		console.log(await response);
 
 		return await response;
@@ -26,8 +27,4 @@ class SituationManager
 
 class Situation
 {
-	constructor({})
-	{
-	}
 }
-	

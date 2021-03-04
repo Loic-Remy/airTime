@@ -131,7 +131,7 @@ Number.prototype.toHoursFormat = function ()
 	return blankSpace + hours + ':' + minutes;
 };
 
-Number.prototype.getSign = function()
+Number.prototype.negativeSign = function()
 {
 	const HTMLspace = '&nbsp;'
 	const minus = '-';
