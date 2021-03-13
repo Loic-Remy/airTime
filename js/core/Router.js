@@ -33,14 +33,26 @@ class Router
 
     findRoute(path)
     {
-        let result;
+        const defaultRoute = 0; 
 
-        result = this.routes.find((route) => route.path === path);
-        this.currentRoute = result || this.routes[0];
+        const result = this.routes.find((route) => route.path === path);
+        
+        this.currentRoute = result || this.routes[defaultRoute];
+
+        return this;
     }
+
 
     callController()
     {
         this.currentRoute.controller.displayView();
+        this._setCurrentPageToSessionStorage();
+    }
+
+
+    _setCurrentPageToSessionStorage()
+    {
+        const pagePath = this.currentRoute.path;
+        sessionStorage.setItem("currentPage", pagePath);
     }
 }

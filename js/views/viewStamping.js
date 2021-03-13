@@ -93,9 +93,9 @@ class ViewStamping extends View
         	<td>${entry.todo.toHoursFormat()}</td>
         	<td class='long'>${entry.done.toHoursFormat()}</td>
         	<td class='long'>${entry.overtime.toHoursFormat()}</td>
-        	<td>${entry.total.getSign()}${entry.total.toHoursFormat()}</td>
-        	<td>${entry.diff.getSign()}${entry.diff.toHoursFormat()}</td>
-			<td>${entry.diff.getSign()}${entry.yearDiff.toHoursFormat()}</td>`;
+        	<td>${entry.total.negativeSign()}${entry.total.toHoursFormat()}</td>
+        	<td>${entry.diff.negativeSign()}${entry.diff.toHoursFormat()}</td>
+			<td>${entry.diff.negativeSign()}${entry.yearDiff.toHoursFormat()}</td>`;
 	}
 
 	_buildDetailLine(line, entry)
