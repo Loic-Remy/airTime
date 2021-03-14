@@ -2,8 +2,6 @@
 
 class Router
 {
-    controller;
-
     routes = [
         {
             path: '#default',
@@ -31,28 +29,29 @@ class Router
         }
     ];
 
-    findRoute(path)
+    _findRoute(path)
     {
-        const defaultRoute = 0; 
+        const defaultRoutePosition = 0; 
 
-        const result = this.routes.find((route) => route.path === path);
+        const routeFound = this.routes.find((route) => route.path === path);
         
-        this.currentRoute = result || this.routes[defaultRoute];
+        this.currentRoute = routeFound || this.routes[defaultRoutePosition];
 
         return this;
     }
 
 
-    callController()
+    displayView(routePath)
     {
+        this._findRoute(routePath);
         this.currentRoute.controller.displayView();
-        this._setCurrentPageToSessionStorage();
+        this._saveCurrentPathInSessionStorage();
     }
 
 
-    _setCurrentPageToSessionStorage()
+    _saveCurrentPathInSessionStorage()
     {
         const pagePath = this.currentRoute.path;
-        sessionStorage.setItem("currentPage", pagePath);
+        sessionStorage.setItem("currentPath", pagePath);
     }
 }

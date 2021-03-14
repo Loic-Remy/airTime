@@ -182,6 +182,11 @@ Date.prototype.toUnixFormat = function ()
 
 	return year + '-' + month + '-' + day;
 }
+Object.prototype.addMultiEventsListener = function (events, handler) 
+{
+	const elt = this;
+	events.forEach(event => elt.addEventListener(event, handler));
+};
 
 function displayDetails()
 {

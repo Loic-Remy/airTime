@@ -1,23 +1,18 @@
 "use strict";
 
 
-var router = new Router();
+const router = new Router();
 
-window.addEventListener('hashchange', () =>
-{
-    router.findRoute(location.hash).callController();
+window.addMultiEventsListener(['hashchange', 'load'], () => {
+    router.displayView(location.hash);
     sessionStorage.setItem("currentPage", location.hash);
 });
 
-window.addEventListener('load', () =>
-{
-    router.findRoute(location.hash).callController();
-});
 
-if(sessionStorage.getItem("currentPage") === undefined) {
+if(sessionStorage.getItem("currentPath") === undefined) {
     location.hash = 'login';
 } else {
-    location.hash = sessionStorage.getItem("currentPage");
+    location.hash = sessionStorage.getItem("currentPath");
 }
 
 
