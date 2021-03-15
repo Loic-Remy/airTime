@@ -46,7 +46,7 @@ class ControllerConditions extends Controller
             .then(response => this.view.updateTable(response));
     }
 }
-
+/*
 class ControllerSituation extends Controller
 {
     constructor(hash)
@@ -84,7 +84,7 @@ class ControllerSituation extends Controller
 
 
 }
-
+*/
 class ControllerStamping extends Controller
 {
     constructor(hash)

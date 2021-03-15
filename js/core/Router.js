@@ -1,5 +1,6 @@
 "use strict";
 
+
 class Router
 {
     routes = [
@@ -43,8 +44,18 @@ class Router
 
     displayView(routePath)
     {
+        let previousController = null;
+
+        if (this.currentRoute != undefined) {
+            previousController = this.currentRoute.controller;
+        }
+
         this._findRoute(routePath);
         this.currentRoute.controller.displayView();
+        
+        if(previousController) {
+            this.previousController.leaveView();
+        }
         this._saveCurrentPathInSessionStorage();
     }
 
