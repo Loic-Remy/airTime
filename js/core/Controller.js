@@ -14,7 +14,7 @@ class Controller
 
     }
 }
-
+/*
 class ControllerStamping extends Controller
 {
     constructor(hash)
@@ -40,7 +40,7 @@ class ControllerStamping extends Controller
 		});
     }
 }
-
+*/
 class ControllerType extends Controller 
 {
     constructor(hash)

@@ -49,11 +49,12 @@ class Router
     displayView(routePath)
     {
         this._findRoute(routePath);
-        this.currentRoute.controller.displayView();
         
         if(this.previousRoute) {
             this.previousRoute.controller.leaveView();
         }
+        this.currentRoute.controller.displayView();
+        
         this._saveCurrentPathInSessionStorage();
     }
 
