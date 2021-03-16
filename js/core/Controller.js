@@ -14,33 +14,7 @@ class Controller
 
     }
 }
-/*
-class ControllerStamping extends Controller
-{
-    constructor(hash)
-    {
-        super(hash);
 
-        this.manager = new StampingManager(url_situation);
-        this.view = new ViewStamping('Timbrages');
-    }
-
-    displayView()
-    {
-        this.view.buildPage();
-
-        this.manager.getStamping()
-            .then(response => this.view.updateTable(response));
-
-        document.getElementById("display").addEventListener('click', (e) => {
-			e.preventDefault();
-            
-            this.manager.getStamping()
-                .then(response => this.view.updateTable(response));
-		});
-    }
-}
-*/
 class ControllerType extends Controller 
 {
     constructor(hash)
@@ -137,7 +111,7 @@ class ControllerType extends Controller
         });
     }
 }
-
+/*
 class ControllerLogin extends Controller
 {
     constructor(hash)
@@ -170,3 +144,4 @@ class ControllerLogin extends Controller
     }
 
 }
+*/
