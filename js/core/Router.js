@@ -3,6 +3,9 @@
 
 class Router
 {
+    currentRoute = null;
+    previousRoute = null;
+
     routes = [
         {
             path: '#default',
@@ -35,30 +38,24 @@ class Router
         const defaultRoutePosition = 0; 
 
         const routeFound = this.routes.find((route) => route.path === path);
+
+        this.previousRoute = this.currentRoute;
         
         this.currentRoute = routeFound || this.routes[defaultRoutePosition];
 
         return this;
     }
 
-
     displayView(routePath)
     {
-        let previousController = null;
-
-        if (this.currentRoute != undefined) {
-            previousController = this.currentRoute.controller;
-        }
-
         this._findRoute(routePath);
         this.currentRoute.controller.displayView();
         
-        if(previousController) {
-            this.previousController.leaveView();
+        if(this.previousRoute) {
+            this.previousRoute.controller.leaveView();
         }
         this._saveCurrentPathInSessionStorage();
     }
-
 
     _saveCurrentPathInSessionStorage()
     {

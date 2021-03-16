@@ -9,82 +9,12 @@ class Controller
 
         this.hash = hash;
     }
-}
 
-class ControllerDefault extends Controller
-{
-    constructor(hash)
-    {
-        super(hash);
-        this.view = new ViewDefault('En construction');
-    }
+    leaveView() {
 
-    displayView()
-    {
-        this.view.buildPage();
     }
 }
 
-class ControllerConditions extends Controller
-{
-    constructor(hash)
-    {
-        super(hash);
-        this.manager = new ConditionsManager(url_situation);
-        this.view = new viewConditions('Conditions');
-    }
-
-    displayView()
-    {
-        this.view.buildPage();
-        
-        let year = function () {
-    		return new Date().getFullYear();
-	    }
-
-        this.manager.getConditions(sessionStorage.getItem('userId'), year())
-            .then(response => this.view.updateTable(response));
-    }
-}
-/*
-class ControllerSituation extends Controller
-{
-    constructor(hash)
-    {
-        super(hash);
-
-        this.manager = new SituationManager(url_situation);
-        this.view = new ViewSituation('Situation');
-    }
-
-    displayView()
-    {
-        this.view.buildPage();
-        
-        let lastDay = function () {
-    		return document.querySelector('#date').value;
-	    }
-
-    	let year = function () {
-		    let year = lastDay();
-    		return year.slice(0,4);
-	    }
-        
-        this.manager.getSituation(sessionStorage.getItem('userId'), year(), '1.1', lastDay().unixToSimple())
-            .then(response => this.view.updateTable(response));
-        
-        document.querySelector('#displaySituation').addEventListener('click', (event) => {
-            event.preventDefault();	
-
-            this.manager.getSituation(sessionStorage.getItem('userId'), year(), '1.1', lastDay().unixToSimple())
-                .then(response => this.view.updateTable(response));
-        
-        });
-    }
-
-
-}
-*/
 class ControllerStamping extends Controller
 {
     constructor(hash)
