@@ -35,7 +35,7 @@ class ViewType extends View
                 <input name='end' type='time' value='12:00' required>
                 <label for='remark'>Remarque</label>
                 <input name='remark' type='text'>
-                <input name='btnSubmit' type='submit' value='Enregistrer' class='pointer'>
+                <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='pointer'>
             `;
 
         this.tableHTML = 

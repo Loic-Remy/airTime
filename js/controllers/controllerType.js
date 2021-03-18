@@ -18,88 +18,84 @@ class ControllerType extends Controller
  
     }
 
-    displayView()
-    {
-        
-        this.view.buildPage();
+    _stamp(event) {
+        event.preventDefault();
 
-        var interval = new Interval();
-/*        function filterCurrentDay(data)
-        {
-            return data.filter((element => {
-                let date = document.forms.typeForm.date.value;
-                return element.begin.substring(0, 10) === date;
-            }));
+        let interval = new Interval();
 
-        }
-      */ 
+        interval.fill(document.forms.typeForm);
+        this.manager.sendInterval(interval)
+            .then((response) => {
+                if (response)
+                    return this.manager.getIntervals(interval)
+            })
+            .then(response => this._filterCurrentDay(response))
+            .then(response => this.view.updateTable(response)); 
+
+        document.forms.typeForm.remark.value = "";
+        document.forms.typeForm.begin.focus();
+    }
+
+    _updateStampingTable() {
+        let interval = new Interval();
         interval.fill(document.forms.typeForm);
         
         this.manager.getIntervals(interval)
             .then(response => this._filterCurrentDay(response))
             .then(response => this.view.updateTable(response));
-            
-        document.forms.typeForm.addEventListener('submit', (event) => {
-            console.log(`Submit form count ${++counter}`);
-            event.preventDefault();
+    }
 
-            let interval = new Interval();
+    _updateTypeOptions(event) {
 
-            interval.fill(document.forms.typeForm);
-            this.manager.sendInterval(interval)
-                .then((response) => {
-                    if (response)
-                        return this.manager.getIntervals(interval)
-                })
-                .then(response => this._filterCurrentDay(response))
-                .then(response => this.view.updateTable(response)); 
+        const form = document.forms.typeForm;
 
+        if (event.target.value === 'work')
+        {   
+            form.type.options[0].setAttribute('selected', 'true');
+            form.type.options[0].classList.remove('hidden');
+            form.type.options[1].removeAttribute('selected');
 
-            document.forms.typeForm.remark.value = "";
-            document.forms.typeForm.begin.focus();
+            form.type.classList.add('hidden');
+            document.querySelector('#labelType').classList.add('hidden');
+            form.begin.classList.remove('hidden');
+            document.querySelector('#labelBegin').classList.remove('hidden');
+            form.end.classList.remove('hidden');
+            document.querySelector('#labelEnd').classList.remove('hidden');
+        }
+        else 
+        {
+            form.type.options[0].removeAttribute('selected');
+            form.type.options[0].classList.add('hidden');
+            form.type.options[1].setAttribute('selected', 'true');
 
-        });
+            form.type.classList.remove('hidden');
+            document.querySelector('#labelType').classList.remove('hidden');
+
+            form.begin.classList.add('hidden');
+            document.querySelector('#labelBegin').classList.add('hidden');
+
+            form.end.classList.add('hidden');
+            document.querySelector('#labelEnd').classList.add('hidden');
+        }
+    }
+
+    displayView()
+    {
         
-        document.forms.typeForm.date.addEventListener('blur', () => {
-            let interval = new Interval();
-            interval.fill(document.forms.typeForm);
-            
-            this.manager.getIntervals(interval)
-                .then(response => this._filterCurrentDay(response))
-                .then(response => this.view.updateTable(response));
-        });
+        this.view.buildPage();
 
-        document.forms.typeForm.reason.addEventListener('change', (event) => {
-            if (event.target.value === 'work')
-            {   
-                document.forms.typeForm.type.options[0].setAttribute('selected', 'true');
-                document.forms.typeForm.type.options[0].classList.remove('hidden');
-                document.forms.typeForm.type.options[1].removeAttribute('selected');
+        this._updateStampingTable();
 
+        document.querySelector('#btnSubmit').addEventListener('click', this._stamp.bind(this));
 
+        document.forms.typeForm.date.addEventListener('blur', this._updateStampingTable.bind(this));
 
-                document.forms.typeForm.type.classList.add('hidden');
-                document.querySelector('#labelType').classList.add('hidden');
-                document.forms.typeForm.begin.classList.remove('hidden');
-                document.querySelector('#labelBegin').classList.remove('hidden');
-                document.forms.typeForm.end.classList.remove('hidden');
-                document.querySelector('#labelEnd').classList.remove('hidden');
-            }
-            else 
-            {
-                document.forms.typeForm.type.options[0].removeAttribute('selected');
-                document.forms.typeForm.type.options[0].classList.add('hidden');
-                document.forms.typeForm.type.options[1].setAttribute('selected', 'true');
+        document.forms.typeForm.reason.addEventListener('change', this._updateTypeOptions.bind(this));
+    }
 
-                document.forms.typeForm.type.classList.remove('hidden');
-                document.querySelector('#labelType').classList.remove('hidden');
-
-                document.forms.typeForm.begin.classList.add('hidden');
-                document.querySelector('#labelBegin').classList.add('hidden');
-
-                document.forms.typeForm.end.classList.add('hidden');
-                document.querySelector('#labelEnd').classList.add('hidden');
-            }
-        });
+    leaveView() {
+        document.querySelector('#btnSubmit').removeEventListener('click', this._stamp.bind(this));
+        document.forms.typeForm.date.removeEventListener('blur', this._updateStampingTable.bind(this));
+        document.forms.typeForm.reason.removeEventListener('change', this._updateTypeOptions.bind(this));
     }
 }
