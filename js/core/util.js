@@ -138,42 +138,7 @@ Number.prototype.negativeSign = function()
 
 	return this < 0 ? minus + HTMLspace : HTMLspace + HTMLspace;
 };
-/*
-Number.prototype.toHoursFormat = function ()
-{
-	const HTMLspace = '&nbsp;';
-	const minus = '-';
-	
-    let sign = this < 0 ? `${minus}${HTMLspace}` : `${HTMLspace}${HTMLspace}`;
-	let blank = "";
-	
-	if (this === 0)
-		return sign + "&nbsp&nbsp;0:00"
 
-	let hours = Math.abs(this);	
-	hours = parseInt(hours, 10);
-	if (hours < 100)
-		blank = '&nbsp;';
-	if (hours < 10)
-		blank = '&nbsp;&nbsp;'
-
-	let minutes = (this % 1) * 60;
-	minutes = Math.abs(minutes);
-	minutes = Math.round(minutes);
-
-	if (minutes > 59)
-	{
-		minutes = '00';
-		hours += 1;
-	}
-	else if (minutes < 10)
-	{
-		minutes = '0' + minutes;
-	}
-
-	return sign + blank + hours + ':' + minutes;
-};
-*/
 Date.prototype.toUnixFormat = function () 
 {
 	const year = this.getFullYear().toString();

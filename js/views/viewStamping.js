@@ -15,18 +15,6 @@ class ViewStamping extends View
 				<input type='submit' name='afficher' value='afficher' id='display' class='pointer'>
 				`;
 
-/*            `<div>
-				<label for='firstDay'>Du</label>
-				<input type='date' name='firstDay' id='firstDay' autofocus>
-			</div>
-			<div>
-				<label for='lastDay'>Au</label>
-				<input type='date' name='lastDay' id='lastDay'>
-			</div>
-			<div>
-				<input type='submit' name='afficher' value='afficher' id='display'>
-			</div>`;
-*/
         this.tableHTML = 
             `<thead>
                 <tr>
@@ -57,8 +45,6 @@ class ViewStamping extends View
 		document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']));
 		document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayYear(lastFriday()), ['min']));
 		document.body.addEventListener('load', setDateAsAttributes('lastDay', lastFriday(), ['value', 'max']));
-	
-	
 	}
 
     _tableModifier()
@@ -66,23 +52,7 @@ class ViewStamping extends View
         this.table.setAttribute('id', 'tableStamping');
     }
 
-    _showOrHideDetails(event)
-	{
-		let currentEl = event.target.parentElement.nextElementSibling;
-						
-		while (currentEl.classList.contains('detailLine'))
-		{
-			if (currentEl.classList.contains('hidden'))
-			{
-				currentEl.classList.replace('hidden', 'shown');
-			}
-			else
-			{
-				currentEl.classList.replace('shown', 'hidden');
-			}
-			currentEl = currentEl.nextElementSibling;
-		}
-	}
+
 
 	_buildDayLine(line, entry)
 	{
@@ -146,7 +116,6 @@ class ViewStamping extends View
 					newLine.classList.add('hilight');
 
 				this._buildDayLine(newLine, entry);
-				newLine.addEventListener('click', this._showOrHideDetails);
 
 				tbody.appendChild(newLine);
 				
