@@ -12,6 +12,8 @@ class ControllerLogin extends Controller
 
     _handleSubmit(event) {
         event.preventDefault();
+        console.log(`Event.target = ${event.target}`);
+        console.log('passage');
         
         this.manager.typedUser = document.forms.login.user.value;
         this.manager.typedPassword = document.forms.login.password.value;
@@ -26,11 +28,11 @@ class ControllerLogin extends Controller
     {
         this.view.buildPage();
         
-        document.forms.login.addEventListener('submit', (e) => this._handleSubmit(e));
+        document.querySelector('#btnSubmit').addEventListener('click', this._handleSubmit.bind(this));
     }
 
     leaveView() {
-        document.forms.login.removeEventListener('submit', (e) => this._handleSubmit(e));
+        document.querySelector('#btnSubmit').removeEventListener('click', this._handleSubmit.bind(this));
     }
 
 }

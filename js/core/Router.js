@@ -39,8 +39,6 @@ class Router
 
         const routeFound = this.routes.find((route) => route.path === path);
 
-        this.previousRoute = this.currentRoute;
-        
         this.currentRoute = routeFound || this.routes[defaultRoutePosition];
 
         return this;
@@ -48,14 +46,24 @@ class Router
 
     displayView(routePath)
     {
-        this._findRoute(routePath);
-        
-        if(this.previousRoute) {
-            this.previousRoute.controller.leaveView();
+
+        if (this.currentRoute) {
+            this.currentRoute.controller.leaveView();
         }
+
+        this._findRoute(routePath);
+
         this.currentRoute.controller.displayView();
         
         this._saveCurrentPathInSessionStorage();
+    }
+
+    _hasPreviousRoute() {
+        return this.previousRoute != null;
+    }
+
+    _hasNoPreviousRoute() {
+        return this.previousRoute == null;
     }
 
     _saveCurrentPathInSessionStorage()
