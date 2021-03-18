@@ -1,4 +1,0 @@
-AuthUserFile C:\wamp64\www\airTime\.htpasswd
-AuthName "Acces Restreint"
-AuthType Basic
-Require valid-user
