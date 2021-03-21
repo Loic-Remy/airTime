@@ -43,21 +43,36 @@ class View
  
     _headerEvents()
     {
+        document.querySelector('#disconnect').addEventListener('click', this._clearSessionStorage);
+        document.querySelector('#disconnect').addEventListener('click', this._navigateToLoginPage);
+    
         document.querySelector('#menuLabel').addEventListener('click', this._displayOrHideMenu);
-
         document.addEventListener('click', this._hideMenu);
 
-        document.querySelector('#disconnect').addEventListener('click', function() {
-            sessionStorage.clear();
-            location.hash = 'login';
-        });
+        document.querySelectorAll('li').forEach(li => li.addEventListener('click', this._navigateToPage));
+    }
+
+    _clearSessionStorage() {
+        sessionStorage.clear();
+    }
+
+    _navigateToLoginPage() {
+        location.hash = 'login';
+    }
     
-        document.querySelectorAll('li').forEach(li => li.addEventListener('click', (event) => {
-            location.hash = event.target.id;
-            })
-        );
-
-
+    _displayOrHideMenu(e) {
+        console.log('display_or_hide');
+        const menu = document.getElementById("menu");
+        
+        if (menu.classList.contains("hidden") ) {
+            menu.style.display = "contents";
+            menu.classList.replace("hidden", "shown");
+        } 
+        else if (menu.classList.contains("shown") ) {
+            menu.style.display = "none";
+            menu.classList.replace("shown", "hidden");
+        }
+        e.stopPropagation();
     }
     
     _hideMenu(e) {
@@ -75,19 +90,8 @@ class View
         }
     }
 
-    _displayOrHideMenu(e) {
-        console.log('display_or_hide');
-        const menu = document.getElementById("menu");
-        
-        if (menu.classList.contains("hidden") ) {
-            menu.style.display = "contents";
-            menu.classList.replace("hidden", "shown");
-        } 
-        else if (menu.classList.contains("shown") ) {
-            menu.style.display = "none";
-            menu.classList.replace("shown", "hidden");
-        }
-        e.stopPropagation();
+    _navigateToPage(e) {
+        location.hash = e.target.id;
     }
 
     _formModifier() {}
