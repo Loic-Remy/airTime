@@ -20,7 +20,7 @@ class View
             </form>
         </div>
         <div id='menuBox'>
-            <p id='menuLabel' class='pointer' onclick='display_or_hide_menu()'>menu</p>
+            <p id='menuLabel' class='pointer'>menu</p>
         </div>
         <div>
             <nav>
@@ -43,6 +43,10 @@ class View
  
     _headerEvents()
     {
+        document.querySelector('#menuLabel').addEventListener('click', this._displayOrHideMenu);
+
+        document.addEventListener('click', this._hideMenu);
+
         document.querySelector('#disconnect').addEventListener('click', function() {
             sessionStorage.clear();
             location.hash = 'login';
@@ -53,6 +57,37 @@ class View
             })
         );
 
+
+    }
+    
+    _hideMenu(e) {
+        const menu = document.getElementById("menu");
+
+        if(menu == null) {
+            return;
+        }
+        
+        if(e.target.nodeName != 'LI' && menu.classList.contains("shown")) {
+            console.log('close');
+            
+            menu.style.display = "none";
+            menu.classList.replace("shown", "hidden");
+        }
+    }
+
+    _displayOrHideMenu(e) {
+        console.log('display_or_hide');
+        const menu = document.getElementById("menu");
+        
+        if (menu.classList.contains("hidden") ) {
+            menu.style.display = "contents";
+            menu.classList.replace("hidden", "shown");
+        } 
+        else if (menu.classList.contains("shown") ) {
+            menu.style.display = "none";
+            menu.classList.replace("shown", "hidden");
+        }
+        e.stopPropagation();
     }
 
     _formModifier() {}

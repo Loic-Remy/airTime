@@ -192,7 +192,7 @@ function display_or_hide_children(element)
 	}
 }
 
-
+/*
 function display_or_hide_menu()
 {
 	let menu = document.getElementById("menu");
@@ -208,7 +208,7 @@ function display_or_hide_menu()
 		menu.classList.replace("shown", "hidden");
 	}
 }
-
+*/
 function firstDayMonth(dateFunction)
 {
 	let currentDate = (typeof dateFunction === 'undefined') ? new Date() : dateFunction;
