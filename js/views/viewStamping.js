@@ -93,10 +93,6 @@ class ViewStamping extends View
 		let newLine;
 		let tbody = document.createElement('tbody');	
 		
-		console.log(data);
-		console.log('Debut: m=' + currMonth + ' / j=' + currDay);
-		console.log('Fin: m=' + lastMonth + ' / j= ' + lastDay);
-	
 		for (; currMonth <= lastMonth; currMonth++)
 		{
 			lastDayThisMonth = currMonth === lastMonth ? lastDay : data.entries[currMonth].length;

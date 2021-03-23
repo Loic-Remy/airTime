@@ -54,6 +54,7 @@ class Router
         this._findRoute(routePath);
 
         this.currentRoute.controller.displayView();
+        console.log(`\n========= DISPLAY NEW PAGE ${location.hash} =========\n\n`)
         
         this._saveCurrentPathInSessionStorage();
     }

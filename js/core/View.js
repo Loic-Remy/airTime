@@ -61,7 +61,6 @@ class View
     }
     
     _displayOrHideMenu(e) {
-        console.log('display_or_hide');
         const menu = document.getElementById("menu");
         
         if (menu.classList.contains("hidden") ) {
@@ -83,8 +82,6 @@ class View
         }
         
         if(e.target.nodeName != 'LI' && menu.classList.contains("shown")) {
-            console.log('close');
-            
             menu.style.display = "none";
             menu.classList.replace("shown", "hidden");
         }
