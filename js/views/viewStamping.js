@@ -77,9 +77,32 @@ class ViewStamping extends View
 			<td>${entry.diff.negativeSign()}${entry.yearDiff.toHoursFormat()}</td>`;
 	}
 
-	_buildDetailLine2(line, entry) {
-
-	}
+    _buildDetailLine2(rowElem, entry) {
+        if (entry.type === 'time')
+        {
+            rowElem.innerHTML = 
+                `<td></td>
+				<td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
+                <td colspan="2">${entry.reason.translate()}</td>
+                <td colspan="5">${entry.remark}</td>`;
+        }
+        else if (entry.reason === 'driving')
+        {
+             rowElem.innerHTML = 
+                `<td></td>
+				<td>${entry.end.substring(11, 16)}</td>
+                <td colspan="2">${entry.reason.translate()}</td>
+                <td colspan="5">${entry.remark ? entry.remark : ""}</td>`;
+        }
+        else
+        {
+           rowElem.innerHTML = 
+                `<td></td>
+				<td>${entry.type.translate()}</td>
+                <td colspan="2">${entry.reason.translate()}</td>
+                <td colspan="5">${entry.remark}</td>`;
+        }
+    }
 
 	_buildDetailLine(line, entry) {
 		line.innerHTML = 
@@ -103,7 +126,9 @@ class ViewStamping extends View
 		let lastDayThisMonth;
 
 		var entry;
+		let intervals;
 		let dayColoration;
+		let currentDay;
 		let newLine;
 		let tbody = document.createElement('tbody');	
 		
@@ -118,8 +143,8 @@ class ViewStamping extends View
 				newLine = document.createElement('tr');
 				newLine.classList.add('stampingLine');
 
-				dayColoration = new Date(year, currMonth - 1, currDay);
-				dayColoration = dayColoration.getDay();
+				currentDay = new Date(year, currMonth, currDay);
+				dayColoration = currentDay.getDay();
 				
 				if (dayColoration === 6 || dayColoration === 0)
 					newLine.classList.add('hilight');
@@ -127,15 +152,17 @@ class ViewStamping extends View
 				this._buildDayLine(newLine, entry);
 
 				tbody.appendChild(newLine);
+
+				intervals = IntervalManager.getIntervalsForGivenDay(data.intervals, currentDay.toUnixFormat());
 				
-				for (let i = 0; i < entry.entries.length; i++)
+				for (let i = 0; i < intervals.length; i++)
 				{
 					newLine = document.createElement('tr');
 					
 					newLine.classList.add('hidden');
 					newLine.classList.add('detailLine');
 					
-					this._buildDetailLine(newLine, entry.entries[i]);
+					this._buildDetailLine2(newLine, intervals[i]);
 					tbody.appendChild(newLine);
 				}
 				

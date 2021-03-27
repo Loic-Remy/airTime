@@ -67,6 +67,7 @@ class Interval
             throw new Error("Begin is bigger than end hour of interval");
         }
     }
+
 }
 
 class IntervalManager
@@ -110,6 +111,24 @@ class IntervalManager
         console.log(url);
         console.log(result);
         return await result;
+    }
+
+    static getIntervalsForGivenDay(intervals, day) {
+
+        function checkTheDay (givenDay) {
+
+            return function (element) {
+                const dayToCheck = element.begin.substring(0, 10);
+                const targetDay = givenDay.substring(0, 10);
+                console.log(dayToCheck);
+                console.log(targetDay);
+                return dayToCheck === targetDay;
+            }
+        }
+
+        const results = intervals.filter(checkTheDay(day));
+        console.log(results);
+        return results;
     }
 
 }
