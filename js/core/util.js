@@ -143,10 +143,11 @@ Date.prototype.toUnixFormat = function ()
 {
 	const year = this.getFullYear().toString();
 	const day = this.getDate() < 10 ? "0" + this.getDate().toString() : this.getDate().toString();
-	const month = this.getMonth() + 1 < 10 ? "0" + this.getMonth() : this.getMonth();
+	const month = this.getMonth() + 1 < 10 ? `0${this.getMonth() + 1}`: `${this.getMonth() + 1}`;
 
 	return year + '-' + month + '-' + day;
 }
+
 Object.prototype.addMultiEventsListener = function (events, handler) 
 {
 	const elt = this;

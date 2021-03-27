@@ -143,7 +143,7 @@ class ViewStamping extends View
 				newLine = document.createElement('tr');
 				newLine.classList.add('stampingLine');
 
-				currentDay = new Date(year, currMonth, currDay);
+				currentDay = new Date(year, currMonth - 1, currDay);
 				dayColoration = currentDay.getDay();
 				
 				if (dayColoration === 6 || dayColoration === 0)
