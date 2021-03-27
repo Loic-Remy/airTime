@@ -35,7 +35,7 @@ class Router
 
     _findRoute(path)
     {
-        const defaultRoutePosition = 0; 
+        const defaultRoutePosition = 1; 
 
         const routeFound = this.routes.find((route) => route.path === path);
 
