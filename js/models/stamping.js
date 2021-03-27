@@ -25,8 +25,9 @@ class StampingManager
 		url.searchParams.append('to', last_day);
 
 		let response = await fetch(url);
+		response = response.json();
 		console.log(response);
-		return await response.json();
+		return await response;
     }
 }
 

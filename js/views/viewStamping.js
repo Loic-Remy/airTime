@@ -47,12 +47,21 @@ class ViewStamping extends View
 		document.body.addEventListener('load', setDateAsAttributes('lastDay', lastFriday(), ['value', 'max']));
 	}
 
-    _tableModifier()
-    {
+    _tableModifier() {
         this.table.setAttribute('id', 'tableStamping');
     }
 
+	_getStampingDetails() {
+		const interval = new Interval();
+		const intervalManager = new IntervalManager(url_stamping);
 
+		interval.fill(document.forms.formDate);
+
+		const stamping = intervalManager.getIntervals(interval);
+
+
+		return stamping;
+	}
 
 	_buildDayLine(line, entry)
 	{
@@ -68,16 +77,21 @@ class ViewStamping extends View
 			<td>${entry.diff.negativeSign()}${entry.yearDiff.toHoursFormat()}</td>`;
 	}
 
-	_buildDetailLine(line, entry)
-	{
+	_buildDetailLine2(line, entry) {
+
+	}
+
+	_buildDetailLine(line, entry) {
 		line.innerHTML = 
 			`<td></td>
 			<td>Période</td>
 			<td colspan='8'>${entry}</td>`;
 	}
 
-	_buildTableBody(data)
-	{
+
+	_buildTableBody(data) {
+		console.log(data);
+
 		let formFirstDay = document.forms.formDate.firstDay.value;
 		let formLastDay = document.forms.formDate.lastDay.value;
 
@@ -96,11 +110,10 @@ class ViewStamping extends View
 		for (; currMonth <= lastMonth; currMonth++)
 		{
 			lastDayThisMonth = currMonth === lastMonth ? lastDay : data.entries[currMonth].length;
-			console.log(lastDayThisMonth);
 			
 			for (; currDay <= lastDayThisMonth; currDay++)
 			{
-				entry = data.entries[currMonth][currDay - 1];
+				entry = data.stamping.entries[currMonth][currDay - 1];
 
 				newLine = document.createElement('tr');
 				newLine.classList.add('stampingLine');

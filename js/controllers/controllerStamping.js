@@ -10,10 +10,26 @@ class ControllerStamping extends Controller
         this.view = new ViewStamping('Timbrages');
     }
 
+    async _getData() {
+        const stamping = await this.manager.getStamping();
+
+        const request = new Interval();
+        request.target = sessionStorage.getItem("userId");
+        request.from = document.forms.formDate.firstDay.value;
+        request.until = document.forms.formDate.lastDay.value;
+
+        const intervalManager = new IntervalManager(url_stamping);
+        const intervals = await intervalManager.getIntervals(request);
+
+        return await {'stamping' : stamping,
+                       'intervals' : intervals
+                    };
+    }
+
     _updateTable(event) {
         event.preventDefault();
         
-        this.manager.getStamping()
+        this._getData()
             .then(response => this.view.updateTable(response));
     }
     
@@ -43,7 +59,7 @@ class ControllerStamping extends Controller
     {
         this.view.buildPage();
 
-        this.manager.getStamping()
+        this._getData()
             .then(response => this.view.updateTable(response));
 
         document.getElementById("display").addEventListener('click', this._updateTable.bind(this));
