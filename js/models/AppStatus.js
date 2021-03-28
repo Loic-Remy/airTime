@@ -14,11 +14,13 @@ class AppStatus
         this.insertPoint.innerHTML = this.msg;
         this.statusBar.classList.remove("hidden");
 
-        setInterval(this._hideStatusBar, 5000);
+        setTimeout(this._hideStatusBar, 5000);
     }
 
     _hideStatusBar() {
         const bar = this.statusBar;
+
+        bar.classList.remove("statusBar--success", "statusBar--warning", "statusBar--failure");
         bar.classList.add("hidden");
     }
 

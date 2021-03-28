@@ -64,7 +64,8 @@ class Interval
     _endIsBiggerThanBegin()
     {
         if(this.end < this.begin){
-            throw new Error("Begin is bigger than end hour of interval");
+            console.log("Begin is bigger than end hour of interval");
+            new AppStatus("L'enregistrement a échoué : l'heure de début est supérieure à l'heure de fin").printAsFailure();
         }
     }
 
@@ -110,6 +111,11 @@ class IntervalManager
         result = await fetch(url, init).then(response => response.json());
         console.log(url);
         console.log(result);
+
+        if (result.success === true) {
+            new AppStatus("Le timbrage a bien été enregistré").printAsSuccess();
+        }
+
         return await result;
     }
 
