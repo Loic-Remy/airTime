@@ -10,6 +10,7 @@ class View
         this.h2 = this._createH2(title); 
         this.form = this._createForm();
         this.table = this._createTable();
+        this.statusBar = this._createStatusBar();
        
         this.headerHTML = 
         `<div>
@@ -34,6 +35,11 @@ class View
                 </ul>
             </nav>
         </div>`;
+
+        this.statusBarHTML = 
+        `
+        <p class="statusBar__msgBox"></p>
+        `;
     }
 
     _headerModifier()
@@ -91,11 +97,30 @@ class View
         location.hash = e.target.id;
     }
 
+
     _formModifier() {}
     _formEvents() {}
 
     _tableModifier() {}
     _tableEvents() {}
+
+    _statusBarModifier() {}
+
+    _statusBarEvents() {
+        const bar = document.querySelector('.statusBar');
+
+        bar.addEventListener('click', (event) => {
+            if(event.currentTarget.nodeName === 'DIV') {
+                if(event.currentTarget.classList.contains("hidden") === false) {
+                    event.currentTarget.classList.add("hidden");
+                }
+            }
+            event.stopPropagation();
+        });
+
+
+
+    }
 
     _createHeader()
     {
@@ -124,6 +149,14 @@ class View
         let table = document.createElement('table');
 		
 		return table;
+    }
+
+    _createStatusBar() {
+        let bar = document.createElement('div');
+        bar.classList.add("statusBar", "hidden");
+        bar.id = "statusBar";
+
+        return bar;
     }
 
     updateTable(data)
@@ -162,6 +195,12 @@ class View
             this.insertPoint.append(this.table);
             this._tableModifier();
             this._formEvents();
+        }
+
+        if(this.statusBar != undefined) {
+            this.statusBar.innerHTML = this.statusBarHTML;
+            this.insertPoint.append(this.statusBar);
+            this._statusBarEvents();
         }
     }
 

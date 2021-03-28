@@ -195,6 +195,29 @@ input[type='submit']
 	width: 100%;
 }
 
+.statusBar {
+	border: solid 1px #000000;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.statusBar--success {
+	background-color: #21f356;
+}
+
+.statusBar--warning {
+	background-color: #f5e342;
+}
+
+.statusBar--failure {
+	background-color: #f33a21;
+}
+
+.statusBar__msgBox {
+	text-align: center;
+}
+
 h1
 {
 	margin: 0;
