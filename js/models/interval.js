@@ -65,7 +65,7 @@ class Interval
     {
         if(this.end < this.begin){
             console.log("Begin is bigger than end hour of interval");
-            new AppStatus("L'enregistrement a échoué : l'heure de début est supérieure à l'heure de fin").printAsFailure();
+            new AppStatus("L'enregistrement a échoué car l'heure de début est supérieure à l'heure de fin", "Attention - ").printAsFailure();
         }
     }
 

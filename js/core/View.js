@@ -153,8 +153,7 @@ class View
 
     _createStatusBar() {
         let bar = document.createElement('div');
-        bar.classList.add("statusBar", "hidden");
-        bar.id = "statusBar";
+        bar.classList.add("statusBar", "statusBar--disparition", "hidden");
 
         return bar;
     }

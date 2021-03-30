@@ -196,26 +196,43 @@ input[type='submit']
 }
 
 .statusBar {
-	border: solid 1px #000000;
 	position: fixed;
-	bottom: 0;
-	width: 100%;
+	bottom: 20px;
+	width: 80%;
+
+	border-radius: 50px;
+}
+
+.statusBar--disparition {
+	animation-timing-function: ease-in;
+	animation: disparition 5s;
 }
 
 .statusBar--success {
-	background-color: #21f356;
+	background-color: #2ecc71;
 }
 
 .statusBar--warning {
-	background-color: #f5e342;
+	background-color: #e67e22;
 }
 
 .statusBar--failure {
-	background-color: #f33a21;
+	background-color: #e74c34;
 }
 
 .statusBar__msgBox {
 	text-align: center;
+}
+
+@keyframes disparition {
+	0% {
+		opacity: 100%;
+	}
+	50% {opacity: 100%
+	}
+	100% {
+		opacity: 0%;
+	}
 }
 
 h1

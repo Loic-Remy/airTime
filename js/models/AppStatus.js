@@ -2,19 +2,23 @@
 
 class AppStatus
 {
-    constructor(msg) {
+    constructor(msg, strongMsg) {
+        this.strongMsg = strongMsg;
         this.msg = msg;
     }
 
+    durationInMS = 5000;
     statusBar = document.querySelector(".statusBar");
-
     insertPoint = document.querySelector('.statusBar__msgBox');
 
     _printAppStatus() {
-        this.insertPoint.innerHTML = this.msg;
+        const strong = this.strongMsg === undefined ? "" : `<strong>${this.strongMsg}</strong>`;
+        const msg = this.msg; 
+        
+        this.insertPoint.innerHTML = strong + msg;
         this.statusBar.classList.remove("hidden");
 
-        setTimeout(this._hideStatusBar, 5000);
+        setTimeout(this._hideStatusBar.bind(this), this.durationInMS);
     }
 
     _hideStatusBar() {
