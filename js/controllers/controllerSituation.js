@@ -13,7 +13,7 @@ class ControllerSituation extends Controller
     handleClick(event) {
             event.preventDefault();	
 
-            this.manager.getSituation(sessionStorage.getItem('userId'), this.yearOfLastDay(), '1.1', this.lastDay().unixToSimple())
+            this.manager.getSituation(localStorage.getItem('userId'), this.yearOfLastDay(), '1.1', this.lastDay().unixToSimple())
                 .then(response => this.view.updateTable(response));
     }
 
@@ -30,8 +30,9 @@ class ControllerSituation extends Controller
         this.view.buildPage();
         
         
-        this.manager.getSituation(sessionStorage.getItem('userId'), this.yearOfLastDay(), '1.1', this.lastDay().unixToSimple())
+        this.manager.getSituation(localStorage.getItem('userId'), this.yearOfLastDay(), '1.1', this.lastDay().unixToSimple())
             .then(response => this.view.updateTable(response));
+//            .then(response => console.log(response));
         
         document.querySelector('#displaySituation').addEventListener('click', (e) => this.handleClick(e));
     }

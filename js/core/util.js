@@ -11,7 +11,7 @@ const _fetch = fetch;
 fetch = (url) => {
 	let init = {
 		headers: {
-			'Authorization': `Basic ${sessionStorage.getItem('autorization')}`
+			'Authorization': `Basic ${locaslStorage.getItem('autorization')}`
 		}
 	};
 	console.log(init);

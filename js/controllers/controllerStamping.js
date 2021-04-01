@@ -14,7 +14,7 @@ class ControllerStamping extends Controller
         const stamping = await this.manager.getStamping();
 
         const request = new Interval();
-        request.target = sessionStorage.getItem("userId");
+        request.target = localStorage.getItem("userId");
         request.from = document.forms.formDate.firstDay.value;
         request.until = document.forms.formDate.lastDay.value;
 

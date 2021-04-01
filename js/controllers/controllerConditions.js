@@ -16,7 +16,7 @@ class ControllerConditions extends Controller
     displayView() {
         this.view.buildPage();
 
-        this.manager.getConditions(sessionStorage.getItem('userId'), this._currentYear())
+        this.manager.getConditions(localStorage.getItem('userId'), this._currentYear())
             .then(response => this.view.updateTable(response));
     }
 

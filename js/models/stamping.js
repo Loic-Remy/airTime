@@ -15,7 +15,7 @@ class StampingManager
 
 		let year = document.querySelector('#firstDay').value;
 		year = year[0] + year[1] + year[2] + year[3];
-		let worker_id = sessionStorage.getItem('userId');
+		let worker_id = localStorage.getItem('userId');
 		let first_day = '1.1';
 		let last_day = document.querySelector('#lastDay').value.unixToSimple();
 		

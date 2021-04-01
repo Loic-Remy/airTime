@@ -15,7 +15,7 @@ class LoginManager
 		var name = userName || this.typedUser;
 	/*	
 		let encoded = utf8_to_b64(name + ':' + this.typedPassword);
-		sessionStorage.setItem('autorization', encoded);
+		localStorage.setItem('autorization', encoded);
 	*/	
 		return await fetch(this.url)
 							.then(response => {
@@ -32,6 +32,7 @@ class LoginManager
 										user.userName = entry.commonName;
 										user.id = entry.id;
 										user.pos = i;
+										user.passWord = this.typedPassword;
 
 										return user;
 									}
@@ -48,10 +49,8 @@ class LoginManager
 	
 	saveUser(response)
 	{
-		sessionStorage.setItem('userId', response.id);
-		sessionStorage.setItem('userName', response.userName);
-		sessionStorage.setItem('pos', response.pos);
+		localStorage.setItem('userId', response.id);
+		localStorage.setItem('userName', response.userName);
+		localStorage.setItem('pos', response.pos);
 	}
-
-
 }

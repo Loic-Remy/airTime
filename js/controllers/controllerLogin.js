@@ -12,20 +12,32 @@ class ControllerLogin extends Controller
 
     _handleSubmit(event) {
         event.preventDefault();
-        console.log(`Event.target = ${event.target}`);
-        console.log('passage');
         
         this.manager.typedUser = document.forms.login.user.value;
         this.manager.typedPassword = document.forms.login.password.value;
 
         this.manager.getUser()
             .then(response => this.manager.saveUser(response))
-            .then( () => location.hash = 'type')
-            .catch(error => this.manager.manageError(error));
+            .then( () => location.hash = 'type');
+    }
+
+    _autoLogIn() {
+
+        if (localStorage.length === 0) {
+            return;
+        }
+
+        this.manager.typedUser = localStorage.getItem("userName");
+        this.manager.typedPassword = localStorage.getItem("userPassword");
+        
+        this.manager.getUser()
+            .then( () => location.hash = 'type');
     }
 
     displayView()
     {
+        this._autoLogIn();
+
         this.view.buildPage();
         
         document.querySelector('#btnSubmit').addEventListener('click', this._handleSubmit.bind(this));

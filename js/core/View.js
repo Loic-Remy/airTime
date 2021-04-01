@@ -44,7 +44,7 @@ class View
 
     _headerModifier()
     {
-        document.getElementById("identity").innerHTML = sessionStorage.getItem('userName');
+        document.getElementById("identity").innerHTML = localStorage.getItem('userName');
     } 
  
     _headerEvents()
@@ -59,7 +59,7 @@ class View
     }
 
     _clearSessionStorage() {
-        sessionStorage.clear();
+        localStorage.clear();
     }
 
     _navigateToLoginPage() {

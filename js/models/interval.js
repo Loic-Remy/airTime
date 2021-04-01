@@ -48,7 +48,7 @@ class Interval
         }
         
         this._hydrate(
-            sessionStorage.getItem('userId'),
+            localStorage.getItem('userId'),
             formDate + 'T' + formBegin + ':00Z',
             formDate + 'T' + formEnd + ':00Z',
             formType,
@@ -119,6 +119,10 @@ class IntervalManager
         return await result;
     }
 
+    async deleteInterval(interval) {
+
+    }
+
     static getIntervalsForGivenDay(intervals, day) {
 
         function checkTheDay (givenDay) {
@@ -126,14 +130,13 @@ class IntervalManager
             return function (element) {
                 const dayToCheck = element.begin.substring(0, 10);
                 const targetDay = givenDay.substring(0, 10);
-                console.log(dayToCheck);
-                console.log(targetDay);
+                
                 return dayToCheck === targetDay;
             }
         }
 
         const results = intervals.filter(checkTheDay(day));
-        console.log(results);
+        
         return results;
     }
 
