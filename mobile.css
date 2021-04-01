@@ -142,7 +142,7 @@ form
 
 label, input, select
 {
-	height: 36px;
+	height: 44px;
 	margin: none;
 	margin-bottom: 10px;
 	font-size: 16px;
@@ -172,12 +172,14 @@ input, select
 
 	width: calc(75% - 3px);
 
+	border-radius: 0px 10px 10px 0px;
 }
 
 input[type='submit']
 {
 	width: 100%;
 	text-align: center;
+
 }
 
 .loginLabel 
@@ -198,7 +200,8 @@ input[type='submit']
 .statusBar {
 	position: fixed;
 	bottom: 20px;
-	width: 80%;
+	width: 600px;
+	margin: 0 auto;
 
 	border-radius: 50px;
 }
@@ -222,6 +225,7 @@ input[type='submit']
 
 .statusBar__msgBox {
 	text-align: center;
+	width: 80%;
 }
 
 @keyframes disparition {
@@ -276,6 +280,7 @@ td
 thead td:last-child, tbody td:last-child
 {
 	border-right: solid black 1px; 
+	border-radius: 0px 10px 10px 0px;
 }
 
 .detailLine > td

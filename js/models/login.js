@@ -36,15 +36,10 @@ class LoginManager
 										return user;
 									}
 								}
-								throw new Error("L'utilisateur n'existe pas");
+								console.log("L'utilisateur n'existe pas");
+								new AppStatus("Utilisateur ou mot de passe incorrect", "Echec - ").printAsFailure();
 							});
 	}
-
-	manageError(error)
-	{
-		console.log(error);
-	}
-
 
 	log(userName)
 	{
