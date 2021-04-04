@@ -44,7 +44,7 @@ class ViewStamping extends View
 	{
 		document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayMonth(lastFriday()), ['value']));
 		document.body.addEventListener('load', setDateAsAttributes('firstDay', firstDayYear(lastFriday()), ['min']));
-		document.body.addEventListener('load', setDateAsAttributes('lastDay', lastFriday(), ['value', 'max']));
+		document.body.addEventListener('load', setDateAsAttributes('lastDay', yesterday(), ['value']));
 	}
 
     _tableModifier() {
@@ -134,7 +134,7 @@ class ViewStamping extends View
 		
 		for (; currMonth <= lastMonth; currMonth++)
 		{
-			lastDayThisMonth = currMonth === lastMonth ? lastDay : data.entries[currMonth].length;
+			lastDayThisMonth = currMonth === lastMonth ? lastDay : data.stamping.entries[currMonth].length;
 			
 			for (; currDay <= lastDayThisMonth; currDay++)
 			{

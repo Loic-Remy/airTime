@@ -172,8 +172,6 @@ function hiddeDetails()
 	for (let i = 0; i < size; i++){
 		elem[i].style.display = "none";
 	}
-
-
 }
 
 function display_or_hide_children(element)
@@ -193,23 +191,6 @@ function display_or_hide_children(element)
 	}
 }
 
-/*
-function display_or_hide_menu()
-{
-	let menu = document.getElementById("menu");
-	
-	if (menu.classList.contains("hidden") )
-	{
-		menu.style.display = "contents";
-		menu.classList.replace("hidden", "shown");
-	}
-	else if (menu.classList.contains("shown") )
-	{
-		menu.style.display = "none";
-		menu.classList.replace("shown", "hidden");
-	}
-}
-*/
 function firstDayMonth(dateFunction)
 {
 	let currentDate = (typeof dateFunction === 'undefined') ? new Date() : dateFunction;
