@@ -124,7 +124,9 @@ class IntervalManager
         url += idToDelete;
         console.log(url);
 
-        let init =  {method: 'DELETE'};
+        let init =  {method: 'DELETE',
+                        mode: 'no-cors',
+                    };
         result = await fetch(url, init).then(response => response.json());
         console.log(url);
         console.log(result);
