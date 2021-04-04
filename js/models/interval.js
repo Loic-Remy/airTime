@@ -78,8 +78,7 @@ class IntervalManager
         this.url = url;
     }
 
-    async getIntervals(interval)
-    {
+    async getIntervals(interval) {
         let url = new URL(this.url);
         let result;
 
@@ -95,8 +94,7 @@ class IntervalManager
         return await result;
     }
 
-    async sendInterval(interval)
-    {
+    async sendInterval(interval) {
         let url = new URL(this.url);
         let result;
 
@@ -119,7 +117,26 @@ class IntervalManager
         return await result;
     }
 
-    async deleteInterval(interval) {
+    async deleteInterval(idToDelete) {
+        let url = new URL(url_stampingDelete);
+        let result;
+
+        url += idToDelete;
+        console.log(url);
+
+        let init =  {method: 'DELETE'};
+        result = await fetch(url, init).then(response => response.json());
+        console.log(url);
+        console.log(result);
+
+        if (result.success === true) {
+            new AppStatus("Le timbrage a bien été supprimé").printAsSuccess();
+        }
+        else {
+            new AppStatus("Le timbrage n'a pas été supprimé", "Erreur : ").printAsFailure();
+        }
+
+        return await result;
 
     }
 

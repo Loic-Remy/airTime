@@ -197,6 +197,17 @@ input[type='submit']
 	width: 100%;
 }
 
+.dailyTable__line__deleteCell{
+	width: 20%;
+}
+
+.dailyTable__line__delete {
+	border: none;
+	background: none;
+
+	font-style: italic;
+}
+
 .statusBar {
 	position: fixed;
 	bottom: 20px;
@@ -266,6 +277,7 @@ thead
 
 td
 {
+	height: 44px;
 	border: solid 1px #000000;
 	border-right: none; 
 	border-left: none;
@@ -281,6 +293,7 @@ thead td:last-child, tbody td:last-child
 {
 	border-right: solid black 1px; 
 	border-radius: 0px 10px 10px 0px;
+	
 }
 
 .detailLine > td

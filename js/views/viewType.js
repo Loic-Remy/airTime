@@ -44,6 +44,7 @@ class ViewType extends View
                     <td>timbrage</td>
                     <td>motif</td>
                     <td>remarque</td>
+                    <td></td>
                 </tr>
             </thead>
             <tboy>
@@ -75,21 +76,26 @@ class ViewType extends View
         if (entry.type === 'time')
         {
             rowElem.innerHTML = 
-                `<td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
+                `<td class='hidden'>${entry.id}</td>
+                <td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
-                <td>${entry.remark}</td>`;
+                <td>${entry.remark}</td>
+                <td class='dailyTable__line__deleteCell'><button class='dailyTable__line__delete'>Suppr</td>
+                `;
         }
         else if (entry.reason === 'driving')
         {
              rowElem.innerHTML = 
-                `<td>${entry.end.substring(11, 16)}</td>
+                `<td class='hidden'>${entry.id}</td>
+                <td>${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark ? entry.remark : ""}</td>`;
         }
         else
         {
            rowElem.innerHTML = 
-                `<td>${entry.type.translate()}</td>
+                `<td class='hidden'>${entry.id}</td>
+                <td>${entry.type.translate()}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>`;
         }
