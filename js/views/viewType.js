@@ -44,14 +44,14 @@ class ViewType extends View
                     <td>timbrage</td>
                     <td>motif</td>
                     <td>remarque</td>
+                    <td></td>
                 </tr>
             </thead>
             <tboy>
             </tbody>`;
     }
     
-    _formModifier() 
-    {
+    _formModifier() {
         this.form.name = 'typeForm';
         this.form.classList.add('multiForm');
         document.forms.typeForm.begin.autofocus = true;
@@ -59,13 +59,11 @@ class ViewType extends View
         document.forms.typeForm.date.value = new Date().toUnixFormat();
     }
 
-    _tableModifier()
-    {
+    _tableModifier() {
         this.table.id = 'dayTable';
     }
 
-    _buildEntryLine(entry, rowElem)
-    {
+    _buildEntryLine(entry, rowElem) {
         if(entry === undefined)
         {
             rowElem.innerHTML = `<td colspan='4'>Aucun timbrage pour cette journée</td>`;
@@ -75,28 +73,32 @@ class ViewType extends View
         if (entry.type === 'time')
         {
             rowElem.innerHTML = 
-                `<td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
+                `<td class='hidden'>${entry.id}</td>
+                <td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
-                <td>${entry.remark}</td>`;
+                <td>${entry.remark}</td>
+                <td class='dailyTable__line__deleteCell'><button class='dailyTable__line__delete'>Suppr</td>
+                `;
         }
         else if (entry.reason === 'driving')
         {
              rowElem.innerHTML = 
-                `<td>${entry.end.substring(11, 16)}</td>
+                `<td class='hidden'>${entry.id}</td>
+                <td>${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark ? entry.remark : ""}</td>`;
         }
         else
         {
            rowElem.innerHTML = 
-                `<td>${entry.type.translate()}</td>
+                `<td class='hidden'>${entry.id}</td>
+                <td>${entry.type.translate()}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>`;
         }
     }
 
-    _buildTableBody(data)
-    {
+    _buildTableBody(data) {
         let tableBody = document.createElement('tbody');
         let newLine;
         let entry;
@@ -118,5 +120,3 @@ class ViewType extends View
         return tableBody;
     }
 }
-
-

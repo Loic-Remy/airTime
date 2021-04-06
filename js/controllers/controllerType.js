@@ -79,6 +79,23 @@ class ControllerType extends Controller
         }
     }
 
+    _deleteInterval(event) {
+        if(event.target.classList.contains('dailyTable__line__delete') === false) {
+            return;
+        }
+
+        const idToDelete = event.target.parentElement.parentElement.firstChild.innerHTML;
+        console.log(idToDelete);
+
+        
+        this.manager.deleteInterval(idToDelete);
+
+        console.log('touché');
+        event.stopPropagation();
+
+        this._updateStampingTable();
+    }
+
     displayView()
     {
         
@@ -91,6 +108,8 @@ class ControllerType extends Controller
         document.forms.typeForm.date.addEventListener('blur', this._updateStampingTable.bind(this));
 
         document.forms.typeForm.reason.addEventListener('change', this._updateTypeOptions.bind(this));
+
+        document.addEventListener('click', this._deleteInterval.bind(this));    
     }
 
     leaveView() {
