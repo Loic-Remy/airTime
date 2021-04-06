@@ -51,8 +51,7 @@ class ViewType extends View
             </tbody>`;
     }
     
-    _formModifier() 
-    {
+    _formModifier() {
         this.form.name = 'typeForm';
         this.form.classList.add('multiForm');
         document.forms.typeForm.begin.autofocus = true;
@@ -60,13 +59,11 @@ class ViewType extends View
         document.forms.typeForm.date.value = new Date().toUnixFormat();
     }
 
-    _tableModifier()
-    {
+    _tableModifier() {
         this.table.id = 'dayTable';
     }
 
-    _buildEntryLine(entry, rowElem)
-    {
+    _buildEntryLine(entry, rowElem) {
         if(entry === undefined)
         {
             rowElem.innerHTML = `<td colspan='4'>Aucun timbrage pour cette journée</td>`;
@@ -101,8 +98,7 @@ class ViewType extends View
         }
     }
 
-    _buildTableBody(data)
-    {
+    _buildTableBody(data) {
         let tableBody = document.createElement('tbody');
         let newLine;
         let entry;
@@ -124,5 +120,3 @@ class ViewType extends View
         return tableBody;
     }
 }
-
-

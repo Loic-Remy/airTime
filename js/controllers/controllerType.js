@@ -92,6 +92,8 @@ class ControllerType extends Controller
 
         console.log('touché');
         event.stopPropagation();
+
+        this._updateStampingTable();
     }
 
     displayView()
