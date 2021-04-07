@@ -79,14 +79,13 @@ class IntervalManager
     }
 
     async getIntervals(interval) {
-        let url = new URL(this.url);
-        let result;
+        const url = new URL(this.url);
 
 		url.searchParams.append('from', interval.from);
 		url.searchParams.append('until', interval.until);
         url.searchParams.append('target', interval.target);
         
-        result = await fetch(url).then(response => response.json());
+        const result = await fetch(url).then(response => response.json());
 
         console.log(url);
         console.log(result);

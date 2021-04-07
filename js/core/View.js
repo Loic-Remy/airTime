@@ -30,6 +30,7 @@ class View
                     <li id='situation' class='pointer'>Situation</li>
                     <li id='stamping' class='pointer'>Timbrages</li>
                     <li id='conditions' class='pointer'>Conditions</li>
+                    <li id='users' class='pointer'>Utilisateurs</li>
                     <li id='request' class='pointer'>Demandes</li>
                     <li id='mask' class='hidden'></li>
                 </ul>

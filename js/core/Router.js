@@ -30,6 +30,10 @@ class Router
         {
             path: '#conditions',
             controller: new ControllerConditions('conditions')
+        },
+        {
+            path: '#users',
+            controller: new ControllerUsers('users')
         }
     ];
 
