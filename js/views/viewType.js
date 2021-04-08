@@ -86,7 +86,9 @@ class ViewType extends View
                 `<td class='hidden'>${entry.id}</td>
                 <td>${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
-                <td>${entry.remark ? entry.remark : ""}</td>`;
+                <td>${entry.remark ? entry.remark : ""}</td>
+                <td class='dailyTable__line__deleteCell'><button class='dailyTable__line__delete'>Suppr</td>
+                `;
         }
         else
         {
@@ -94,7 +96,9 @@ class ViewType extends View
                 `<td class='hidden'>${entry.id}</td>
                 <td>${entry.type.translate()}</td>
                 <td>${entry.reason.translate()}</td>
-                <td>${entry.remark}</td>`;
+                <td>${entry.remark}</td>
+                <td class='dailyTable__line__deleteCell'><button class='dailyTable__line__delete'>Suppr</td>
+                `;
         }
     }
 
