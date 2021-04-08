@@ -24,25 +24,26 @@ class ViewUsers extends View
     _buildUserLine(user) {
         const line = document.createElement('tr');
 
+
         line.innerHTML = `
             <td class='hidden'>${user.id}</td>
             <td>${user.name}</td>
             <td></td>
-            <td></td>
+            <td>${user.currentBalance()}</td>
             <td></td>
         `
 
         return line;
     }
 
-    _buildTableBody(users)
-	{
+    _buildTableBody(users) {
 		const tableBody = document.createElement('tbody');
-
+        console.log(users.json());
 		let line;  
 
 		for (let i = 0; i < users.length; i++)
 		{
+            console.log(users[i].name)
             line = this._buildUserLine(users[i]);
             tableBody.append(line);
 		}

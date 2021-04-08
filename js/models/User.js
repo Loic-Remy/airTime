@@ -2,11 +2,11 @@
 
 class User
 {
-    constructor(obj) {
-        this.id = obj.id;
-        this.name = obj.commonName;
-        this.disabled = obj.disabled;
-        this.role = obj.role;
+    constructor({id, commonName, disabled, role}) {
+        this.id = id;
+        this.name = commonName;
+        this.disabled = disabled;
+        this.role = role;
     }
 
     isActive() {
@@ -16,7 +16,30 @@ class User
     isConnected() {
         return this.id === localStorage.getItem('userId');
     }
+    
+    async getSituation(year, firstDay, lastDay) {
+	{
+		let url = new URL(url_situation);
+
+		url.searchParams.append('year', year);
+		url.searchParams.append('id', this.id);
+		url.searchParams.append('from', firstDay);
+		url.searchParams.append('to', lastDay);
+
+		let response = await fetch(url).then(response => response.json());
+
+		console.log(response);
+		return await response;
+	}
+
+
+    }
 	
+	currentBalance() {
+        console.log(this);
+		const balance = this.situation.diff;
+		return balance.toHours();
+	}
 }
 
 class UserManager 
@@ -34,6 +57,8 @@ class UserManager
 
 		return await data;
 	}
+
+
 
     activeOnly(users) {
         return users.map(elem => elem.isActive === true);
