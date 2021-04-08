@@ -42,12 +42,16 @@ class ViewSituation extends View
 	_buildTableBody(data)
 	{
 		let tbody = document.createElement('tbody');
+
+		if (data === undefined) {
+			tbody.append(this._buildNoSituationLine());
+			return tbody;
+		}
+
 		let situationDate = document.forms.formSituation.date.value.unixDateToDDMMYYYY();
-	
+		
 		let diff = data.diff;
 		diff = Math.round(data.diff * 100) / 100;
-
-		
 
 		tbody.append(
 			this._buildLineFromSummary('Travail planifié', '-', data, 'globalTodo', 'hilight'),
@@ -68,6 +72,15 @@ class ViewSituation extends View
 		);
 			 
 		return tbody;
+	}
+
+	_buildNoSituationLine() {
+		const line = document.createElement('tr');
+		line.innerHTML = 
+		`
+		<th colspan="4">Impossible d'afficher la situation</th>
+		`
+		return line;
 	}
 
 

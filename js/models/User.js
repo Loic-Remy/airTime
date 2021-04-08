@@ -26,9 +26,16 @@ class User
 		url.searchParams.append('from', firstDay);
 		url.searchParams.append('to', lastDay);
 
-		let response = await fetch(url).then(response => response.json());
+		let response = await fetch(url).then(response => {
+            if(response.ok) {
+                return response.json();
+            } else {
+                return null;
+            }
+        })
+        .catch(error => console.log(error));
 
-		console.log(response);
+
 		return await response;
 	}
 
@@ -36,10 +43,33 @@ class User
     }
 	
 	currentBalance() {
-        console.log(this);
+        if (this.situation === undefined) {
+            return "    nd";
+        }
+
 		const balance = this.situation.diff;
-		return balance.toHours();
+		return balance.toHoursFormat();
 	}
+
+    takenHoliday() {
+        if (this.situation === undefined) {
+            return "    nd"
+        }
+
+        const holiday = this.situation.vacancy;
+        return holiday;
+    }
+
+    yearBalance() {
+        if (this.situation === undefined) {
+            return "    nd";
+        }
+
+		const balance = this.situation.todo - this.situation.done;
+		return balance.toHoursFormat();
+
+
+    }
 }
 
 class UserManager 

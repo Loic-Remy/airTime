@@ -22,15 +22,20 @@ class ViewUsers extends View
     }
 
     _buildUserLine(user) {
+
+        if (user === undefined) {
+            return;
+        }
+
         const line = document.createElement('tr');
 
 
         line.innerHTML = `
             <td class='hidden'>${user.id}</td>
             <td>${user.name}</td>
-            <td></td>
+            <td>${user.yearBalance()}</td>
             <td>${user.currentBalance()}</td>
-            <td></td>
+            <td>${user.takenHoliday()}</td>
         `
 
         return line;
@@ -38,12 +43,11 @@ class ViewUsers extends View
 
     _buildTableBody(users) {
 		const tableBody = document.createElement('tbody');
-        console.log(users.json());
+        console.log(users);
 		let line;  
 
 		for (let i = 0; i < users.length; i++)
 		{
-            console.log(users[i].name)
             line = this._buildUserLine(users[i]);
             tableBody.append(line);
 		}

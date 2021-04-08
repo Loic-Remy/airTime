@@ -16,7 +16,18 @@ class SituationManager
 		url.searchParams.append('from', firstDay);
 		url.searchParams.append('to', lastDay);
 
-		let response = await fetch(url).then(response => response.json());
+		let response = await fetch(url).then(response => {
+			if (response.ok) {
+				if (response.lenth > 0) {
+					return response.json();
+				} else {
+					throw new Error('No .ini file for this user');
+				}
+			} else {
+				throw new Error('Can not fetch the situation');
+			}
+		})
+		.catch(error => console.log(error));
 
 		console.log(response);
 		return await response;
