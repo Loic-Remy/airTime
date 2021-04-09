@@ -3,7 +3,7 @@
 	font-family: "century gothic";
 }
 
-.pointer
+.--pointer
 {
 	cursor: pointer;
 }
@@ -107,11 +107,13 @@ body
 {
 	margin: 0;
 	height: 100%;
-
 }
 
-#conditionsTable td:nth-child(2)
-{
+.conditionsTable__line__condition {
+	text-align:left;
+}
+
+.conditionsTable__line__value {
 	text-align: right;
 }
 
@@ -173,6 +175,8 @@ input, select
 	width: calc(75% - 3px);
 
 	border-radius: 0px 10px 10px 0px;
+
+	cursor: pointer;
 }
 
 input[type='submit']
@@ -197,15 +201,30 @@ input[type='submit']
 	width: 100%;
 }
 
-.dailyTable__line__deleteCell{
+.dayTable__line__deleteCell{
 	width: 20%;
+	text-align: end;
 }
 
-.dailyTable__line__delete {
+.dayTable__line__delete {
 	border: none;
 	background: none;
+	height: 44px;
 
+	cursor: pointer;
 	font-style: italic;
+}
+
+.usersTable__line__value {
+	text-align: center;
+}
+
+.usersTable__line__name {
+	text-align: left;
+
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	column-width: 20%;
 }
 
 .statusBar {
@@ -277,7 +296,6 @@ thead
 
 td
 {
-	height: 44px;
 	border: solid 1px #000000;
 	border-right: none; 
 	border-left: none;
@@ -289,7 +307,7 @@ td
 	text-align: left;
 }
 
-thead td:last-child, tbody td:last-child
+thead td:last-child, tbody td:last-child, th:last-child
 {
 	border-right: solid black 1px; 
 	border-radius: 0px 10px 10px 0px;
@@ -306,8 +324,6 @@ thead td:last-child, tbody td:last-child
 tbody tr:hover td
 {
 	background-color: #5DF3F7;
-	
-	cursor: pointer;
 }
 
 #tableStamping

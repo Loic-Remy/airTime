@@ -17,21 +17,21 @@ class View
             <p id='identity'></p>
             <p id='airtime'>airTime</p>
             <form action='index.html' method='post'>
-                <button id='disconnect' type='button' class='pointer'>Déconnexion</button>
+                <button id='disconnect' type='button' class='--pointer'>Déconnexion</button>
             </form>
         </div>
         <div id='menuBox'>
-            <p id='menuLabel' class='pointer'>menu</p>
+            <p id='menuLabel' class='--pointer'>menu</p>
         </div>
         <div>
             <nav>
                 <ul id='menu' class='hidden'>
-                    <li id='type' class='pointer'>Saisie</li>
-                    <li id='situation' class='pointer'>Situation</li>
-                    <li id='stamping' class='pointer'>Timbrages</li>
-                    <li id='conditions' class='pointer'>Conditions</li>
-                    <li id='users' class='pointer'>Utilisateurs</li>
-                    <li id='request' class='pointer'>Demandes</li>
+                    <li id='type' class='--pointer'>Saisie</li>
+                    <li id='situation' class='--pointer'>Situation</li>
+                    <li id='stamping' class='--pointer'>Timbrages</li>
+                    <li id='conditions' class='--pointer'>Conditions</li>
+                    <li id='users' class='--pointer'>Utilisateurs</li>
+                    <li id='request' class='hidden --pointer'>Demandes</li>
                     <li id='mask' class='hidden'></li>
                 </ul>
             </nav>

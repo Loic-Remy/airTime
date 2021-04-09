@@ -141,7 +141,7 @@ class ViewStamping extends View
 				entry = data.stamping.entries[currMonth][currDay - 1];
 
 				newLine = document.createElement('tr');
-				newLine.classList.add('stampingLine');
+				newLine.classList.add('stampingLine', '--pointer');
 
 				currentDay = new Date(year, currMonth - 1, currDay);
 				dayColoration = currentDay.getDay();

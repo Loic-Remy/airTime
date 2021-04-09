@@ -10,8 +10,8 @@ class viewConditions extends View
             `
             <thead>
                 <tr>
-                    <th>Conditions</th>
-                    <th>Valeurs</th>
+                    <th class='conditionsTable__line__condition'>Conditions</th>
+                    <th class='conditionsTable__line__value'>Valeurs</th>
                 </tr>
             </thead>
             <tbody
@@ -34,36 +34,36 @@ class viewConditions extends View
         tableBody.innerHTML = 
             `
             <tr>
-                <td>Début</td>
-                <td>${cond.begin.date.substring(0, 10).unixDateToDDMMYYYY()}</td>
+                <td class='conditionsTable__line__conditions'>Début</td>
+                <td class='conditionsTable__line__value'>${cond.begin.date.substring(0, 10).unixDateToDDMMYYYY()}</td>
             </tr>
             <tr>
-                <td>Fin</td>
-                <td>${cond.end.date.substring(0, 10).unixDateToDDMMYYYY()}</td>
+                <td class='conditionsTable__line__conditions'>Fin</td>
+                <td class='conditionsTable__line__value'>${cond.end.date.substring(0, 10).unixDateToDDMMYYYY()}</td>
             </tr>
             <tr>
-                <td>Solde période préc [heures / vac]</td>
-                <td>${cond.report}</td>
+                <td class='conditionsTable__line__conditions'>Solde période préc [heures / vac]</td>
+                <td class='conditionsTable__line__value'>${cond.report}</td>
             </tr>
             <tr>
-                <td>Durée de la semaine de travail</td>
-                <td>${parseFloat(cond.workweek).toHoursFormat()} heures</td>
+                <td class='conditionsTable__line__conditions'>Durée de la semaine de travail</td>
+                <td class='conditionsTable__line__value'>${parseFloat(cond.workweek).toHoursFormat()} heures</td>
             </tr>
             <tr>
-                <td>Taux d'activité</td>
-                <td>${cond.workratio} %</td>
+                <td class='conditionsTable__line__conditions'>Taux d'activité</td>
+                <td class='conditionsTable__line__value'>${cond.workratio} %</td>
             </tr>
             <tr>
-                <td>Dureé de la journée de travail</td>
-                <td>${parseFloat(cond.dayhours).toHoursFormat()} heures</td>
+                <td class='conditionsTable__line__conditions'>Dureé de la journée de travail</td>
+                <td class='conditionsTable__line__value'>${parseFloat(cond.dayhours).toHoursFormat()} heures</td>
             </tr>
             <tr>
-                <td>Vacances</td>
-                <td>${cond.holiday} jours</td>
+                <td class='conditionsTable__line__conditions'>Vacances</td>
+                <td class='conditionsTable__line__value'>${cond.holiday} jours</td>
             </tr>
             <tr>
-                <td>Majoration dimanche</td>
-                <td>${cond.sundayratio} %</td>
+                <td class='conditionsTable__line__conditions'>Majoration dimanche</td>
+                <td class='conditionsTable__line__value'>${cond.sundayratio} %</td>
             </tr>
             `;
 

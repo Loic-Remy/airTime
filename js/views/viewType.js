@@ -77,7 +77,7 @@ class ViewType extends View
                 <td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='dailyTable__line__deleteCell'><button class='dailyTable__line__delete'>Suppr</td>
+                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete --pointer'>Suppr</button></td>
                 `;
         }
         else if (entry.reason === 'driving')
@@ -87,7 +87,7 @@ class ViewType extends View
                 <td>${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark ? entry.remark : ""}</td>
-                <td class='dailyTable__line__deleteCell'><button class='dailyTable__line__delete'>Suppr</td>
+                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete --pointer'>Suppr</button></td>
                 `;
         }
         else
@@ -97,7 +97,7 @@ class ViewType extends View
                 <td>${entry.type.translate()}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='dailyTable__line__deleteCell'><button class='dailyTable__line__delete'>Suppr</td>
+                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete --pointer'>Suppr</button></td>
                 `;
         }
     }

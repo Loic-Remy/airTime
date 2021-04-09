@@ -10,7 +10,7 @@ class ViewUsers extends View
             `<thead>
                 <tr>
                     <th class='hidden'>Id</th>
-                    <th>Collaborateur</th>
+                    <th class='usersTable__line__name'>Collaborateur</th>
                     <th>Solde de l'année</th>
                     <th>Solde cumulé</th>
                     <th>Vacances prises</th>
@@ -32,10 +32,10 @@ class ViewUsers extends View
 
         line.innerHTML = `
             <td class='hidden'>${user.id}</td>
-            <td>${user.name}</td>
-            <td>${user.yearBalance()}</td>
-            <td>${user.currentBalance()}</td>
-            <td>${user.takenHoliday()}</td>
+            <td class='usersTable__line__name'>${user.name}</td>
+            <td class='usersTable__line__value'>${user.yearBalance()}</td>
+            <td class='usersTable__line__value'>${user.currentBalance()}</td>
+            <td class='usersTable__line__value'>${user.takenHoliday()}</td>
         `
 
         return line;
@@ -44,12 +44,16 @@ class ViewUsers extends View
     _buildTableBody(users) {
 		const tableBody = document.createElement('tbody');
         console.log(users);
-		let line;  
+		let line, current; 
 
 		for (let i = 0; i < users.length; i++)
 		{
-            line = this._buildUserLine(users[i]);
-            tableBody.append(line);
+            current = users[i];
+
+            if (current.situation) {
+                line = this._buildUserLine(current);
+                tableBody.append(line);
+            }
 		}
 
         return tableBody;
