@@ -6,6 +6,8 @@ class ViewType extends View
     {
         super(title);
 
+        this.viewId = 'viewType';
+        
         this.formHTML = 
             `
                 <label for='date'>Date</label>
@@ -22,8 +24,8 @@ class ViewType extends View
                     <option value='unpaid'>Vacances non-payées</option>
                     <option value='paidunemployed'>Chômage technique</option>
                 </select>
-                <label for='type' id='labelType' class='hidden'>Durée</label>
-                <select name='type' class='hidden'>
+                <label for='type' id='labelType' class='g-hidden'>Durée</label>
+                <select name='type' class='g-hidden'>
                     <option value='time' selected>Timbrage</option>
                     <option value='wholeday'>Jour entier</option>
                     <option value='morning'>Matin</option>
@@ -73,31 +75,31 @@ class ViewType extends View
         if (entry.type === 'time')
         {
             rowElem.innerHTML = 
-                `<td class='hidden'>${entry.id}</td>
+                `<td class='g-hidden'>${entry.id}</td>
                 <td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete --pointer'>Suppr</button></td>
+                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete g-pointer'>Suppr</button></td>
                 `;
         }
         else if (entry.reason === 'driving')
         {
              rowElem.innerHTML = 
-                `<td class='hidden'>${entry.id}</td>
+                `<td class='g-hidden'>${entry.id}</td>
                 <td>${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark ? entry.remark : ""}</td>
-                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete --pointer'>Suppr</button></td>
+                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete g-pointer'>Suppr</button></td>
                 `;
         }
         else
         {
            rowElem.innerHTML = 
-                `<td class='hidden'>${entry.id}</td>
+                `<td class='g-hidden'>${entry.id}</td>
                 <td>${entry.type.translate()}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete --pointer'>Suppr</button></td>
+                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete g-pointer'>Suppr</button></td>
                 `;
         }
     }

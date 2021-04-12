@@ -43,13 +43,13 @@ class ControllerStamping extends Controller
                         
         while (currentEl.classList.contains('detailLine'))
         {
-            if (currentEl.classList.contains('hidden'))
+            if (currentEl.classList.contains('g-hidden'))
             {
-                currentEl.classList.replace('hidden', 'shown');
+                currentEl.classList.replace('g-hidden', 'shown');
             }
             else
             {
-                currentEl.classList.replace('shown', 'hidden');
+                currentEl.classList.replace('shown', 'g-hidden');
             }
             currentEl = currentEl.nextElementSibling;
         }

@@ -52,30 +52,30 @@ class ControllerType extends Controller
         if (event.target.value === 'work')
         {   
             form.type.options[0].setAttribute('selected', 'true');
-            form.type.options[0].classList.remove('hidden');
+            form.type.options[0].classList.remove('g-hidden');
             form.type.options[1].removeAttribute('selected');
 
-            form.type.classList.add('hidden');
-            document.querySelector('#labelType').classList.add('hidden');
-            form.begin.classList.remove('hidden');
-            document.querySelector('#labelBegin').classList.remove('hidden');
-            form.end.classList.remove('hidden');
-            document.querySelector('#labelEnd').classList.remove('hidden');
+            form.type.classList.add('g-hidden');
+            document.querySelector('#labelType').classList.add('g-hidden');
+            form.begin.classList.remove('g-hidden');
+            document.querySelector('#labelBegin').classList.remove('g-hidden');
+            form.end.classList.remove('g-hidden');
+            document.querySelector('#labelEnd').classList.remove('g-hidden');
         }
         else 
         {
             form.type.options[0].removeAttribute('selected');
-            form.type.options[0].classList.add('hidden');
+            form.type.options[0].classList.add('g-hidden');
             form.type.options[1].setAttribute('selected', 'true');
 
-            form.type.classList.remove('hidden');
-            document.querySelector('#labelType').classList.remove('hidden');
+            form.type.classList.remove('g-hidden');
+            document.querySelector('#labelType').classList.remove('g-hidden');
 
-            form.begin.classList.add('hidden');
-            document.querySelector('#labelBegin').classList.add('hidden');
+            form.begin.classList.add('g-hidden');
+            document.querySelector('#labelBegin').classList.add('g-hidden');
 
-            form.end.classList.add('hidden');
-            document.querySelector('#labelEnd').classList.add('hidden');
+            form.end.classList.add('g-hidden');
+            document.querySelector('#labelEnd').classList.add('g-hidden');
         }
     }
 

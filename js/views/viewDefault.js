@@ -6,6 +6,8 @@ class ViewDefault extends View
     {
         super(title);
 
+        this.viewId = 'viewDefault';
+
         this.formHTML = 
             `<p>Service indisponible.</p>`;
     }

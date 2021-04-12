@@ -179,15 +179,15 @@ function display_or_hide_children(element)
 	let target = element.parentElement;
 	let array = target.getElementsByClassName("details")	
 
-	if (array[0].classList.contains("hidden") )
+	if (array[0].classList.contains("g-hidden") )
 	{
 		array[0].style.display = "contents";
-		array[0].classList.replace("hidden", "shown");
+		array[0].classList.replace("g-hidden", "shown");
 	}
 	else if (array[0].classList.contains("shown") )
 	{
 		array[0].style.display = "none";
-		array[0].classList.replace("shown", "hidden");
+		array[0].classList.replace("shown", "g-hidden");
 	}
 }
 

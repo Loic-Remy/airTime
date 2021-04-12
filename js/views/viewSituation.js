@@ -6,6 +6,8 @@ class ViewSituation extends View
 	{
 		super(title);
 
+		this.viewId = 'viewSituation';
+
 		this.formHTML = 
 			`
 				<label for='date'>Au</label>

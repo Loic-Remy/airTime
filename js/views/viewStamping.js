@@ -6,6 +6,8 @@ class ViewStamping extends View
     {
         super(title);
 
+		this.viewId = 'viewStamping';
+
         this.formHTML = 
 				`
 				<label for='firstDay'>Du</label>
@@ -19,11 +21,11 @@ class ViewStamping extends View
             `<thead>
                 <tr>
                     <th>date</th>
-                    <th class='long'>type</th>
-                    <th class='long'>taux</th>
+                    <th class='g-long'>type</th>
+                    <th class='g-long'>taux</th>
                     <th>à faire</th>
-                    <th class='long'>fait</th>
-                    <th class='long'>majoré</th>
+                    <th class='g-long'>fait</th>
+                    <th class='g-long'>majoré</th>
                     <th>total jour</span></th>
                     <th>+/- jour</span></th>
                     <th>+/- an</span></th>
@@ -67,11 +69,11 @@ class ViewStamping extends View
 	{
 		line.innerHTML = 
 			`<td>${entry.date.unixDateToDDMM()}</td>
-  		    <td class='long'>${entry.reason}</td>
-        	<td class='long'>${entry.ratio}%</td>
+  		    <td class='g-long'>${entry.reason}</td>
+        	<td class='g-long'>${entry.ratio}%</td>
         	<td>${entry.todo.toHoursFormat()}</td>
-        	<td class='long'>${entry.done.toHoursFormat()}</td>
-        	<td class='long'>${entry.overtime.toHoursFormat()}</td>
+        	<td class='g-long'>${entry.done.toHoursFormat()}</td>
+        	<td class='g-long'>${entry.overtime.toHoursFormat()}</td>
         	<td>${entry.total.negativeSign()}${entry.total.toHoursFormat()}</td>
         	<td>${entry.diff.negativeSign()}${entry.diff.toHoursFormat()}</td>
 			<td>${entry.diff.negativeSign()}${entry.yearDiff.toHoursFormat()}</td>`;
@@ -141,7 +143,7 @@ class ViewStamping extends View
 				entry = data.stamping.entries[currMonth][currDay - 1];
 
 				newLine = document.createElement('tr');
-				newLine.classList.add('stampingLine', '--pointer');
+				newLine.classList.add('stampingLine', 'g-pointer');
 
 				currentDay = new Date(year, currMonth - 1, currDay);
 				dayColoration = currentDay.getDay();
@@ -159,7 +161,7 @@ class ViewStamping extends View
 				{
 					newLine = document.createElement('tr');
 					
-					newLine.classList.add('hidden');
+					newLine.classList.add('g-hidden');
 					newLine.classList.add('detailLine');
 					
 					this._buildDetailLine2(newLine, intervals[i]);

@@ -1,106 +1,43 @@
-*
-{
-	font-family: "century gothic";
+/*
+Global
+*/
+
+:root {
+    --width-xs: 600px;
+    --width-sm: 960px;
+    --width-md: 1280px;
+    --width-lg: 1920px;
 }
 
-.--pointer
+*
+{
+	font-family: "century gothic", Helvetica, sans-serif;
+}
+
+.g-pointer
 {
 	cursor: pointer;
 }
 
-header 
+.g-highlight
 {
-	background-color: #f33a21;
-	color: #ffffff;
-
-	display: flex;
-	flex-direction: column;
-	font-size: 16px;
+	background-color: #e7e7e7;
 }
 
-header > div
+.g-long
 {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-around; 
+	display: none;
 
 }
 
-header > div > p, header > div > form
-{
-	flex: 1;
-}
-
-#menuBox
-{
-	top: 44px;
-	height: 44px;
-
-	border-top:#ffffff solid 1px;
-}
-
-#menu
+.g-hidden
 {
 	display: none;
 }
 
-nav
+h1
 {
-	width: 100%;
-	height: 100%;
-}
-
-ul
-{
-	height: 100%;
-
 	margin: 0;
-	padding: 0;
-	
-	list-style: none;
-}
-
-li 
-{
-	height: 44px;
-	border-top: solid #ffffff 1px;
-
-	display: flex;	
-	justify-content: center;
-	align-items: center;
-}
-
-a
-{
-	outline: none;
-	text-decoration: none;
-
-}
-a:link
-{
-	color: #ffffff;
-}
-
-a:visited
-{
-	color: #ffffff;
-}
-
-#airtime
-{
-	font-weight: bold;
-	font-size: large;
-}
-
-#disconnect
-{
-	color: #ffffff;
-
-	background: transparent;
-
-	padding: 0px;
-	border: none;
 }
 
 body 
@@ -108,22 +45,6 @@ body
 	margin: 0;
 	height: 100%;
 }
-
-.conditionsTable__line__condition {
-	text-align:left;
-}
-
-.conditionsTable__line__value {
-	text-align: right;
-}
-
-.table
-{
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-}
-
 
 body, ::placeholder
 {
@@ -185,95 +106,6 @@ input[type='submit']
 	text-align: center;
 
 }
-
-.loginLabel 
-{
-	display: none;
-}
-
-.loginForm
-{
-	width: 50%;
-}
-.loginForm > input
-{
-	text-align: left;
-	width: 100%;
-}
-
-.dayTable__line__deleteCell{
-	width: 20%;
-	text-align: end;
-}
-
-.dayTable__line__delete {
-	border: none;
-	background: none;
-	height: 44px;
-
-	cursor: pointer;
-	font-style: italic;
-}
-
-.usersTable__line__value {
-	text-align: center;
-}
-
-.usersTable__line__name {
-	text-align: left;
-
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	column-width: 20%;
-}
-
-.statusBar {
-	position: fixed;
-	bottom: 20px;
-	width: 600px;
-	margin: 0 auto;
-
-	border-radius: 50px;
-}
-
-.statusBar--disparition {
-	animation-timing-function: ease-in;
-	animation: disparition 5s;
-}
-
-.statusBar--success {
-	background-color: #2ecc71;
-}
-
-.statusBar--warning {
-	background-color: #e67e22;
-}
-
-.statusBar--failure {
-	background-color: #e74c34;
-}
-
-.statusBar__msgBox {
-	text-align: center;
-	width: 80%;
-}
-
-@keyframes disparition {
-	0% {
-		opacity: 100%;
-	}
-	50% {opacity: 100%
-	}
-	100% {
-		opacity: 0%;
-	}
-}
-
-h1
-{
-	margin: 0;
-}
-
 table
 {
 	font-size: 12px;
@@ -314,6 +146,219 @@ thead td:last-child, tbody td:last-child, th:last-child
 	
 }
 
+/*
+ *		header
+ */
+
+header 
+{
+	background-color: #f33a21;
+	color: #ffffff;
+
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+}
+
+header > div
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+header p, header form
+{
+	display: block;
+	width: 200px;
+	flex: 1;
+}
+
+header .airtime
+{
+	font-weight: bold;
+	font-size: large;
+}
+
+header .disconnect
+{
+	color: #ffffff;
+
+	background: transparent;
+
+	padding: 0px;
+	border: none;
+}
+
+header .menuContainer
+{
+	top: 44px;
+	height: 44px;
+
+	border-top:#ffffff solid 1px;
+}
+
+header nav
+{
+	width: 100%;
+	height: 100%;
+}
+
+header ul
+{
+	height: 100%;
+
+	margin: 0;
+	padding: 0;
+	
+	list-style: none;
+}
+
+header li 
+{
+	height: 44px;
+	border-top: solid #ffffff 1px;
+
+	display: flex;	
+	justify-content: center;
+	align-items: center;
+}
+
+header a
+{
+	outline: none;
+	text-decoration: none;
+
+}
+header a:link
+{
+	color: #ffffff;
+}
+
+header a:visited
+{
+	color: #ffffff;
+}
+
+/*
+ *		statusBar
+ */
+
+
+#statusBar {
+	position: fixed;
+	bottom: 20px;
+	width: 600px;
+
+	border-radius: 50px;
+}
+
+#statusBar .disparition {
+	animation-timing-function: ease-in;
+	animation: disparition 5s;
+}
+
+#statusBar .success {
+	background-color: #2ecc71;
+}
+
+#statusBar .warning {
+	background-color: #e67e22;
+}
+
+#statusBar .failure {
+	background-color: #e74c34;
+}
+
+#statusBar .msgBox {
+	display: inline-block;
+	text-align: center;
+	width: 80%;
+}
+
+@keyframes disparition {
+	0% {
+		opacity: 100%;
+	}
+	50% {opacity: 100%
+	}
+	100% {
+		opacity: 0%;
+	}
+}
+
+
+
+/*
+ *      viewConditions
+ */
+
+.conditionsTable__line__condition {
+	text-align:left;
+}
+
+.conditionsTable__line__value {
+	text-align: right;
+}
+
+/*
+ *      viewLogin
+ */
+
+.loginLabel 
+{
+	display: none;
+}
+
+.loginForm
+{
+	width: 50%;
+}
+.loginForm > input
+{
+	text-align: left;
+	width: 100%;
+}
+
+.dayTable__line__deleteCell{
+	width: 20%;
+	text-align: end;
+}
+
+ /*
+  *     viewType
+  */
+
+.dayTable__line__delete {
+	border: none;
+	background: none;
+	height: 44px;
+
+	cursor: pointer;
+	font-style: italic;
+}
+
+/*
+ *      viewUsers
+ */
+
+.usersTable__line__value {
+	text-align: center;
+}
+
+.usersTable__line__name {
+	text-align: left;
+
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	column-width: 20%;
+}
+
+/*
+ *      viewStamping
+ */
+
 .detailLine > td
 {
 	background-color: yellow;
@@ -345,6 +390,10 @@ tbody tr:hover td
 	height: 44px;
 }
 
+/*
+ *      viewSituation
+ */
+
 #tableSituation
 {
 	border-spacing: 0px 2px;
@@ -368,35 +417,23 @@ tbody tr:hover td
 	background-color: #ffffff;
 }
 
-.hilight
-{
-	background-color: #e7e7e7;
-}
+
 
 #diff, #diff > th
 {
 	font-weight: bold;
 }
 
-.long
-{
-	display: none;
 
-}
 
-.hidden
-{
-	display: none;
-}
-
-@media screen and (min-width: 640px) {
+@media screen and (min-width: var(--width-sm)) {
 
 	::placeholder 
 	{
-		visibility: hidden;
+		visibility: contents;
 	}
 
-	.long
+	.g-long
 	{
 		display: table-cell;
 	}

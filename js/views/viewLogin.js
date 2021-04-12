@@ -6,6 +6,8 @@ class viewLogin extends View
     {
         super(title);
 
+		this.viewId = 'viewLogin';
+
         this.formHTML = 
             `
             <label for='utilisateur' class='loginLabel'>Utilisateur </label>

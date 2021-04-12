@@ -5,6 +5,7 @@ class View
 	constructor(title = 'Pas de titre')
 	{
         this.insertPoint = document.querySelector('main');
+        console.log(this.viewId);
  
         this.header = this._createHeader();
         this.h2 = this._createH2(title); 
@@ -14,46 +15,46 @@ class View
        
         this.headerHTML = 
         `<div>
-            <p id='identity'></p>
-            <p id='airtime'>airTime</p>
+            <p class='identity'></p>
+            <p class='airtime'>airTime</p>
             <form action='index.html' method='post'>
-                <button id='disconnect' type='button' class='--pointer'>Déconnexion</button>
+                <button type='button' class='g-pointer disconnect'>Déconnexion</button>
             </form>
         </div>
-        <div id='menuBox'>
-            <p id='menuLabel' class='--pointer'>menu</p>
+        <div class='menuContainer'>
+            <p class='menuLabel g-pointer'>menu</p>
         </div>
         <div>
             <nav>
-                <ul id='menu' class='hidden'>
-                    <li id='type' class='--pointer'>Saisie</li>
-                    <li id='situation' class='--pointer'>Situation</li>
-                    <li id='stamping' class='--pointer'>Timbrages</li>
-                    <li id='conditions' class='--pointer'>Conditions</li>
-                    <li id='users' class='--pointer'>Utilisateurs</li>
-                    <li id='request' class='hidden --pointer'>Demandes</li>
-                    <li id='mask' class='hidden'></li>
+                <ul class='menuList g-hidden'>
+                    <li id='type' class='g-pointer'>Saisie</li>
+                    <li id='situation' class='g-pointer'>Situation</li>
+                    <li id='stamping' class='g-pointer'>Timbrages</li>
+                    <li id='conditions' class='g-pointer'>Conditions</li>
+                    <li id='users' class='g-pointer'>Utilisateurs</li>
+                    <li id='request' class='g-hidden g-pointer'>Demandes</li>
+                    <li id='mask' class='g-hidden'></li>
                 </ul>
             </nav>
         </div>`;
 
         this.statusBarHTML = 
         `
-        <p class="statusBar__msgBox"></p>
+        <p class="msgBox"></p>
         `;
     }
 
     _headerModifier()
     {
-        document.getElementById("identity").innerHTML = localStorage.getItem('userName');
+        document.querySelector(".identity").innerHTML = localStorage.getItem('userName');
     } 
  
     _headerEvents()
     {
-        document.querySelector('#disconnect').addEventListener('click', this._clearSessionStorage);
-        document.querySelector('#disconnect').addEventListener('click', this._navigateToLoginPage);
+        document.querySelector('.disconnect').addEventListener('click', this._clearSessionStorage);
+        document.querySelector('.disconnect').addEventListener('click', this._navigateToLoginPage);
     
-        document.querySelector('#menuLabel').addEventListener('click', this._displayOrHideMenu);
+        document.querySelector('.menuLabel').addEventListener('click', this._displayOrHideMenu);
         document.addEventListener('click', this._hideMenu);
 
         document.querySelectorAll('li').forEach(li => li.addEventListener('click', this._navigateToPage));
@@ -68,29 +69,26 @@ class View
     }
     
     _displayOrHideMenu(e) {
-        const menu = document.getElementById("menu");
+        const menu = document.querySelector(".menuList");
         
-        if (menu.classList.contains("hidden") ) {
-            menu.style.display = "contents";
-            menu.classList.replace("hidden", "shown");
+        if (menu.classList.contains("g-hidden") ) {
+            menu.classList.remove("g-hidden");
         } 
-        else if (menu.classList.contains("shown") ) {
-            menu.style.display = "none";
-            menu.classList.replace("shown", "hidden");
+        else {
+            menu.classList.add("g-hidden");
         }
         e.stopPropagation();
     }
     
     _hideMenu(e) {
-        const menu = document.getElementById("menu");
+        const menu = document.querySelector(".menuList");
 
-        if(menu == null) {
+        if(menu === null) {
             return;
         }
         
-        if(e.target.nodeName != 'LI' && menu.classList.contains("shown")) {
-            menu.style.display = "none";
-            menu.classList.replace("shown", "hidden");
+        if(e.target.nodeName != 'LI' && menu.classList.contains("g-hidden") === false) {
+            menu.classList.add("g-hidden");
         }
     }
 
@@ -105,15 +103,16 @@ class View
     _tableModifier() {}
     _tableEvents() {}
 
-    _statusBarModifier() {}
+    _statusBarModifier() {
+    }
 
     _statusBarEvents() {
-        const bar = document.querySelector('.statusBar');
+        const bar = document.querySelector('#statusBar');
 
         bar.addEventListener('click', (event) => {
             if(event.currentTarget.nodeName === 'DIV') {
-                if(event.currentTarget.classList.contains("hidden") === false) {
-                    event.currentTarget.classList.add("hidden");
+                if(event.currentTarget.classList.contains("g-hidden") === false) {
+                    event.currentTarget.classList.add("g-hidden");
                 }
             }
             event.stopPropagation();
@@ -154,7 +153,8 @@ class View
 
     _createStatusBar() {
         let bar = document.createElement('div');
-        bar.classList.add("statusBar", "statusBar--disparition", "hidden");
+        bar.id = 'statusBar';
+        bar.classList.add("disparition", "g-hidden");
 
         return bar;
     }
@@ -171,6 +171,8 @@ class View
     buildPage()
     {
         this.insertPoint.innerHTML = "";
+        this.insertPoint.id = this.viewId;
+
 
         if(this.header != null)
         {

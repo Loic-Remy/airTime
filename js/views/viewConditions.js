@@ -6,6 +6,8 @@ class viewConditions extends View
     {
         super(title);
 
+        this.viewId = 'viewConditions';
+
         this.tableHTML =
             `
             <thead>

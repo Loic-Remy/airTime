@@ -6,10 +6,12 @@ class ViewUsers extends View
     {
         super(title);
 
+        this.viewId = 'viewUsers';
+
         this.tableHTML = 
             `<thead>
                 <tr>
-                    <th class='hidden'>Id</th>
+                    <th class='g-hidden'>Id</th>
                     <th class='usersTable__line__name'>Collaborateur</th>
                     <th>Solde de l'année</th>
                     <th>Solde cumulé</th>
@@ -31,7 +33,7 @@ class ViewUsers extends View
 
 
         line.innerHTML = `
-            <td class='hidden'>${user.id}</td>
+            <td class='g-hidden'>${user.id}</td>
             <td class='usersTable__line__name'>${user.name}</td>
             <td class='usersTable__line__value'>${user.yearBalance()}</td>
             <td class='usersTable__line__value'>${user.currentBalance()}</td>
