@@ -1,0 +1,423 @@
+*
+{
+	font-family: "century gothic";
+}
+
+.g-pointer
+{
+	cursor: pointer;
+}
+
+header 
+{
+	background-color: #f33a21;
+	color: #ffffff;
+
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+}
+
+header > div
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+header > div > p, header > div > form
+{
+	display: block;
+	width: 200px;
+	flex: 1;
+}
+
+#menuBox
+{
+	top: 44px;
+	height: 44px;
+
+	border-top:#ffffff solid 1px;
+}
+
+#menu
+{
+	display: none;
+}
+
+nav
+{
+	width: 100%;
+	height: 100%;
+}
+
+ul
+{
+	height: 100%;
+
+	margin: 0;
+	padding: 0;
+	
+	list-style: none;
+}
+
+li 
+{
+	height: 44px;
+	border-top: solid #ffffff 1px;
+
+	display: flex;	
+	justify-content: center;
+	align-items: center;
+}
+
+a
+{
+	outline: none;
+	text-decoration: none;
+
+}
+a:link
+{
+	color: #ffffff;
+}
+
+a:visited
+{
+	color: #ffffff;
+}
+
+#airtime
+{
+	font-weight: bold;
+	font-size: large;
+}
+
+#disconnect
+{
+	color: #ffffff;
+
+	background: transparent;
+
+	padding: 0px;
+	border: none;
+}
+
+body 
+{
+	margin: 0;
+	height: 100%;
+}
+
+.conditionsTable__line__condition {
+	text-align:left;
+}
+
+.conditionsTable__line__value {
+	text-align: right;
+}
+
+.table
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+
+body, ::placeholder
+{
+	text-align: center;
+}
+
+form
+{
+	width: 90%;
+	margin: 0 auto;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+
+}
+
+label, input, select
+{
+	height: 44px;
+	margin: none;
+	margin-bottom: 10px;
+	font-size: 16px;
+	padding: 0;
+
+}
+
+label
+{
+	padding-top: 8px;
+	padding-bottom: 1px;
+	padding-right: 2px;
+
+	display: inline-block;
+	text-align: left;
+	width: 25%;
+
+}
+
+input, select
+{
+	border: solid 1px #000000;
+	border-top: none;
+	border-left: none;
+
+	text-align: left;
+
+	width: calc(75% - 3px);
+
+	border-radius: 0px 10px 10px 0px;
+
+	cursor: pointer;
+}
+
+input[type='submit']
+{
+	width: 100%;
+	text-align: center;
+
+}
+
+.loginLabel 
+{
+	display: none;
+}
+
+.loginForm
+{
+	width: 50%;
+}
+.loginForm > input
+{
+	text-align: left;
+	width: 100%;
+}
+
+.dayTable__line__deleteCell{
+	width: 20%;
+	text-align: end;
+}
+
+.dayTable__line__delete {
+	border: none;
+	background: none;
+	height: 44px;
+
+	cursor: pointer;
+	font-style: italic;
+}
+
+.usersTable__line__value {
+	text-align: center;
+}
+
+.usersTable__line__name {
+	text-align: left;
+
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	column-width: 20%;
+}
+
+.statusBar {
+	position: fixed;
+	bottom: 20px;
+	width: 600px;
+
+	border-radius: 50px;
+}
+
+.statusBar--disparition {
+	animation-timing-function: ease-in;
+	animation: disparition 5s;
+}
+
+.statusBar--success {
+	background-color: #2ecc71;
+}
+
+.statusBar--warning {
+	background-color: #e67e22;
+}
+
+.statusBar--failure {
+	background-color: #e74c34;
+}
+
+.statusBar__msgBox {
+	display: inline-block;
+	text-align: center;
+	width: 80%;
+}
+
+@keyframes disparition {
+	0% {
+		opacity: 100%;
+	}
+	50% {opacity: 100%
+	}
+	100% {
+		opacity: 0%;
+	}
+}
+
+h1
+{
+	margin: 0;
+}
+
+table
+{
+	font-size: 12px;
+	border-collapse: separate;
+	border: none;
+
+
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 0px 20px;
+
+	border-spacing: 0px 10px;
+
+}
+
+thead
+{
+	background-color: #e7e7e7;
+}
+
+td
+{
+	border: solid 1px #000000;
+	border-right: none; 
+	border-left: none;
+	border-top: none;
+
+	padding-left: 4px;
+	padding-right: 4px;
+
+	text-align: left;
+}
+
+thead td:last-child, tbody td:last-child, th:last-child
+{
+	border-right: solid black 1px; 
+	border-radius: 0px 10px 10px 0px;
+	
+}
+
+.detailLine > td
+{
+	background-color: yellow;
+
+	text-align: center;
+}
+
+tbody tr:hover td
+{
+	background-color: #5DF3F7;
+}
+
+#tableStamping
+{
+	border-spacing: 0px 5px;
+}
+
+#tableStamping th, #tableSamping td
+{
+	position: sticky;
+	top: 0px;
+	background-color: #e7e7e7;
+	border-bottom: solid 1px #000000;
+}
+
+#tableStamping th , #tableStamping .stampingLine > td 
+{
+	text-align: center;
+	height: 44px;
+}
+
+#tableSituation
+{
+	border-spacing: 0px 2px;
+}
+
+#tableSituation tbody th
+{
+	text-align: left;
+	font-weight: normal;
+
+	border-bottom: solid #000000 1px;
+}
+
+#tableSituation td, #tableSituation thead th
+{
+	text-align: right;
+}
+
+#tableSituation thead th
+{
+	background-color: #ffffff;
+}
+
+g-highlight
+{
+	background-color: #e7e7e7;
+}
+
+#diff, #diff > th
+{
+	font-weight: bold;
+}
+
+.g-long
+{
+	display: none;
+
+}
+
+.g-hidden
+{
+	display: none;
+}
+
+@media screen and (min-width: 640px) {
+
+	::placeholder 
+	{
+		visibility: g-hidden;
+	}
+
+	.g-long
+	{
+		display: table-cell;
+	}
+
+	.loginLabel
+	{
+		display: block;
+		text-align: left;
+	}
+
+
+	table, form
+	{
+
+		width: 600px;
+	}
+
+	.conditionsSet
+	{
+		width: 980px;
+	}
+	
+}
