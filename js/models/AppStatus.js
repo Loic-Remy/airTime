@@ -26,22 +26,22 @@ class AppStatus
     _hideStatusBar() {
         const bar = this.statusBar;
 
-        bar.classList.remove(".success", ".warning", ".failure");
+        bar.classList.remove("success", "warning", "failure");
         bar.classList.add("g-hidden");
     }
 
     printAsSuccess() {
-        this.statusBar.classList.add(".success");
+        this.statusBar.classList.add("success");
         this._printAppStatus();
     }
 
     printAsWarning() {
-        this.statusBar.classList.add(".warning");
+        this.statusBar.classList.add("warning");
         this._printAppStatus();
     }
 
     printAsFailure() {
-        this.statusBar.classList.add(".failure");
+        this.statusBar.classList.add("failure");
         this._printAppStatus();
     }
 }

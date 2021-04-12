@@ -249,25 +249,25 @@ header a:visited
 #statusBar {
 	position: fixed;
 	bottom: 20px;
-	width: 600px;
+	width: var(--width-xs);
 
 	border-radius: 50px;
 }
 
-#statusBar .disparition {
+#statusBar.disparition {
 	animation-timing-function: ease-in;
 	animation: disparition 5s;
 }
 
-#statusBar .success {
+#statusBar.success {
 	background-color: #2ecc71;
 }
 
-#statusBar .warning {
+#statusBar.warning {
 	background-color: #e67e22;
 }
 
-#statusBar .failure {
+#statusBar.failure {
 	background-color: #e74c34;
 }
 
@@ -287,7 +287,6 @@ header a:visited
 		opacity: 0%;
 	}
 }
-
 
 
 /*
@@ -426,7 +425,7 @@ tbody tr:hover td
 
 
 
-@media screen and (min-width: var(--width-sm)) {
+@media only screen and (min-width: 640px) {
 
 	::placeholder 
 	{
@@ -451,9 +450,4 @@ tbody tr:hover td
 		width: 600px;
 	}
 
-	.conditionsSet
-	{
-		width: 980px;
-	}
-	
 }
