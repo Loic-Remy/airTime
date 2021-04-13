@@ -10,9 +10,9 @@ class viewLogin extends View
 
         this.formHTML = 
             `
-            <label for='utilisateur' class='loginLabel'>Utilisateur </label>
+            <label for='utilisateur' class='label'>Utilisateur </label>
             <input type='text' id='utilisateur' name='user' placeholder='utilisateur' required autofocus autocomplete>
-            <label for='mot de passe' class='loginLabel'>Mot de passe </label>
+            <label for='mot de passe' class='label'>Mot de passe </label>
             <input type='password' id='mdp' name='password' placeholder='mot de passe' required autocomplete>
             <input type='submit' id='btnSubmit' name='btnSubmit' value='Valider' class='pointer'>
             `;
@@ -30,7 +30,7 @@ class viewLogin extends View
     _formModifier()
     {
         let form = document.querySelectorAll('form')[0];
-        form.classList.add('loginForm');
+        this.form.id = 'loginForm';
         form.name = 'login';
         form.method = 'post';
     }

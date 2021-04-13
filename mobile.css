@@ -7,6 +7,8 @@ Global
     --width-sm: 960px;
     --width-md: 1280px;
     --width-lg: 1920px;
+
+	--border-xs: 1px;
 }
 
 *
@@ -308,27 +310,29 @@ header a:visited
  *      viewLogin
  */
 
-#viewLogin #loginForm .label
-.loginLabel 
+#viewLogin #loginForm
+{
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	margin-top: 60px;
+}
+
+#viewLogin #loginForm label
 {
 	display: none;
 }
 
-#viewLogin #loginForm
-.loginForm
-{
-	width: 50%;
-}
-
-
-#viewLogin #loginForm input
-.loginForm > input
+#viewLogin #loginForm input 
 {
 	text-align: left;
 	width: 100%;
 }
 
-
+#viewLogin #loginForm input[type=submit]
+{
+	width: 100%;
+}
 
  /*
   *     viewType
@@ -445,10 +449,16 @@ tbody tr:hover td
 		display: table-cell;
 	}
 
-	.loginLabel
+	#viewLogin #loginForm label
 	{
 		display: block;
 		text-align: left;
+		width: 39%;
+	}
+
+	#viewLogin #loginForm input
+	{
+		width: 60%;	
 	}
 
 
