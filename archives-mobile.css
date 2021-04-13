@@ -110,11 +110,11 @@ body
 	height: 100%;
 }
 
-.conditionsTable__line__condition {
+..condition {
 	text-align:left;
 }
 
-.conditionsTable__line__value {
+..value {
 	text-align: right;
 }
 
