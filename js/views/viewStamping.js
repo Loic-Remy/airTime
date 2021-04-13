@@ -37,7 +37,7 @@ class ViewStamping extends View
 
     _formModifier()
     {
-		this.form.setAttribute('id', 'stamping');
+		this.form.setAttribute('id', 'formStamping');
 		this.form.setAttribute('name', 'formDate');
 
 	}
@@ -149,7 +149,7 @@ class ViewStamping extends View
 				dayColoration = currentDay.getDay();
 				
 				if (dayColoration === 6 || dayColoration === 0)
-					newLine.classList.add('hilight');
+					newLine.classList.add('g-highlight');
 
 				this._buildDayLine(newLine, entry);
 

@@ -19,6 +19,7 @@ Global
 .g-pointer
 {
 	cursor: pointer;
+	height: 44px;
 }
 
 .g-highlight
@@ -219,7 +220,6 @@ header ul
 
 header li 
 {
-	height: 44px;
 	border-top: solid #ffffff 1px;
 
 	display: flex;	
@@ -347,9 +347,7 @@ header a:visited
 #viewType #tableType .btnDelete {
 	border: none;
 	background: none;
-	height: 44px;
 
-	cursor: pointer;
 	font-style: italic;
 }
 
@@ -357,11 +355,13 @@ header a:visited
  *      viewUsers
  */
 
-.usersTable__line__value {
+#viewUsers #tableUsers .value
+{
 	text-align: center;
 }
 
-.usersTable__line__name {
+#viewUsers #tableUsers .name
+{
 	text-align: left;
 
 	white-space: nowrap;
@@ -373,24 +373,24 @@ header a:visited
  *      viewStamping
  */
 
-.detailLine > td
+#viewStamping #tableStamping
+{
+	border-spacing: 0px 5px;
+}
+
+#viewStamping #tableStamping .detailLine
 {
 	background-color: yellow;
 
 	text-align: center;
 }
 
-tbody tr:hover td
+#viewStamping #tableStamping tbody tr:hover td
 {
 	background-color: #5DF3F7;
 }
 
-#tableStamping
-{
-	border-spacing: 0px 5px;
-}
-
-#tableStamping th, #tableSamping td
+#viewStamping #tableStamping th
 {
 	position: sticky;
 	top: 0px;
@@ -398,10 +398,10 @@ tbody tr:hover td
 	border-bottom: solid 1px #000000;
 }
 
-#tableStamping th , #tableStamping .stampingLine > td 
+#viewStamping #tableStamping th,
+#viewStamping #tableSamping td .stampingLine
 {
 	text-align: center;
-	height: 44px;
 }
 
 /*
@@ -432,7 +432,6 @@ tbody tr:hover td
 }
 
 
-
 #diff, #diff > th
 {
 	font-weight: bold;
@@ -441,14 +440,20 @@ tbody tr:hover td
 
 @media only screen and (min-width: 600px) {
 
-	::placeholder 
-	{
-		visibility: contents;
-	}
-
 	.g-long
 	{
 		display: table-cell;
+	}
+
+	table, form
+	{
+
+		width: 600px;
+	}
+
+	::placeholder 
+	{
+		visibility: contents;
 	}
 
 	#viewLogin #loginForm label
@@ -464,10 +469,5 @@ tbody tr:hover td
 	}
 
 
-	table, form
-	{
-
-		width: 600px;
-	}
 
 }

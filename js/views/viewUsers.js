@@ -12,7 +12,7 @@ class ViewUsers extends View
             `<thead>
                 <tr>
                     <th class='g-hidden'>Id</th>
-                    <th class='usersTable__line__name'>Collaborateur</th>
+                    <th class='.name'>Collaborateur</th>
                     <th>Solde de l'année</th>
                     <th>Solde cumulé</th>
                     <th>Vacances prises</th>
@@ -21,6 +21,10 @@ class ViewUsers extends View
             <tbody>
             </tbody>
             `;
+    }
+
+    _tableModifier() {
+        this.table.id = 'tableUsers';
     }
 
     _buildUserLine(user) {
@@ -34,10 +38,10 @@ class ViewUsers extends View
 
         line.innerHTML = `
             <td class='g-hidden'>${user.id}</td>
-            <td class='usersTable__line__name'>${user.name}</td>
-            <td class='usersTable__line__value'>${user.yearBalance()}</td>
-            <td class='usersTable__line__value'>${user.currentBalance()}</td>
-            <td class='usersTable__line__value'>${user.takenHoliday()}</td>
+            <td class='name'>${user.name}</td>
+            <td class='value'>${user.yearBalance()}</td>
+            <td class='value'>${user.currentBalance()}</td>
+            <td class='value'>${user.takenHoliday()}</td>
         `
 
         return line;
