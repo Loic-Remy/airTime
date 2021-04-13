@@ -337,12 +337,14 @@ header a:visited
  /*
   *     viewType
   */
-.dayTable__line__deleteCell{
+
+
+#viewType #tableType .cellDelete {
 	width: 20%;
 	text-align: end;
 }
 
-.dayTable__line__delete {
+#viewType #tableType .btnDelete {
 	border: none;
 	background: none;
 	height: 44px;

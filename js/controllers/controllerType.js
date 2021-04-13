@@ -80,7 +80,7 @@ class ControllerType extends Controller
     }
 
     _deleteInterval(event) {
-        if(event.target.classList.contains('dailyTable__line__delete') === false) {
+        if(event.target.classList.contains('btnDelete') === false) {
             return;
         }
 

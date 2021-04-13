@@ -54,6 +54,7 @@ class ViewType extends View
     }
     
     _formModifier() {
+        this.form.id = 'formType';
         this.form.name = 'typeForm';
         this.form.classList.add('multiForm');
         document.forms.typeForm.begin.autofocus = true;
@@ -62,7 +63,7 @@ class ViewType extends View
     }
 
     _tableModifier() {
-        this.table.id = 'dayTable';
+        this.table.id = 'tableType';
     }
 
     _buildEntryLine(entry, rowElem) {
@@ -79,7 +80,7 @@ class ViewType extends View
                 <td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete g-pointer'>Suppr</button></td>
+                <td class='cellDelete'><button type='button' class='btnDelete g-pointer'>Suppr</button></td>
                 `;
         }
         else if (entry.reason === 'driving')
@@ -89,7 +90,7 @@ class ViewType extends View
                 <td>${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark ? entry.remark : ""}</td>
-                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete g-pointer'>Suppr</button></td>
+                <td class='cellDelete'><button type='button' class='btnDelete g-pointer'>Suppr</button></td>
                 `;
         }
         else
@@ -99,7 +100,7 @@ class ViewType extends View
                 <td>${entry.type.translate()}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='dayTable__line__deleteCell'><button type='button' class='dayTable__line__delete g-pointer'>Suppr</button></td>
+                <td class='cellDelete'><button type='button' class='btnDelete g-pointer'>Suppr</button></td>
                 `;
         }
     }
