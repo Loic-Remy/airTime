@@ -18,11 +18,11 @@ class SituationManager
 
 		let response = await fetch(url).then(response => {
 			if (response.ok) {
-				if (response.lenth > 0) {
+/*				if (response.lenth > 0) {		*/
 					return response.json();
-				} else {
+/*				} else {
 					throw new Error('No .ini file for this user');
-				}
+				} */
 			} else {
 				throw new Error('Can not fetch the situation');
 			}

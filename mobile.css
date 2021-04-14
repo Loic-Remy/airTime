@@ -171,14 +171,15 @@ header > div
 	justify-content: space-around;
 }
 
-header p, header form
+header p, header button 
 {
 	display: block;
 	width: 200px;
 	flex: 1;
 }
 
-header .airtime
+header .airtime,
+header .menuLabel
 {
 	font-weight: bold;
 	font-size: large;
@@ -192,14 +193,6 @@ header .disconnect
 
 	padding: 0px;
 	border: none;
-}
-
-header .menuContainer
-{
-	top: 44px;
-	height: 44px;
-
-	border-top:#ffffff solid 1px;
 }
 
 header nav
@@ -448,7 +441,7 @@ header a:visited
 	table, form
 	{
 
-		width: 600px;
+		width: 700px;
 	}
 
 	::placeholder 
@@ -467,7 +460,4 @@ header a:visited
 	{
 		width: 60%;	
 	}
-
-
-
 }

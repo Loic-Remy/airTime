@@ -16,13 +16,8 @@ class View
         this.headerHTML = 
         `<div>
             <p class='identity'></p>
-            <p class='airtime'>airTime</p>
-            <form action='index.html' method='post'>
-                <button type='button' class='g-pointer disconnect'>Déconnexion</button>
-            </form>
-        </div>
-        <div class='menuContainer'>
-            <p class='menuLabel g-pointer'>menu</p>
+            <p class='menuLabel g-pointer'>Menu</p>
+            <button type='button' class='g-pointer disconnect'>Déconnexion</button>
         </div>
         <div>
             <nav>
