@@ -19,7 +19,9 @@ class LoginManager
 	*/	
 		return await fetch(this.url)
 							.then(response => {
-								return response.json()
+								if (response.ok) {
+									return response.json()
+								}
 							})
 							.then(response => {
 								var user = {};
@@ -39,6 +41,9 @@ class LoginManager
 								}
 								console.log("L'utilisateur n'existe pas");
 								new AppStatus("Utilisateur ou mot de passe incorrect", "Echec - ").printAsFailure();
+							})
+							.catch(error => {
+								new AppStatus(error, 'Echec - ').printAsFailure()
 							});
 	}
 

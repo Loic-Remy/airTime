@@ -32,7 +32,7 @@ class ViewSituation extends View
 	{
 		this.form.id = 'form';
 		this.form.name = 'formSituation';
-		document.body.addEventListener('load', setDateAsAttributes('date', lastFriday(), ['value', 'max']));
+		document.body.addEventListener('load', setDateAsAttributes('date', lastFriday(), ['value']));
 		document.body.addEventListener('load', setDateAsAttributes('date', firstDayYear(), ['min']));
 	}
 
