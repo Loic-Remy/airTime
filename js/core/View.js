@@ -14,24 +14,26 @@ class View
         this.statusBar = this._createStatusBar();
        
         this.headerHTML = 
-        `<div>
-            <p class='identity'></p>
-            <p class='menuLabel g-pointer'>Menu</p>
-            <button type='button' class='g-pointer disconnect'>Déconnexion</button>
-        </div>
-        <div>
-            <nav>
-                <ul class='menuList g-hidden'>
-                    <li id='type' class='g-pointer'>Saisie</li>
-                    <li id='situation' class='g-pointer'>Situation</li>
-                    <li id='stamping' class='g-pointer'>Timbrages</li>
-                    <li id='conditions' class='g-pointer'>Conditions</li>
-                    <li id='users' class='g-pointer'>Utilisateurs</li>
-                    <li id='request' class='g-hidden g-pointer'>Demandes</li>
-                    <li id='mask' class='g-hidden'></li>
-                </ul>
-            </nav>
-        </div>`;
+        `<header>
+            <div>
+                <p class='identity'></p>
+                <p class='menuLabel g-pointer'>Menu</p>
+                <button type='button' class='g-pointer disconnect'>Déconnexion</button>
+            </div>
+            <div>
+                <nav>
+                    <ul class='menuList g-hidden'>
+                        <li id='type' class='g-pointer'>Saisie</li>
+                        <li id='situation' class='g-pointer'>Situation</li>
+                        <li id='stamping' class='g-pointer'>Timbrages</li>
+                        <li id='conditions' class='g-pointer'>Conditions</li>
+                        <li id='users' class='g-pointer'>Utilisateurs</li>
+                        <li id='request' class='g-hidden g-pointer'>Demandes</li>
+                        <li id='mask' class='g-hidden'></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>`;
 
         this.statusBarHTML = 
         `
