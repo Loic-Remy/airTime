@@ -37,7 +37,7 @@ class Router
         },
         {
             path: '#request',
-            controller: new ControllerUsers('users')
+            controller: new ControllerRequest('request')
         }
 
     ];
