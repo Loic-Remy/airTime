@@ -12,6 +12,10 @@ class ViewType extends View
             `
                 <label for='date'>Date</label>
                 <input name='date' type='date'>
+                <label for='dateBegin' class='g-hidden'>Début</label>
+                <input name='dateBegin' type='date' class='g-hidden'>
+                <label for='dateEnd' class='g-hidden'>Fin</label>
+                <input name='dateEnd' type='date' class='g-hidden'>
                 <label for='reason'>Motif</label>
                 <select name='reason'>
                     <option value='work' selected>Travail</option>

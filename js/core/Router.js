@@ -34,7 +34,12 @@ class Router
         {
             path: '#users',
             controller: new ControllerUsers('users')
+        },
+        {
+            path: '#request',
+            controller: new ControllerUsers('users')
         }
+
     ];
 
     _findRoute(path)
