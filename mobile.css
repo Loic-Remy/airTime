@@ -430,6 +430,15 @@ header a:visited
 	font-weight: bold;
 }
 
+/*
+ *      viewRequest
+ */
+
+#viewRequest #formRequest .shortInput
+{
+
+}
+
 
 @media only screen and (min-width: 600px) {
 

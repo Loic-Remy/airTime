@@ -5,7 +5,6 @@ class Interval
     constructor(target, begin, end, type, reason, remark)
     {
         this._hydrate(target, begin, end, type, reason, remark);
-
     }
 
     _hydrate(target, begin, end, type, reason, remark)
@@ -59,6 +58,70 @@ class Interval
         this.until = formDate + 'T23:59:59Z';
 
         this._endIsBiggerThanBegin();
+    }
+
+    _defineFormType(form) {
+        const formType = form.type.value;
+        
+        if (formType === 'morning') {
+            formType = 'halfday';
+        } else if (formType === 'afternoon') {
+            formType = 'halfday';
+        } else if (formType === 'wholeday') {
+            formType = 'wholeday';
+        } else {
+            formType = 'time';
+        }
+
+        return formType;
+    }
+
+    _defineFormBegin() {
+if (formType === 'morning')
+        {
+            formType = 'halfday';
+            formBegin = '06:00';
+            formEnd = '06:00';
+        }
+        else if (formType === 'afternoon')
+        {
+            formType = 'halfday';
+            formBegin = '12:01';
+            formEnd = '12:01';
+        }
+        else if (formType === 'wholeday')
+        {
+            formBegin = '06:00';
+            formEnd = '06:00';
+        }
+        else
+        {
+            formType = 'time';
+        }
+    }
+
+    _defineFormEnd() {
+if (formType === 'morning')
+        {
+            formType = 'halfday';
+            formBegin = '06:00';
+            formEnd = '06:00';
+        }
+        else if (formType === 'afternoon')
+        {
+            formType = 'halfday';
+            formBegin = '12:01';
+            formEnd = '12:01';
+        }
+        else if (formType === 'wholeday')
+        {
+            formBegin = '06:00';
+            formEnd = '06:00';
+        }
+        else
+        {
+            formType = 'time';
+        }
     }
 
     _endIsBiggerThanBegin()

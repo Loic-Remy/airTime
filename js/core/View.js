@@ -5,7 +5,6 @@ class View
 	constructor(title = 'Pas de titre')
 	{
         this.insertPoint = document.querySelector('main');
-        console.log(this.viewId);
  
         this.header = this._createHeader();
         this.h2 = this._createH2(title); 
