@@ -3,7 +3,6 @@
 class Request 
 {
     fill(form) {
-        console.log(form);
         this.target = localStorage.getItem('userId');
         this.from = form.dateBegin.value;
         this.fromType = form.typeBegin.value;

@@ -7,7 +7,7 @@ class ControllerRequest extends Controller
         super(hash);
 
         this.manager = new IntervalManager(url_type);
-        this.view = new ViewRequest('Demandes');
+        this.view = new ViewRequest('Absences');
     }
 
     _filterFromGivenDay(data, date) {

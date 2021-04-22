@@ -26,8 +26,8 @@ class View
                         <li id='situation' class='g-pointer'>Situation</li>
                         <li id='stamping' class='g-pointer'>Timbrages</li>
                         <li id='conditions' class='g-pointer'>Conditions</li>
-                        <li id='users' class='g-pointer'>Utilisateurs</li>
-                        <li id='request' class='g-hidden g-pointer'>Demandes</li>
+                        <li id='users' class='g-hidden g-pointer'>Utilisateurs</li>
+                        <li id='request' class='g-pointer'>Absences</li>
                         <li id='mask' class='g-hidden'></li>
                     </ul>
                 </nav>
