@@ -84,7 +84,7 @@ class ViewType extends View
                 <td>${entry.begin.substring(11, 16)} - ${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='cellDelete'><button type='button' class='btnDelete g-pointer'>Suppr</button></td>
+                <td class='g-cellDelete'><button type='button' class='g-btnDelete g-pointer'>Suppr</button></td>
                 `;
         }
         else if (entry.reason === 'driving')
@@ -94,7 +94,7 @@ class ViewType extends View
                 <td>${entry.end.substring(11, 16)}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark ? entry.remark : ""}</td>
-                <td class='cellDelete'><button type='button' class='btnDelete g-pointer'>Suppr</button></td>
+                <td class='g-cellDelete'><button type='button' class='g-btnDelete g-pointer'>Suppr</button></td>
                 `;
         }
         else
@@ -104,7 +104,7 @@ class ViewType extends View
                 <td>${entry.type.translate()}</td>
                 <td>${entry.reason.translate()}</td>
                 <td>${entry.remark}</td>
-                <td class='cellDelete'><button type='button' class='btnDelete g-pointer'>Suppr</button></td>
+                <td class='g-cellDelete'><button type='button' class='g-btnDelete g-pointer'>Suppr</button></td>
                 `;
         }
     }

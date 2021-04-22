@@ -149,6 +149,17 @@ thead td:last-child, tbody td:last-child, th:last-child
 	
 }
 
+.g-cellDelete {
+	width: 20%;
+	text-align: end;
+}
+
+.g-btnDelete {
+	border: none;
+	background: none;
+
+	font-style: italic;
+}
 /*
  *		header
  */
@@ -332,17 +343,7 @@ header a:visited
   */
 
 
-#viewType #tableType .cellDelete {
-	width: 20%;
-	text-align: end;
-}
 
-#viewType #tableType .btnDelete {
-	border: none;
-	background: none;
-
-	font-style: italic;
-}
 
 /*
  *      viewUsers
