@@ -17,7 +17,6 @@ class ControllerUsers extends Controller
         for(let i = 0; i < newUsers.length; i++) {
             newUsers[i].situation = await newUsers[i].getSituation('2021', '1.1', '31.3');
         }
-        console.log(newUsers);
 
         return newUsers;
     }
@@ -25,20 +24,16 @@ class ControllerUsers extends Controller
 
     displayView() {
         this.view.buildPage();
-/*
-        this.manager.getUsers()
-            .then(response => {
-                console.log(response);
-                return response.map(async function (elem) {
-                    elem.situation = await elem.getSituation('2021', '1.1', '31.3');
-                    return await elem;
-                })
-            })
-            .then(response => response.json())
-            .then(response => this.view.updateTable(response));
-*/
+
             this.manager.getUsers()
             .then(response => this._fetchSituations(response))
             .then(response => this.view.updateTable(response));
+
+            document.querySelector('h2').addEventListener('click', this._orderByName());
+    }
+
+    _orderByName(event) {
+        const lines = document.querySelectorAll('#tableUsers tbody tr');
+        console.log(lines);
     }
 }

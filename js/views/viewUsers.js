@@ -12,10 +12,10 @@ class ViewUsers extends View
             `<thead>
                 <tr>
                     <th class='g-hidden'>Id</th>
-                    <th class='.name'>Collaborateur</th>
-                    <th>Solde de l'année</th>
-                    <th>Solde cumulé</th>
-                    <th>Vacances prises</th>
+                    <th id='thName' class='name g-pointer'>Collaborateur</th>
+                    <th class='value g-pointer'>Solde de l'année</th>
+                    <th class='value g-pointer'>Solde cumulé</th>
+                    <th class='value g-pointer'>Vacances prises</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +49,6 @@ class ViewUsers extends View
 
     _buildTableBody(users) {
 		const tableBody = document.createElement('tbody');
-        console.log(users);
 		let line, current; 
 
 		for (let i = 0; i < users.length; i++)
