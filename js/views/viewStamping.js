@@ -76,7 +76,7 @@ class ViewStamping extends View
         	<td class='g-long'>${entry.overtime.toHoursFormat()}</td>
         	<td>${entry.total.negativeSign()}${entry.total.toHoursFormat()}</td>
         	<td>${entry.diff.negativeSign()}${entry.diff.toHoursFormat()}</td>
-			<td>${entry.diff.negativeSign()}${entry.yearDiff.toHoursFormat()}</td>`;
+			<td>${entry.yearDiff.negativeSign()}${entry.yearDiff.toHoursFormat()}</td>`;
 	}
 
     _buildDetailLine2(rowElem, entry) {

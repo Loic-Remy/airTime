@@ -49,8 +49,7 @@ class ControllerType extends Controller
 
         const form = document.forms.typeForm;
 
-        if (event.target.value === 'work')
-        {   
+        if (event.target.value === 'work') {
             form.type.options[0].setAttribute('selected', 'true');
             form.type.options[0].classList.remove('g-hidden');
             form.type.options[1].removeAttribute('selected');
@@ -61,6 +60,20 @@ class ControllerType extends Controller
             document.querySelector('#labelBegin').classList.remove('g-hidden');
             form.end.classList.remove('g-hidden');
             document.querySelector('#labelEnd').classList.remove('g-hidden');
+        } else if (event.target.value === 'driving') {
+            form.type.options[0].removeAttribute('selected');
+            form.type.options[0].classList.add('g-hidden');
+            form.type.options[1].setAttribute('selected', 'true');
+
+            form.duration.classList.remove('g-hidden');
+            document.querySelector('#labelDuration').classList.remove('g-hidden');
+
+            form.begin.classList.add('g-hidden');
+            document.querySelector('#labelBegin').classList.add('g-hidden');
+
+            form.end.classList.add('g-hidden');
+            document.querySelector('#labelEnd').classList.add('g-hidden');
+
         }
         else 
         {
@@ -73,6 +86,9 @@ class ControllerType extends Controller
 
             form.begin.classList.add('g-hidden');
             document.querySelector('#labelBegin').classList.add('g-hidden');
+            
+            form.duration.classList.add('g-hidden');
+            document.querySelector('#labelDuration').classList.add('g-hidden');
 
             form.end.classList.add('g-hidden');
             document.querySelector('#labelEnd').classList.add('g-hidden');
@@ -80,7 +96,7 @@ class ControllerType extends Controller
     }
 
     _deleteInterval(event) {
-        if(event.target.classList.contains('btnDelete') === false) {
+        if(event.target.classList.contains('g-btnDelete') === false) {
             return;
         }
 
@@ -116,5 +132,6 @@ class ControllerType extends Controller
         document.querySelector('#btnSubmit').removeEventListener('click', this._stamp.bind(this));
         document.forms.typeForm.date.removeEventListener('blur', this._updateStampingTable.bind(this));
         document.forms.typeForm.reason.removeEventListener('change', this._updateTypeOptions.bind(this));
+        document.removeEventListener('click', this._deleteInterval.bind(this));    
     }
 }

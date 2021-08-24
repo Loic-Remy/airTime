@@ -19,6 +19,7 @@ class ViewType extends View
                 <label for='reason'>Motif</label>
                 <select name='reason'>
                     <option value='work' selected>Travail</option>
+                    <option value='driving'>Conduite (OTR)</option>
                     <option value='holiday'>Vacances</option>
                     <option value='army'>Armée/PC/Service civil</option>
                     <option value='health'>Maladie</option>
@@ -39,6 +40,8 @@ class ViewType extends View
                 <input name='begin' type='time' value='07:00' required>
                 <label for='end' id='labelEnd'>Fin</label>
                 <input name='end' type='time' value='12:00' required>
+                <label for='duration' id='labelDuration' class='g-hidden'>Durée</label>
+                <input name='duration' class='g-hidden' type='time' value='00:00' required>
                 <label for='remark'>Remarque</label>
                 <input name='remark' type='text'>
                 <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='pointer'>

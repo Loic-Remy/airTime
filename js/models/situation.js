@@ -40,4 +40,10 @@ class Situation
 		this.diff = diff;
 	}
 
+	getYearBalance() {
+
+	}
+
+	
+
 }

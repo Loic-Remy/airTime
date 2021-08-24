@@ -27,38 +27,84 @@ class ControllerUsers extends Controller
 
             this.manager.getUsers()
             .then(response => this._fetchSituations(response))
-            .then(response => this.view.updateTable(response))
-            .then(response => document.querySelector('#thName').addEventListener('click', this._orderByName()));
+            .then(response => this.view.updateTable(response));
+            
+        document.querySelector('#thName').addEventListener('click', () => {
+            this._orderBy(this._compareNameAsc);
+        });
+        
+        document.querySelector('#thYearBalance').addEventListener('click', () => {
+            this._orderBy(this._compareYearBalanceAsc);
+        });
+        
+        document.querySelector('#thBalance').addEventListener('click', () => {
+            this._orderBy(this._compareBalanceAsc);
+        });
+        
+        document.querySelector('#thTakenHoliday').addEventListener('click', () => {
+            this._orderBy(this._compareTakenHolidayAsc);
+        });
+ 
     }
 
-    _orderByName(event) {
+    _orderBy(orderFunction) {
         const tableBody = document.querySelector('tbody');
         const nodeList = document.querySelectorAll('tbody tr');
         const lines = Array.from(nodeList);
+        let order = 'asc';
         
-//        lines.sort(this._compareNameAsc);
+        lines.sort(orderFunction.bind(this));
 
-        lines.sort(this._compareNameDesc);
+        if(event.currentTarget.getAttribute('data-order') === 'asc') {
+            lines.reverse();
+            order = 'desc';
+        }
 
         tableBody.innerHTML = '';
        
         for (let i = 0; i < lines.length; i++) {
             tableBody.appendChild(lines[i]);
         }
-        
-        console.log(lines);
+    
+        event.currentTarget.setAttribute('data-order', order);
     }
 
     _compareNameAsc(line1, line2) {
-        const name1 = line1.cells[1].innerHTML;
-        const name2 = line2.cells[1].innerHTML;
+        const pos = this._findCellIndex('name');
+        const name1 = line1.cells[pos].innerHTML;
+        const name2 = line2.cells[pos].innerHTML;
 
         return name1.localeCompare(name2);
     } 
-    _compareNameDesc(line1, line2) {
-        const name1 = line1.cells[1].innerHTML;
-        const name2 = line2.cells[1].innerHTML;
 
-        return name2.localeCompare(name1);
+    _compareYearBalanceAsc(line1, line2) {
+        const pos = this._findCellIndex('yearBalance');
+        const balance1 = line1.cells[pos].innerHTML;
+        const balance2 = line2.cells[pos].innerHTML;
+        
+        return balance1.localeCompare(balance2);
     }
+    
+    _compareBalanceAsc(line1, line2) {
+        const pos = this._findCellIndex('totalBalance');
+        const balance1 = line1.cells[pos].innerHTML;
+        const balance2 = line2.cells[pos].innerHTML;
+        
+        return balance1.localeCompare(balance2);
+    }
+
+    _compareTakenHolidayAsc(line1, line2) {
+        const pos = this._findCellIndex('takenHoliday');
+        const balance1 = line1.cells[pos].innerHTML;
+        const balance2 = line2.cells[pos].innerHTML;
+        
+        return balance1.localeCompare(balance2);
+    }
+
+    _findCellIndex(key) {
+        const cells = ['id', 'name', 'yearBalance', 'totalBalance', 'takenHoliday'];
+
+        return cells.indexOf(key);
+    }
+
 }

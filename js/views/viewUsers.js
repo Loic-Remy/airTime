@@ -13,9 +13,12 @@ class ViewUsers extends View
                 <tr>
                     <th class='g-hidden'>Id</th>
                     <th id='thName' class='name g-pointer'>Collaborateur</th>
-                    <th class='value g-pointer'>Solde de l'année</th>
-                    <th class='value g-pointer'>Solde cumulé</th>
-                    <th class='value g-pointer'>Vacances prises</th>
+                    <th></th>
+                    <th id='thYearBalance' class='value g-pointer'>Solde de l'année</th>
+                    <th></th>
+                    <th id='thBalance' class='value g-pointer'>Solde cumulé</th>
+                    <th></th>
+                    <th id='thTakenHoliday' class='value g-pointer'>Vacances prises</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,8 +42,11 @@ class ViewUsers extends View
         line.innerHTML = `
             <td class='g-hidden'>${user.id}</td>
             <td class='name'>${user.name}</td>
-            <td class='value'>${user.yearBalance()}</td>
-            <td class='value'>${user.currentBalance()}</td>
+            <td>${user.yearBalance().negativeSign()}</td>
+            <td class='value'>${user.yearBalance().toHoursFormat()}</td>
+            <td>${user.currentBalance().negativeSign()}</td>
+            <td class='value'>${user.currentBalance().toHoursFormat()}</td>
+            <td>${user.takenHoliday().negativeSign()}</td>
             <td class='value'>${user.takenHoliday()}</td>
         `
 

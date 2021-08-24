@@ -18,7 +18,6 @@ class User
     }
     
     async getSituation(year, firstDay, lastDay) {
-	{
 		let url = new URL(url_situation);
 
 		url.searchParams.append('year', year);
@@ -40,15 +39,13 @@ class User
 	}
 
 
-    }
-	
 	currentBalance() {
         if (this.situation === undefined) {
             return "    nd";
         }
 
 		const balance = this.situation.diff;
-		return balance.toHoursFormat();
+		return balance;
 	}
 
     takenHoliday() {
@@ -66,9 +63,7 @@ class User
         }
 
 		const balance = this.situation.todo - this.situation.done;
-		return balance.toHoursFormat();
-
-
+		return balance;
     }
 }
 
