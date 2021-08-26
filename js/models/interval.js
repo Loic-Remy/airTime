@@ -23,6 +23,7 @@ class Interval
 		let formBegin = form.begin.value;
 		let formEnd = form.end.value;
         let formType = form.type.value;
+        let formReason = form.reason.value;
 
         if (formType === 'morning')
         {
@@ -40,6 +41,11 @@ class Interval
         {
             formBegin = '06:00';
             formEnd = '06:00';
+        }
+        else if (formReason === 'driving') 
+        {
+            formBegin = '00:00';
+            formEnd = form.duration.value;
         }
         else
         {
@@ -77,7 +83,7 @@ class Interval
     }
 
     _defineFormBegin() {
-if (formType === 'morning')
+        if (formType === 'morning')
         {
             formType = 'halfday';
             formBegin = '06:00';
@@ -101,7 +107,7 @@ if (formType === 'morning')
     }
 
     _defineFormEnd() {
-if (formType === 'morning')
+        if (formType === 'morning')
         {
             formType = 'halfday';
             formBegin = '06:00';

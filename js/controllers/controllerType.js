@@ -61,9 +61,9 @@ class ControllerType extends Controller
             form.end.classList.remove('g-hidden');
             document.querySelector('#labelEnd').classList.remove('g-hidden');
         } else if (event.target.value === 'driving') {
-            form.type.options[0].removeAttribute('selected');
+//            form.type.options[0].removeAttribute('selected');
             form.type.options[0].classList.add('g-hidden');
-            form.type.options[1].setAttribute('selected', 'true');
+//            form.type.options[1].setAttribute('selected', 'true');
 
             form.duration.classList.remove('g-hidden');
             document.querySelector('#labelDuration').classList.remove('g-hidden');

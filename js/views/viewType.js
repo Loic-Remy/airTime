@@ -80,7 +80,7 @@ class ViewType extends View
             return;
         }
 
-        if (entry.type === 'time')
+        if (entry.type === 'time' && entry.reason != 'driving')
         {
             rowElem.innerHTML = 
                 `<td class='g-hidden'>${entry.id}</td>
