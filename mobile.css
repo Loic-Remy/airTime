@@ -342,6 +342,21 @@ header a:visited
   *     viewType
   */
 
+.tab
+{
+	width: 50%;
+	height: 36px;
+	margin-bottom: 30px;
+	border-radius: 10px 10px 0px 0px;
+	border-collapse: collapse;
+	background-color: #e7e7e7;
+}
+
+.tabActive
+{
+	border-bottom: none;
+	background-color: white;
+}
 
 
 
