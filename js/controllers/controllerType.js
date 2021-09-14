@@ -95,6 +95,15 @@ class ControllerType extends Controller
         }
     }
 
+    _activateTab (event) {
+        event.preventDefault();
+
+        if (event.target.classList.contains('tab')) {
+            const buttons = document.querySelectorAll('.tab');
+            buttons.forEach(elem => elem.classList.toggle('tabActive'));
+       }
+    }
+
     _deleteInterval(event) {
         if(event.target.classList.contains('g-btnDelete') === false) {
             return;
@@ -121,6 +130,8 @@ class ControllerType extends Controller
 
         document.querySelector('#btnSubmit').addEventListener('click', this._stamp.bind(this));
 
+        document.forms.typeForm.addEventListener('click', this._activateTab.bind(this));
+
         document.forms.typeForm.date.addEventListener('blur', this._updateStampingTable.bind(this));
 
         document.forms.typeForm.reason.addEventListener('change', this._updateTypeOptions.bind(this));
@@ -130,6 +141,7 @@ class ControllerType extends Controller
 
     leaveView() {
         document.querySelector('#btnSubmit').removeEventListener('click', this._stamp.bind(this));
+        document.forms.typeForm.removeEventListener('click', this._activateTab.bind(this));
         document.forms.typeForm.date.removeEventListener('blur', this._updateStampingTable.bind(this));
         document.forms.typeForm.reason.removeEventListener('change', this._updateTypeOptions.bind(this));
         document.removeEventListener('click', this._deleteInterval.bind(this));    

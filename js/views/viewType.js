@@ -10,8 +10,8 @@ class ViewType extends View
         
         this.formHTML = 
             `
-                <button class='tab tabLeft tabActive g-pointer'>Heures</button>
-                <button class='tab tabRight g-highlight g-pointer'>Frais</button>
+                <button name='hours' class='tab tabLeft tabActive g-pointer'>Heures</button>
+                <button name='expenses' class='tab tabRight g-pointer'>Frais</button>
                 <label for='date'>Date</label>
                 <input name='date' type='date'>
                <label for='dateBegin' class='g-hidden'>Début</label>
