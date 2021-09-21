@@ -10,16 +10,16 @@ class ViewType extends View
         
         this.formHTML = 
             `
-                <button name='hours' class='tab tabLeft tabActive g-pointer'>Heures</button>
-                <button name='expenses' class='tab tabRight g-pointer'>Frais</button>
-                <label for='date'>Date</label>
-                <input name='date' type='date'>
-               <label for='dateBegin' class='g-hidden'>Début</label>
-                <input name='dateBegin' type='date' class='g-hidden'>
-                <label for='dateEnd' class='g-hidden'>Fin</label>
-                <input name='dateEnd' type='date' class='g-hidden'>
-                <label for='reason'>Motif</label>
-                <select name='reason'>
+                <button name='hours' class='tab tabActive modeDriving modeWork modeAbsence modeExpenses g-pointer'>Heures</button>
+                <button name='expenses' class='tab modeDriving modeWork modeAbsence modeExpenses g-pointer'>Frais</button>
+                <label for='date'class='modeDriving modeWork modeAbsence modeExpenses'>Date</label>
+                <input name='date' type='date' class='modeDriving modeWork modeAbsence modeExpenses'>
+                <label for='dateBegin' class=' g-hidden'>Début</label>
+                <input name='dateBegin' type='date' class=' g-hidden'>
+                <label for='dateEnd' class=' g-hidden'>Fin</label>
+                <input name='dateEnd' type='date' class=' g-hidden'>
+                <label for='reason' class='modeWork modeDriving modeAbsence'>Motif</label>
+                <select name='reason' class='modeWork modeDriving modeAbsence'>
                     <option value='work' selected>Travail</option>
                     <option value='driving'>Conduite (OTR)</option>
                     <option value='holiday'>Vacances</option>
@@ -31,22 +31,26 @@ class ViewType extends View
                     <option value='unpaid'>Vacances non-payées</option>
                     <option value='paidunemployed'>Chômage technique</option>
                 </select>
-                <label for='type' id='labelType' class='g-hidden'>Durée</label>
-                <select name='type' class='g-hidden'>
+                <label for='type' id='labelType' class='modeAbsence g-hidden'>Durée</label>
+                <select name='type' class='modeAbsence g-hidden'>
                     <option value='time' selected>Timbrage</option>
                     <option value='wholeday'>Jour entier</option>
                     <option value='morning'>Matin</option>
                     <option value='afternoon'>Après-midi</option>
                 </select>
-                <label for='begin' id='labelBegin'>Début</label>
-                <input name='begin' type='time' value='07:00' required>
-                <label for='end' id='labelEnd'>Fin</label>
-                <input name='end' type='time' value='12:00' required>
-                <label for='duration' id='labelDuration' class='g-hidden'>Durée</label>
-                <input name='duration' class='g-hidden' type='time' value='00:00' required>
-                <label for='remark'>Remarque</label>
-                <input name='remark' type='text'>
-                <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='pointer'>
+                <label for='begin' id='labelBegin' class='modeWork'>Début</label>
+                <input name='begin' type='time' value='07:00' class='modeWork' required>
+                <label for='end' id='labelEnd' class='modeWork'>Fin</label>
+                <input name='end' type='time' value='12:00' class='modeWork' required>
+                <label for='duration' id='labelDuration' class='modeDriving g-hidden'>Durée</label>
+                <input name='duration' class='modeDriving g-hidden' type='time' value='00:00' class='modeDriving' required>
+                <label for='amount' class='modeExpenses g-hidden'>Montant</label>
+                <input name='amount' type='number' class='modeExpenses g-hidden'>
+                <label for='picture' class='modeExpenses g-hidden'>Justificatif</label>
+                <input name='picture' id='file-input' type='file' capture='environment' accept='image/*' class='modeExpenses g-hidden'>
+                <label for='remark' class='modeWork modeAbsence modeExpenses'>Remarque</label>
+                <input name='remark' type='text' class='modeWork modeAbsence modeExpenses'>
+                <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='modeWork modeAbsence modeExpenses pointer'>
             `;
 
         this.tableHTML = 

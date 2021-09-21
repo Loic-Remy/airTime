@@ -50,58 +50,66 @@ class ControllerType extends Controller
         const form = document.forms.typeForm;
 
         if (event.target.value === 'work') {
+            this._changeMode('modeWork');
             form.type.options[0].setAttribute('selected', 'true');
-            form.type.options[0].classList.remove('g-hidden');
             form.type.options[1].removeAttribute('selected');
 
-            form.type.classList.add('g-hidden');
-            document.querySelector('#labelType').classList.add('g-hidden');
-            form.begin.classList.remove('g-hidden');
-            document.querySelector('#labelBegin').classList.remove('g-hidden');
-            form.end.classList.remove('g-hidden');
-            document.querySelector('#labelEnd').classList.remove('g-hidden');
         } else if (event.target.value === 'driving') {
-//            form.type.options[0].removeAttribute('selected');
+            this._changeMode('modeDriving');
             form.type.options[0].classList.add('g-hidden');
-//            form.type.options[1].setAttribute('selected', 'true');
-
-            form.duration.classList.remove('g-hidden');
-            document.querySelector('#labelDuration').classList.remove('g-hidden');
-
-            form.begin.classList.add('g-hidden');
-            document.querySelector('#labelBegin').classList.add('g-hidden');
-
-            form.end.classList.add('g-hidden');
-            document.querySelector('#labelEnd').classList.add('g-hidden');
-
         }
         else 
         {
+            this._changeMode('modeAbsence');
             form.type.options[0].removeAttribute('selected');
             form.type.options[0].classList.add('g-hidden');
             form.type.options[1].setAttribute('selected', 'true');
+        }
+    }
 
-            form.type.classList.remove('g-hidden');
-            document.querySelector('#labelType').classList.remove('g-hidden');
+    _changeMode(newMode) {
+        console.log('switch to ' + newMode);
+        const formElements = document.forms.typeForm.children;
 
-            form.begin.classList.add('g-hidden');
-            document.querySelector('#labelBegin').classList.add('g-hidden');
-            
-            form.duration.classList.add('g-hidden');
-            document.querySelector('#labelDuration').classList.add('g-hidden');
+        const hiddenClass = 'g-hidden';
 
-            form.end.classList.add('g-hidden');
-            document.querySelector('#labelEnd').classList.add('g-hidden');
+        for (let i = 0; i < formElements.length; i++) {
+            if(formElements[i].classList.contains(newMode)) {
+                formElements[i].classList.remove(hiddenClass);
+            } else {
+                formElements[i].classList.add(hiddenClass);
+            }
         }
     }
 
     _activateTab (event) {
         event.preventDefault();
 
+        if (event.target.classList.contains('tabActive')) {
+            return;
+        }
+
+        if (!event.target.classList.contains('tab')) {
+            return;
+        }
+
+        console.log('activateTab');
+        
+        const form = document.forms.typeForm;
+
         if (event.target.classList.contains('tab')) {
             const buttons = document.querySelectorAll('.tab');
             buttons.forEach(elem => elem.classList.toggle('tabActive'));
-       }
+        }
+
+        if (document.forms.typeForm.hours.classList.contains('tabActive')){
+            this._changeMode('modeWork');
+        }
+        else {
+            this._changeMode('modeExpenses');
+        }
+
+
     }
 
     _deleteInterval(event) {
