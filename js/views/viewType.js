@@ -45,12 +45,13 @@ class ViewType extends View
                 <label for='duration' id='labelDuration' class='modeDriving g-hidden'>Durée</label>
                 <input name='duration' class='modeDriving g-hidden' type='time' value='00:00' class='modeDriving' required>
                 <label for='amount' class='modeExpenses g-hidden'>Montant</label>
-                <input name='amount' type='number' class='modeExpenses g-hidden'>
+                <input name='amount' type='number' min='0' class='modeExpenses g-hidden'>
                 <label for='picture' class='modeExpenses g-hidden'>Justificatif</label>
-                <input name='picture' id='file-input' type='file' capture='environment' accept='image/*' class='modeExpenses g-hidden'>
+                <input name='picture' type='file' class='modeExpenses g-hidden'>
                 <label for='remark' class='modeWork modeAbsence modeExpenses'>Remarque</label>
                 <input name='remark' type='text' class='modeWork modeAbsence modeExpenses'>
-                <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='modeWork modeAbsence modeExpenses pointer'>
+                <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='modeWork modeAbsence g-pointer'>
+                <input name='btnSubmitExpenses' type='submit' value='Enregistrer' id='btnSubmitExpenses' class='modeExpenses g-hidden g-pointer'>
             `;
 
         this.tableHTML = 

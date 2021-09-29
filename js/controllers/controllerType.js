@@ -46,44 +46,48 @@ class ControllerType extends Controller
     }
 
     _updateTypeOptions(event) {
-
-        const form = document.forms.typeForm;
-
         if (event.target.value === 'work') {
             this._changeMode('modeWork');
+        } 
+        else if (event.target.value === 'driving') {
+            this._changeMode('modeDriving');
+        }
+        else {
+            this._changeMode('modeAbsence');
+        }
+    }
+
+    _changeMode(newMode) {
+        console.log('switch to ' + newMode);
+        
+        const form = document.forms.typeForm;
+        const formElements = document.forms.typeForm.children;
+        const hiddenClass = 'g-hidden';
+
+        for (let i = 0; i < formElements.length; i++) {
+            if(formElements[i].classList.contains(newMode)) {
+                formElements[i].classList.remove(hiddenClass);
+            } 
+            else {
+                formElements[i].classList.add(hiddenClass);
+            }
+        }
+
+        if (newMode === 'modeWork') {
+            console.log(form.reason.options[0]);
+            form.reason.options[0].setAttribute('selected', 'true');
             form.type.options[0].setAttribute('selected', 'true');
             form.type.options[1].removeAttribute('selected');
-
-        } else if (event.target.value === 'driving') {
-            this._changeMode('modeDriving');
+        } else if (newMode === 'modeDriving') {
             form.type.options[0].classList.add('g-hidden');
-        }
-        else 
-        {
-            this._changeMode('modeAbsence');
+        } else if (newMode === 'modeAbsence') {
             form.type.options[0].removeAttribute('selected');
             form.type.options[0].classList.add('g-hidden');
             form.type.options[1].setAttribute('selected', 'true');
         }
     }
 
-    _changeMode(newMode) {
-        console.log('switch to ' + newMode);
-        const formElements = document.forms.typeForm.children;
-
-        const hiddenClass = 'g-hidden';
-
-        for (let i = 0; i < formElements.length; i++) {
-            if(formElements[i].classList.contains(newMode)) {
-                formElements[i].classList.remove(hiddenClass);
-            } else {
-                formElements[i].classList.add(hiddenClass);
-            }
-        }
-    }
-
     _activateTab (event) {
-        event.preventDefault();
 
         if (event.target.classList.contains('tabActive')) {
             return;
@@ -92,6 +96,8 @@ class ControllerType extends Controller
         if (!event.target.classList.contains('tab')) {
             return;
         }
+
+        event.preventDefault();
 
         console.log('activateTab');
         
