@@ -35,25 +35,30 @@ class ControllerStamping extends Controller
     
     _showOrHideDetails(event)
 	{
-        if(event.target.nodeName != 'TD') {
+        if (event.target.nodeName != 'TD' ||
+            event.target.parentElement.classList.contains('detailLine')) {
             return;
         }
 
         let currentEl = event.target.parentElement.nextElementSibling;
-                        
+
         while (currentEl.classList.contains('detailLine'))
         {
-            if (currentEl.classList.contains('g-hidden'))
-            {
-                currentEl.classList.replace('g-hidden', 'shown');
-            }
-            else
-            {
-                currentEl.classList.replace('shown', 'g-hidden');
-            }
+            currentEl.classList.toggle('g-hidden');
             currentEl = currentEl.nextElementSibling;
         }
 	}
+
+    _displayFilterWindow() {
+        const insertPoint = document.querySelector('body');
+
+        const dialog = document.createElement('dialog');
+        dialog.setAttribute('open', 'true');
+        dialog.innerHTML = '<p> Fenêtre</p>';
+        
+
+        insertPoint.append(dialog);
+    }
 
     displayView()
     {
@@ -62,8 +67,11 @@ class ControllerStamping extends Controller
         this._getData()
             .then(response => this.view.updateTable(response));
 
+        console.log(document.querySelector('#tableStamping thead'));
+
         document.getElementById("display").addEventListener('click', this._updateTable.bind(this));
         document.querySelector('#tableStamping').addEventListener('click', this._showOrHideDetails);
+        document.querySelector('#tableStamping thead').addEventListener('click', this._displayFilterWindow);
     }
 
     leaveView() {

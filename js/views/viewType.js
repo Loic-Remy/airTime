@@ -47,7 +47,7 @@ class ViewType extends View
                 <label for='amount' class='modeExpenses g-hidden'>Montant</label>
                 <input name='amount' type='number' min='0' class='modeExpenses g-hidden'>
                 <label for='picture' class='modeExpenses g-hidden'>Justificatif</label>
-                <input name='picture' type='file' class='modeExpenses g-hidden'>
+                <input name='picture' type='file' capture='environment' class='modeExpenses g-hidden'>
                 <label for='remark' class='modeWork modeAbsence modeExpenses'>Remarque</label>
                 <input name='remark' type='text' class='modeWork modeAbsence modeExpenses'>
                 <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='modeWork modeAbsence g-pointer'>
