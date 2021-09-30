@@ -129,7 +129,7 @@ class ControllerType extends Controller
         
         this.manager.deleteInterval(idToDelete);
 
-        console.log('touché');
+        console.log('bouton delete activé');
         event.stopPropagation();
 
         this._updateStampingTable();
