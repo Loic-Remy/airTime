@@ -51,7 +51,7 @@ class ViewType extends View
                 <label for='remark' class='modeWork modeAbsence modeExpenses'>Remarque</label>
                 <input name='remark' type='text' class='modeWork modeAbsence modeExpenses'>
                 <input name='btnSubmit' type='submit' value='Enregistrer' id='btnSubmit' class='modeWork modeAbsence g-pointer'>
-                <input name='btnSubmitExpenses' type='submit' value='Enregistrer' id='btnSubmitExpenses' class='modeExpenses g-hidden g-pointer'>
+                <input name='btnSubmitExpenses' type='submit' value='Enregistrer' id='btnSubmitExpenses' disabled class='modeExpenses g-hidden g-pointer'>
             `;
 
         this.tableHTML = 
