@@ -21,19 +21,26 @@ class ControllerType extends Controller
     _stamp(event) {
         event.preventDefault();
 
-        let interval = new Interval();
+        const modHours = document.forms.typeForm.hours.classList.contains('tabActive');
 
-        interval.fill(document.forms.typeForm);
-        this.manager.sendInterval(interval)
-            .then((response) => {
-                if (response)
-                    return this.manager.getIntervals(interval)
-            })
-            .then(response => this._filterCurrentDay(response))
-            .then(response => this.view.updateTable(response)); 
+        if (modHours === true) {
+            let interval = new Interval();
 
-        document.forms.typeForm.remark.value = "";
-        document.forms.typeForm.begin.focus();
+            interval.fill(document.forms.typeForm);
+            this.manager.sendInterval(interval)
+                .then((response) => {
+                    if (response)
+                        return this.manager.getIntervals(interval)
+                })
+                .then(response => this._filterCurrentDay(response))
+                .then(response => this.view.updateTable(response)); 
+
+            document.forms.typeForm.remark.value = "";
+            document.forms.typeForm.begin.focus();
+        }
+        else {
+            /* implement way to send expenses to server */
+        }
     }
 
     _updateStampingTable() {
