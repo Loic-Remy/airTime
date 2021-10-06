@@ -142,11 +142,12 @@ class ControllerType extends Controller
 
         this._updateStampingTable();
 
-        document.querySelector('#btnSubmit').addEventListener('click', this._stamp.bind(this));
+//        document.querySelector('#btnSubmit').addEventListener('click', this._stamp.bind(this));
+        document.forms.typeForm.addEventListener('submit', this._stamp.bind(this));
 
         document.forms.typeForm.addEventListener('click', this._activateTab.bind(this));
 
-        document.forms.typeForm.date.addEventListener('blur', this._updateStampingTable.bind(this));
+        document.forms.typeForm.date.addEventListener('change', this._updateStampingTable.bind(this));
 
         document.forms.typeForm.reason.addEventListener('change', this._updateTypeOptions.bind(this));
 
